@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rehue.Form", "Rehue\Rehue.Form.csproj", "{D157CDF3-A6DB-478A-9633-2B75AFAB88F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rehue.UI", "Rehue\Rehue.UI.csproj", "{D157CDF3-A6DB-478A-9633-2B75AFAB88F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rehue.BE", "Rehue.BE\Rehue.BE.csproj", "{C38D5B7B-F64D-40B6-87A7-7D9F57EB8CC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rehue.BLL", "Rehue.BLL\Rehue.BLL.csproj", "{44215EBB-7D8C-4448-AF1A-9D82F0C420FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rehue.DAL", "Rehue.DAL\Rehue.DAL.csproj", "{3607BD19-70A3-4CBD-A106-E50164346C88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rehue.Servicios", "Rehue.Servicios\Rehue.Servicios.csproj", "{B8AA7B7E-FBF9-4283-958A-227CA03DF7C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3607BD19-70A3-4CBD-A106-E50164346C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3607BD19-70A3-4CBD-A106-E50164346C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3607BD19-70A3-4CBD-A106-E50164346C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8AA7B7E-FBF9-4283-958A-227CA03DF7C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8AA7B7E-FBF9-4283-958A-227CA03DF7C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8AA7B7E-FBF9-4283-958A-227CA03DF7C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8AA7B7E-FBF9-4283-958A-227CA03DF7C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

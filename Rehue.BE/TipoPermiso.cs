@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE
 {
-    public class Class1
+    public enum TipoPermiso
     {
+        GestorPermiso,
+        GestorUsuario,
     }
 }
