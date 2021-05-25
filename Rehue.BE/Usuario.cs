@@ -1,4 +1,4 @@
-﻿using Rehue.Interfaces.BE;
+﻿using Rehue.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +7,8 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE
 {
-    public interface IUsuario
+    public class Usuario : IUsuario
     {
-        string Email { get; set; }
-        string Password { get; set; }
-        IList<IPermiso> Permisos { get; }
-    }
-    public class Usuario : Entity, IUsuario
-    {
-
-        private IList<IPermiso> _permisos;
-
         public Usuario()
         {
             _permisos = new List<IPermiso>();
@@ -26,6 +17,7 @@ namespace Rehue.BE
         public string Password { get; set; }
 
 
+        private IList<IPermiso> _permisos;
         public IList<IPermiso> Permisos
         {
             get
@@ -33,5 +25,7 @@ namespace Rehue.BE
                 return _permisos;
             }
         }
+        public int Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Nombre { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

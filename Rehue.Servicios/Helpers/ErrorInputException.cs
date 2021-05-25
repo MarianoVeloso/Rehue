@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.Servicios
+namespace Rehue.Servicios.Helpers
 {
-    public class OperacionDBException : Exception
+    public class ErrorInputException : Exception
     {
-        public OperacionDBException(string mensaje) : base(mensaje)
+        public ErrorInputException(string mensaje) : base(mensaje)
         {
 
         }

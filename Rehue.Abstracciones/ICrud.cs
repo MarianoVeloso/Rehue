@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.BE.Interfaces
+namespace Rehue.Interfaces
 {
-    public interface ICrud<T> where T : IEntity
+    public interface ICrud<T>
     {
-        T GetById(Guid id);
+        T GetById(int id);
         IList<T> GetAll();
         void Save(T entity);
         void Delete(T entity);

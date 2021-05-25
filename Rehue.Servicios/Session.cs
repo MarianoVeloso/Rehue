@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rehue.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Rehue.Servicios
 {
-    public class SingletonSesion
+    public class Session
     {
-        private static SingletonSesion _instancia;
-        private static Object _lock = new object();
+        private static Session _instancia;
 
         public IUsuario Usuario { get; set; }
 
@@ -23,14 +23,12 @@ namespace Rehue.Servicios
             Usuario = null;
         }
 
-        public static SingletonSesion Instancia
+        public static Session Instancia
         {
             get
             {
                 if (_instancia == null)
-                    _instancia = new SingletonSesion();
-
-
+                    _instancia = new Session();
                 return _instancia;
             }
         }
@@ -38,11 +36,6 @@ namespace Rehue.Servicios
         public bool IsLogged()
         {
             return false;
-        }
-
-        public bool IsInRole(TipoPermiso permiso)
-        {
-            return true;
         }
     }
 }

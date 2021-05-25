@@ -1,11 +1,11 @@
-﻿using Rehue.BE;
-using Rehue.BE.Interfaces;
+﻿using Rehue.Interfaces;
+using Rehue.BE;
 using System;
 using System.Collections.Generic;
 
 namespace Rehue.BLL
 {
-    public abstract class AbstractBLL<T> : ICrud<T> where T : IEntity
+    public abstract class AbstractBLL<T> : ICrud<T>
     {
         protected ICrud<T> _crud;
 
@@ -19,7 +19,7 @@ namespace Rehue.BLL
             return _crud.GetAll();
         }
 
-        public T GetById(Guid id)
+        public T GetById(int id)
         {
             return _crud.GetById(id);
         }

@@ -11,7 +11,7 @@ namespace Rehue.DAL
         private SqlTransaction transaccion;
         public void Abrir()
         {
-            conexion = new SqlConnection("Initial Catalog=; Data Source=.\\SqlExpress; Integrated Security=SSPI");
+            conexion = new SqlConnection("Initial Catalog=Rehue; Data Source=.\\SqlExpress; Integrated Security=SSPI");
             conexion.Open();
         }
 
@@ -142,13 +142,13 @@ namespace Rehue.DAL
 
         public void RegistrarError(string error)
         {
-            Operar("registrar_error",
-                new List<SqlParameter>
-                {
-                    CrearParametro("@error", error),
-                    CrearParametro("@fecha", DateTime.Now)
-                }
-            );
+            //Operar("registrar_error",
+            //    new List<SqlParameter>
+            //    {
+            //        CrearParametro("@error", error),
+            //        CrearParametro("@fecha", DateTime.Now)
+            //    }
+            //);
         }
     }
 }

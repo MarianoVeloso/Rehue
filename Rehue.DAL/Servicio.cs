@@ -1,14 +1,16 @@
-﻿using Rehue.BE.Helpers;
+﻿using Rehue.Abstracciones;
+using Rehue.Servicios;
+using Rehue.Servicios.Helpers;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Rehue.DAL
 {
-    internal abstract class GenericMapper
+    public class Servicio : IServicio
     {
         private readonly Acceso acceso = new Acceso();
-        internal int RealizarOperacion(string storedProcedure, List<SqlParameter> parameters = null)
+        public void RealizarOperacion(string storedProcedure, List<SqlParameter> parameters = null)
         {
             acceso.Abrir();
             acceso.IniciarTransaccion();
@@ -24,17 +26,17 @@ namespace Rehue.DAL
                 throw new OperacionDBException("Ocurrió un error al intentar realizar la operación");
             }
 
-            acceso.Cerrar();
+            acceso.ConfirmarTransaccion();
 
-            return res;
+            acceso.Cerrar();
         }
 
-        internal SqlParameter CrearParametro(string nombre, object valor, ParameterDirection direccion = ParameterDirection.Input)
+        public SqlParameter CrearParametro(string nombre, object valor, ParameterDirection direccion = ParameterDirection.Input)
         {
             return acceso.CrearParametro(nombre, valor, direccion);
         }
 
-        internal DataTable Leer(string nombre, List<SqlParameter> parametros = null)
+        public DataTable Leer(string nombre, List<SqlParameter> parametros = null)
         {
             return acceso.Leer(nombre, parametros);
         }

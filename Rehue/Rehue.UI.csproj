@@ -46,14 +46,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="DefaultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="DefaultForm.Designer.cs">
+      <DependentUpon>DefaultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn\LogIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogIn\LogIn.Designer.cs">
+      <DependentUpon>LogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn\RegistrarEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogIn\RegistrarEmpresa.Designer.cs">
+      <DependentUpon>RegistrarEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn\RegistrarPersona.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogIn\RegistrarPersona.Designer.cs">
+      <DependentUpon>RegistrarPersona.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn\RegistroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogIn\RegistroForm.Designer.cs">
+      <DependentUpon>RegistroForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DefaultForm.resx">
+      <DependentUpon>DefaultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogIn\LogIn.resx">
+      <DependentUpon>LogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogIn\RegistroForm.resx">
+      <DependentUpon>RegistroForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

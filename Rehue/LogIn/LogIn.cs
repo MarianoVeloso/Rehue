@@ -8,13 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Rehue
+namespace Rehue.LogIn
 {
-    public partial class Form1 : Form
+    public partial class LogIn : RehueDefaultForm
     {
-        public Form1()
+        public LogIn()
         {
             InitializeComponent();
+        }
+
+        private void btnRegistrarUsuario_Click(object sender, EventArgs e)
+        {
+            RegistrarPersona form = new RegistrarPersona();
+
+            form.ShowDialog();
+
         }
     }
 }
