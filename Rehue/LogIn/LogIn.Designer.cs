@@ -105,6 +105,7 @@
             this.btnRegistrarEmpresa.TabIndex = 6;
             this.btnRegistrarEmpresa.Text = "Registrar Empresas";
             this.btnRegistrarEmpresa.UseVisualStyleBackColor = true;
+            this.btnRegistrarEmpresa.Click += new System.EventHandler(this.btnRegistrarEmpresa_Click);
             // 
             // LogIn
             // 

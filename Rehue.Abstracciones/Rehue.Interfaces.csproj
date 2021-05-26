@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICrud.cs" />
+    <Compile Include="IEmpresa.cs" />
     <Compile Include="IPermiso.cs" />
+    <Compile Include="IPersona.cs" />
     <Compile Include="IServicio.cs" />
     <Compile Include="IUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

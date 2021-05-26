@@ -9,7 +9,8 @@ namespace Rehue.Interfaces
     public interface IUsuario
     {
         int Id { get; set; }
-        string Nombre { get; set; }
+        string Email { get; set; }
         string Password { get; set; }
+        IList<IPermiso> Permisos { get; set; }
     }
 }

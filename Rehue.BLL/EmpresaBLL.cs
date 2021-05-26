@@ -1,4 +1,6 @@
-﻿using Rehue.BE;
+﻿using Rehue.Abstracciones;
+using Rehue.BE;
+using Rehue.DAL;
 using Rehue.Interfaces;
 using Rehue.Servicios;
 using Rehue.Servicios.Helpers;
@@ -7,37 +9,36 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Rehue.DAL;
 using System.Text;
 using System.Threading.Tasks;
-using Rehue.Abstracciones;
 
 namespace Rehue.BLL
 {
-    public class UsuarioBLL : AbstractBLL<IUsuario>
+    class EmpresaBLL : ICrud<IEmpresa>
     {
-        private readonly IServicio _servicio = new Servicio();
+        Servicio _servicio = new Servicio();
 
-        public void ValidarUsuario(string nombre)
+        public void ValidarUsuario(string email)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@nombre", nombre)
+                _servicio.CrearParametro("@email", email)
             };
             var resultado = _servicio.Leer("Validar_Usuario", parametros);
 
             if (resultado.Rows.Count >= 1)
                 throw new ErrorLogInException("Usuario existente en la base de datos.");
         }
-        public IUsuario ValidarUsuarioContraseña(string nombre, string password)
+
+        public void ValidarUsuarioContraseña(IEmpresa entity)
         {
-            string encryptPassword = Encriptador.Hash(password);
+            string encryptPassword = Encriptador.Hash(entity.Password);
 
             int id = 0;
 
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@nombre", nombre),
+                _servicio.CrearParametro("@email", entity.Email),
                 _servicio.CrearParametro("@password", encryptPassword),
                 _servicio.CrearParametro("@id", id, ParameterDirection.Output)
             };
@@ -48,20 +49,30 @@ namespace Rehue.BLL
 
             if (id == 0)
                 throw new ErrorLogInException("Combinación de Usuario y Contraseña incorrecta.");
-
-            return CrearUsuario(nombre, encryptPassword, id);
         }
 
-        public IUsuario RegistrarUsuario(string nombre, string password)
+        public IEmpresa GetById(int id)
         {
-            string encryptPassword = Encriptador.Hash(password);
+            return MapearPersona();
+        }
+
+        public IList<IEmpresa> GetAll()
+        {
+            return new List<IEmpresa> { MapearPersona() };
+        }
+
+        public void Save(IEmpresa entity)
+        {
+            string encryptPassword = Encriptador.Hash(entity.Password);
             int id = 0;
+
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@nombre", nombre),
+                _servicio.CrearParametro("@email", entity.Email),
                 _servicio.CrearParametro("@password", encryptPassword),
                 _servicio.CrearParametro("@id", id, ParameterDirection.Output)
             };
+
             try
             {
                 _servicio.RealizarOperacion("Registar_Usuario", parametros);
@@ -71,28 +82,19 @@ namespace Rehue.BLL
                 throw new ErrorLogInException(ex.Message);
             }
 
-            id = int.Parse(parametros[2].Value.ToString());
+            entity.Id = int.Parse(parametros[2].Value.ToString());
 
-            return CrearUsuario(nombre, encryptPassword, id);
+            Session.Instancia.Login(entity);
         }
 
-        public void LogIn(IUsuario usuario)
+        public void Delete(IEmpresa entity)
         {
-            Session.Instancia.Login(usuario);
+            throw new NotImplementedException();
         }
 
-        public void LogOut()
+        private IEmpresa MapearPersona()
         {
-            //Session.Instancia.LogOut();
-            //Session.Instancia.QuitarFocoDirectorio();
-        }
-
-        private IUsuario CrearUsuario(string nombre, string password, int id)
-        {
-            Usuario usuario = new Usuario { Nombre = nombre, Password = password };
-            LogIn(usuario);
-
-            return usuario;
+            return new Empresa();
         }
     }
 }

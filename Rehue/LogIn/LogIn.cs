@@ -24,5 +24,12 @@ namespace Rehue.LogIn
             form.ShowDialog();
 
         }
+
+        private void btnRegistrarEmpresa_Click(object sender, EventArgs e)
+        {
+            RegistrarEmpresa form = new RegistrarEmpresa();
+
+            form.ShowDialog();
+        }
     }
 }

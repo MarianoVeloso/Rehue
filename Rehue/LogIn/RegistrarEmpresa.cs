@@ -16,5 +16,15 @@ namespace Rehue.LogIn
         {
             InitializeComponent();
         }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnRegistrar_Click_1(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
