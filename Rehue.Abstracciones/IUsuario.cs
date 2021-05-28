@@ -12,5 +12,6 @@ namespace Rehue.Interfaces
         string Email { get; set; }
         string Password { get; set; }
         IList<IPermiso> Permisos { get; set; }
+        int Reputacion { get; set; }
     }
 }

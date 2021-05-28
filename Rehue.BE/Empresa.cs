@@ -8,24 +8,8 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE
 {
-    public class Empresa : IEmpresa
+    public class Empresa : Usuario, IEmpresa
     {
-        public Empresa()
-        {
-            _permisos = new List<IPermiso>();
-        }
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-
-        private IList<IPermiso> _permisos;
-
-        public IList<IPermiso> Permisos
-        {
-            get { return _permisos; }
-            set { _permisos = value; }
-        }
-
         private string _razonSocial;
 
         public string RazonSocial
@@ -40,6 +24,14 @@ namespace Rehue.BE
         {
             get { return _cuitCuil; }
             set { _cuitCuil = value; }
+        }
+
+        public Subscripcion Subscripcion
+        {
+            get => default;
+            set
+            {
+            }
         }
     }
 }
