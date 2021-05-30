@@ -2,13 +2,13 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Rehue.BE.Empresa">
     <Position X="2.75" Y="1.75" Width="1.5" />
-    <AssociationLine Name="Subscripcion" Type="Rehue.BE.Subscripcion" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Subscripcion" Type="Rehue.BE.Subscripcion" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="4.25" Y="2.75" />
-        <Point X="4.625" Y="2.75" />
-        <Point X="4.625" Y="6.625" />
-        <Point X="6.25" Y="6.625" />
-        <Point X="6.25" Y="7" />
+        <Point X="4.979" Y="2.75" />
+        <Point X="4.979" Y="6.906" />
+        <Point X="6.5" Y="6.906" />
+        <Point X="6.5" Y="7.25" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -51,7 +51,7 @@
         <Point X="9.375" Y="3.913" />
         <Point X="9.375" Y="4.812" />
         <Point X="10.151" Y="4.812" Type="JumpStart" />
-        <Point X="10.318" Y="4.812" Type="JumpEnd" />
+        <Point X="10.317" Y="4.812" Type="JumpEnd" />
         <Point X="11" Y="4.812" />
       </Path>
     </AssociationLine>
@@ -76,7 +76,7 @@
   <Class Name="Rehue.BE.Denuncia">
     <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAAAEAAAAAAABAAAAAAAAAAAAAACBAAA=</HashCode>
+      <HashCode>AAAAABAAIAAAAAAEAAAIAAABAAAAAAAAAAAAAACBAAA=</HashCode>
       <FileName>Denuncia.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -128,27 +128,24 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Rehue.BE.Subscripcion">
-    <Position X="5.5" Y="7" Width="1.5" />
+    <Position X="5.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAIAAAAAAAAAAAAAEIAAAAAAAAAAAAAAABAQA=</HashCode>
       <FileName>Subscripcion.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Rehue.BE.Menu">
-    <Position X="5.5" Y="1.75" Width="1.5" />
+    <Position X="5.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAACAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABEAAAAAIAAACAAAAAAAAAAAABAAAAAgAAAAQAABAAA=</HashCode>
       <FileName>Menu.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Empresa" />
-    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Field Name="_items" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Rehue.BE.Item">
-    <Position X="5.5" Y="4" Width="1.5" />
+    <Position X="5.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAEJAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Item.cs</FileName>
@@ -157,7 +154,7 @@
   <Enum Name="Rehue.BE.EstadoCita">
     <Position X="11" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AADAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAQA=</HashCode>
+      <HashCode>AADAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAQEAAA=</HashCode>
       <FileName>EstadoCita.cs</FileName>
     </TypeIdentifier>
   </Enum>

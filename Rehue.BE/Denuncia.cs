@@ -47,5 +47,22 @@ namespace Rehue.BE
             {
             }
         }
+
+        private DateTime _fechaCreacion;
+
+        public DateTime FechaCreacion
+        {
+            get { return _fechaCreacion; }
+            set { _fechaCreacion = value; }
+        }
+
+
+        private DateTime _fechaModificacion;
+
+        public DateTime FechaModificacion
+        {
+            get { return _fechaModificacion; }
+            set { _fechaModificacion = value; }
+        }
     }
 }

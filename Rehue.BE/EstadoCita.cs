@@ -8,7 +8,7 @@ namespace Rehue.BE
 {
     public enum EstadoCita
     {
-        Pendiente,
+        Finalizada,
         EnProceso,
         Confirmada,
         Rechazada,
