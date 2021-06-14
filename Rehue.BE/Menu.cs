@@ -1,32 +1,32 @@
-﻿using System;
+﻿using Rehue.Abstracciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Rehue.BE
 {
-    public class Menu
+    public class Menu : IMenu
     {
-        private Empresa _empresa;
+        private List<IMenuComponent> _hijos;
+        public Menu()
+        {
+            _hijos = new List<IMenuComponent>();
+        }
 
-        public Empresa Empresa
+        private IEmpresa _empresa;
+
+        public IEmpresa Empresa
         {
             get { return _empresa; }
             set { _empresa = value; }
         }
 
-        private List<Item> _items;
-        public List<Item> Items
+        private List<IItem> _items;
+        public List<IItem> Items
         {
             get { return _items; }
             set { _items = value; }
-        }
-
-        private bool _activo;
-        public bool Activo
-        {
-            get { return _activo; }
-            set { _activo = value; }
         }
 
         private DateTime _fechaCreacion;
@@ -34,6 +34,20 @@ namespace Rehue.BE
         {
             get { return _fechaCreacion; }
             set { _fechaCreacion = value; }
+        }
+
+        public void QuitarItems()
+        {
+            _hijos.Clear();
+        }
+        public void AgregarItem(IMenuComponent c)
+        {
+            _hijos.Add(c);
+        }
+
+        public IList<IMenuComponent> ObtenerItems()
+        {
+            return _hijos;
         }
     }
 }

@@ -21,12 +21,12 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Rehue.BE.Persona">
-    <Position X="2.75" Y="5" Width="1.5" />
-    <InheritanceLine Type="Rehue.BE.Usuario" ManuallyRouted="true" FixedFromPoint="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Rehue.BE.Usuario" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="2" Y="4.125" />
-        <Point X="3.5" Y="4.125" />
-        <Point X="3.5" Y="5" />
+        <Point X="2" Y="4.383" />
+        <Point X="3.5" Y="4.383" />
+        <Point X="3.5" Y="4.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -38,7 +38,7 @@
   <Class Name="Rehue.BE.Usuario">
     <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQCAABAACAAAAAAAABAAAEAAgAAAAACAAAAAAAAAAM=</HashCode>
+      <HashCode>EAQCAABAACAAAAAAAABAAAEAAgAAAAACAAAAAAAAAIM=</HashCode>
       <FileName>Usuario.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -149,6 +149,28 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAEJAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rehue.BE.RolComponent">
+    <Position X="1.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RolComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Rehue.BE.Rol">
+    <Position X="2.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rehue.BE.Permiso">
+    <Position X="0.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Permiso.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="Rehue.BE.EstadoCita">

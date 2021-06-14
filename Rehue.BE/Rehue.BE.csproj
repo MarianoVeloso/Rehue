@@ -50,6 +50,10 @@
     <Compile Include="EstadoDenuncia.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="MenuComponent.cs" />
+    <Compile Include="Permiso.cs" />
+    <Compile Include="Rol.cs" />
+    <Compile Include="RolComponent.cs" />
     <Compile Include="Sancion.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

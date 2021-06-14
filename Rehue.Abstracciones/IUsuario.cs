@@ -13,5 +13,6 @@ namespace Rehue.Interfaces
         string Password { get; set; }
         IList<IPermiso> Permisos { get; set; }
         int Reputacion { get; set; }
+        DateTime FechaNacimiento { get; set; }
     }
 }

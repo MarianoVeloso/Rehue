@@ -49,5 +49,13 @@ namespace Rehue.BE
             get { return _permisos; }
             set { _permisos = value; }
         }
+
+        private DateTime _fechaNacimiento;
+
+        public DateTime FechaNacimiento
+        {
+            get { return _fechaNacimiento; }
+            set { _fechaNacimiento = value; }
+        }
     }
 }
