@@ -19,8 +19,8 @@ namespace Rehue.BE
 
         public DateTime FechaCaducidad
         {
-            get { return _fechaCreacion; }
-            set { _fechaCreacion = value; }
+            get { return _fechaCaducidad; }
+            set { _fechaCaducidad = value; }
         }
 
         private int _monto;

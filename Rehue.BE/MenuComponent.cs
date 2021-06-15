@@ -1,4 +1,4 @@
-﻿using Rehue.Abstracciones;
+﻿using Rehue.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE
 {
-    public abstract class MenuComponent : IMenuComponent
+    public abstract class MenuComponent : Entity, IMenuComponent
     {
         private IEmpresa _empresa;
 

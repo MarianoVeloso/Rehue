@@ -7,17 +7,11 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE
 {
-    public abstract class Usuario : IUsuario
+    public abstract class Usuario : Entity, IUsuario
     {
         public Usuario()
         {
             _permisos = new List<IPermiso>();
-        }
-        private int _id;
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
         }
 
         private string _email;
@@ -25,6 +19,13 @@ namespace Rehue.BE
         {
             get { return _email; }
             set { _email = value; }
+        }
+
+        private DateTime _fechaNacimiento;
+        public DateTime FechaNacimiento
+        {
+            get { return _fechaNacimiento; }
+            set { _fechaNacimiento = value; }
         }
 
         private string _password;
@@ -48,14 +49,6 @@ namespace Rehue.BE
         {
             get { return _permisos; }
             set { _permisos = value; }
-        }
-
-        private DateTime _fechaNacimiento;
-
-        public DateTime FechaNacimiento
-        {
-            get { return _fechaNacimiento; }
-            set { _fechaNacimiento = value; }
         }
     }
 }

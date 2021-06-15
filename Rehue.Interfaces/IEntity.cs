@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.BE
+namespace Rehue.Interfaces
 {
-    public enum TipoPermiso
+    public interface IEntity
     {
-        GestorPermiso,
-        GestorUsuario,
+        int Id { get; set; }
     }
 }

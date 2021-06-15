@@ -46,13 +46,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rehue.Abstracciones\Rehue.Interfaces.csproj">
-      <Project>{BF51F753-C9E7-4D87-90DE-91A7DED64BB9}</Project>
-      <Name>Rehue.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Rehue.BE\Rehue.BE.csproj">
       <Project>{c38d5b7b-f64d-40b6-87a7-7d9f57eb8cc5}</Project>
       <Name>Rehue.BE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rehue.Interfaces\Rehue.Interfaces.csproj">
+      <Project>{BF51F753-C9E7-4D87-90DE-91A7DED64BB9}</Project>
+      <Name>Rehue.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Rehue.Servicios\Rehue.Servicios.csproj">
       <Project>{B8AA7B7E-FBF9-4283-958A-227CA03DF7C3}</Project>

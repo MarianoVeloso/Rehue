@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.Abstracciones
+namespace Rehue.Interfaces
 {
-    public interface IItem
+    public interface IRolComponent
     {
-
+        int Id { get; set; }
+        string Nombre { get; set; }
     }
 }

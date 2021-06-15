@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.TextBox();
@@ -40,6 +42,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.lblFechaNacimiento);
             this.groupBox1.Controls.Add(this.txtTelefono);
             this.groupBox1.Controls.Add(this.lblTelefono);
             this.groupBox1.Controls.Add(this.lblPassword);
@@ -48,19 +52,35 @@
             this.groupBox1.Controls.Add(this.txtEmail);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(303, 108);
+            this.groupBox1.Size = new System.Drawing.Size(317, 128);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos básicos";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(110, 97);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 4;
+            // 
+            // lblFechaNacimiento
+            // 
+            this.lblFechaNacimiento.AutoSize = true;
+            this.lblFechaNacimiento.Location = new System.Drawing.Point(6, 103);
+            this.lblFechaNacimiento.Name = "lblFechaNacimiento";
+            this.lblFechaNacimiento.Size = new System.Drawing.Size(93, 13);
+            this.lblFechaNacimiento.TabIndex = 7;
+            this.lblFechaNacimiento.Text = "Fecha Nacimiento";
             // 
             // txtTelefono
             // 
             this.txtTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTelefono.Location = new System.Drawing.Point(96, 71);
+            this.txtTelefono.Location = new System.Drawing.Point(110, 71);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(201, 20);
-            this.txtTelefono.TabIndex = 6;
+            this.txtTelefono.TabIndex = 3;
             // 
             // lblTelefono
             // 
@@ -75,10 +95,10 @@
             // 
             this.lblPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPassword.Location = new System.Drawing.Point(96, 45);
+            this.lblPassword.Location = new System.Drawing.Point(110, 45);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(201, 20);
-            this.lblPassword.TabIndex = 4;
+            this.lblPassword.TabIndex = 2;
             // 
             // lblContraseña
             // 
@@ -102,7 +122,7 @@
             // 
             this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtEmail.Location = new System.Drawing.Point(96, 19);
+            this.txtEmail.Location = new System.Drawing.Point(110, 19);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(201, 20);
             this.txtEmail.TabIndex = 1;
@@ -111,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 131);
+            this.ClientSize = new System.Drawing.Size(338, 147);
             this.Controls.Add(this.groupBox1);
             this.Name = "RegistroForm";
             this.Text = "RegistrarForm";
@@ -130,5 +150,7 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.Label lblTelefono;
+        private System.Windows.Forms.Label lblFechaNacimiento;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

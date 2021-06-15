@@ -1,6 +1,5 @@
 ﻿using Rehue.BE;
 using Rehue.BLL;
-using Rehue.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +27,7 @@ namespace Rehue.LogIn
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Close();
         }
     }
 }
