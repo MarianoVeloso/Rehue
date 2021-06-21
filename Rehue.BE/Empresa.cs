@@ -32,5 +32,13 @@ namespace Rehue.BE
             {
             }
         }
+
+        private string _ubicacion;
+
+        public string Ubicacion
+        {
+            get { return _ubicacion; }
+            set { _ubicacion = value; }
+        }
     }
 }

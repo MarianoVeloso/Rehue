@@ -14,13 +14,18 @@ namespace Rehue.BE
             _hijos = new List<IRolComponent>();
         }
 
+        public int ObtenerId()
+        {
+            return Id;
+        }
+
         public void QuitarPermisos()
         {
             _hijos.Clear();
         }
-        public void AgregarPermiso(IRolComponent c)
+        public void AgregarPermiso(IRolComponent rol)
         {
-            _hijos.Add(c);
+            _hijos.Add(rol);
         }
 
         public  IList<IRolComponent> ObtenerHijos()

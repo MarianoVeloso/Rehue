@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DefaultForm.Designer.cs">
-      <DependentUpon>DefaultForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="LogIn\LogIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,9 +72,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DefaultForm.resx">
-      <DependentUpon>DefaultForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LogIn\LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,6 +118,10 @@
     <ProjectReference Include="..\Rehue.Interfaces\Rehue.Interfaces.csproj">
       <Project>{BF51F753-C9E7-4D87-90DE-91A7DED64BB9}</Project>
       <Name>Rehue.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rehue.Servicios\Rehue.Servicios.csproj">
+      <Project>{B8AA7B7E-FBF9-4283-958A-227CA03DF7C3}</Project>
+      <Name>Rehue.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

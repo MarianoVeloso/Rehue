@@ -9,5 +9,6 @@ namespace Rehue.BE
 {
     public class Administrador : Usuario, IUsuario
     {
+
     }
 }

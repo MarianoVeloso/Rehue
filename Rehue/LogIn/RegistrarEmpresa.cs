@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Rehue.BE;
+using Rehue.BLL;
+using Rehue.Interfaces;
+using Rehue.Servicios.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +16,7 @@ namespace Rehue.LogIn
 {
     public partial class RegistrarEmpresa : RegistroForm
     {
+        private readonly EmpresaBLL _empresaBLL = new EmpresaBLL();
         public RegistrarEmpresa()
         {
             InitializeComponent();
@@ -24,7 +29,32 @@ namespace Rehue.LogIn
 
         private void btnRegistrar_Click_1(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            IEmpresa empresa = new Empresa()
+            {
+                Email = txtEmail.Text,
+                Password = txtPassword.Text,
+                Telefono = txtTelefono.Text,
+                FechaNacimiento = dtFechaNacimiento.Value,
+                RazonSocial = txtRazonSocial.Text,
+                CuitCuil = txtCuitCuil.Text,
+                Ubicacion = txtUbicacion.Text
+            };
+
+            try
+            {
+                _empresaBLL.ValidarUsuario(empresa.Email);
+                _empresaBLL.ValidarUsuarioContraseña(empresa);
+                _empresaBLL.Guardar(empresa);
+
+            }
+            catch (ErrorLogInException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

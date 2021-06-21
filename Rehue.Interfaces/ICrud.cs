@@ -8,9 +8,9 @@ namespace Rehue.Interfaces
 {
     public interface ICrud<T>
     {
-        T GetById(int id);
-        IList<T> GetAll();
-        void Save(T entity);
-        void Delete(T entity);
+        T ObtenerPorId(int id);
+        IList<T> ObtenerTodos();
+        void Guardar(T entity);
+        void Eliminar(T entity);
     }
 }

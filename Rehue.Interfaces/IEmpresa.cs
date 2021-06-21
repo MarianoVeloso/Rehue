@@ -10,5 +10,6 @@ namespace Rehue.Interfaces
     {
         string RazonSocial { get; set; }
         string CuitCuil { get; set; }
+        string Ubicacion { get; set; }
     }
 }

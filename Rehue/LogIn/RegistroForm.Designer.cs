@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
-            this.lblPassword = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblContraseña = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -42,11 +42,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.dtFechaNacimiento);
             this.groupBox1.Controls.Add(this.lblFechaNacimiento);
             this.groupBox1.Controls.Add(this.txtTelefono);
             this.groupBox1.Controls.Add(this.lblTelefono);
-            this.groupBox1.Controls.Add(this.lblPassword);
+            this.groupBox1.Controls.Add(this.txtPassword);
             this.groupBox1.Controls.Add(this.lblContraseña);
             this.groupBox1.Controls.Add(this.lblEmail);
             this.groupBox1.Controls.Add(this.txtEmail);
@@ -57,12 +57,12 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos básicos";
             // 
-            // dateTimePicker1
+            // dtFechaNacimiento
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(110, 97);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 4;
+            this.dtFechaNacimiento.Location = new System.Drawing.Point(110, 97);
+            this.dtFechaNacimiento.Name = "dtFechaNacimiento";
+            this.dtFechaNacimiento.Size = new System.Drawing.Size(200, 20);
+            this.dtFechaNacimiento.TabIndex = 4;
             // 
             // lblFechaNacimiento
             // 
@@ -91,14 +91,14 @@
             this.lblTelefono.TabIndex = 5;
             this.lblTelefono.Text = "Telefono";
             // 
-            // lblPassword
+            // txtPassword
             // 
-            this.lblPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPassword.Location = new System.Drawing.Point(110, 45);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(201, 20);
-            this.lblPassword.TabIndex = 2;
+            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPassword.Location = new System.Drawing.Point(110, 45);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(201, 20);
+            this.txtPassword.TabIndex = 2;
             // 
             // lblContraseña
             // 
@@ -143,14 +143,14 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox lblPassword;
-        private System.Windows.Forms.Label lblContraseña;
-        private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtTelefono;
-        private System.Windows.Forms.Label lblTelefono;
-        private System.Windows.Forms.Label lblFechaNacimiento;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.TextBox txtPassword;
+        public System.Windows.Forms.Label lblContraseña;
+        public System.Windows.Forms.Label lblEmail;
+        public System.Windows.Forms.TextBox txtEmail;
+        public System.Windows.Forms.TextBox txtTelefono;
+        public System.Windows.Forms.Label lblTelefono;
+        public System.Windows.Forms.Label lblFechaNacimiento;
+        public System.Windows.Forms.DateTimePicker dtFechaNacimiento;
     }
 }

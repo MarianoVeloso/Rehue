@@ -11,7 +11,7 @@ namespace Rehue.BE
     {
         public Usuario()
         {
-            _permisos = new List<IPermiso>();
+            _roles = new List<IRol>();
         }
 
         private string _email;
@@ -44,11 +44,19 @@ namespace Rehue.BE
         }
 
 
-        private IList<IPermiso> _permisos;
-        public IList<IPermiso> Permisos
+        private IList<IRol> _roles;
+        public IList<IRol> Roles
         {
-            get { return _permisos; }
-            set { _permisos = value; }
+            get { return _roles; }
+            set { _roles = value; }
+        }
+
+        private string _telefono;
+
+        public string Telefono
+        {
+            get { return _telefono; }
+            set { _telefono = value; }
         }
     }
 }

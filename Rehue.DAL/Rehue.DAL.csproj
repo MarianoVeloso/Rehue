@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acceso.cs" />
+    <Compile Include="EmpresaDAL.cs" />
+    <Compile Include="RehueDAL.cs" />
+    <Compile Include="RolComponentDAL.cs" />
+    <Compile Include="PersonaDAL.cs" />
     <Compile Include="Servicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

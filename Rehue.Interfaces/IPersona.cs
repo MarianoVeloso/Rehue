@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.Abstracciones
+namespace Rehue.Interfaces
 {
     public interface IPersona : IUsuario
     {
         string Nombre { get; set; }
         string Apellido { get; set; }
+        string Ubicacion { get; set; }
     }
 }

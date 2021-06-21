@@ -10,91 +10,87 @@ using System.Linq;
 using Rehue.DAL;
 using System.Text;
 using System.Threading.Tasks;
-using Rehue.Abstracciones;
 
 namespace Rehue.BLL
 {
     public class PersonaBLL : ICrud<IPersona>
     {
-        Servicio _servicio = new Servicio();
-
+        private readonly PersonaDAL _personaDAL = new PersonaDAL();
+        private readonly RehueDAL _ruehueDAL = new RehueDAL();
         public void ValidarUsuario(string email)
         {
-            List<SqlParameter> parametros = new List<SqlParameter>()
+            try
             {
-                _servicio.CrearParametro("@email", email)
-            };
-            var resultado = _servicio.Leer("Validar_Usuario", parametros);
+                bool inValido = _ruehueDAL.ValidarUsuario(email);
 
-            if (resultado.Rows.Count >= 1)
-                throw new ErrorLogInException("Usuario existente en la base de datos.");
+                if (inValido)
+                    throw new ErrorLogInException("Usuario existente en la base de datos.");
+            }
+            catch (ErrorLogInException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
         }
 
         public void ValidarUsuarioContraseña(IPersona entity)
         {
-            string encryptPassword = Encriptador.Hash(entity.Password);
-
-            int id = 0;
-
-            List<SqlParameter> parametros = new List<SqlParameter>()
-            {
-                _servicio.CrearParametro("@email", entity.Email),
-                _servicio.CrearParametro("@password", encryptPassword),
-                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
-            };
-
-            _servicio.Leer("Validar_Usuario_Contraseña", parametros);
-
-            id = int.Parse(parametros[2].Value.ToString());
-
-            if (id == 0)
-                throw new ErrorLogInException("Combinación de Usuario y Contraseña incorrecta.");
-        }
-
-        public IPersona GetById(int id)
-        {
-            return MapearPersona();
-        }
-
-        public IList<IPersona> GetAll()
-        {
-            return new List<IPersona> { MapearPersona() };
-        }
-
-        public void Save(IPersona entity)
-        {
-            string encryptPassword = Encriptador.Hash(entity.Password);
-            int id = 0;
-
-            List<SqlParameter> parametros = new List<SqlParameter>()
-            {
-                _servicio.CrearParametro("@email", entity.Email),
-                _servicio.CrearParametro("@password", encryptPassword),
-                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
-            };
+            entity.Password = Encriptador.Hash(entity.Password);
 
             try
             {
-                _servicio.RealizarOperacion("Registar_Usuario", parametros);
+                bool inValido = _ruehueDAL.ValidarUsuarioContraseña(entity);
+
+                if (inValido)
+                    throw new ErrorLogInException("Combinación de Usuario y Contraseña incorrecta.");
+            }
+            catch (ErrorLogInException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
+
+        public IPersona ObtenerPorId(int id)
+        {
+            return _personaDAL.ObtenerPorId(id);
+        }
+
+        public IList<IPersona> ObtenerTodos()
+        {
+            return _personaDAL.ObtenerTodos();
+        }
+
+        public void Guardar(IPersona entity)
+        {
+            try
+            {
+                _personaDAL.Guardar(entity);
+
+                Session.Instancia.Login(entity);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
-
-            entity.Id = int.Parse(parametros[2].Value.ToString());
-
-            Session.Instancia.Login(entity);
         }
 
-        public void Delete(IPersona entity)
+        public void Eliminar(IPersona entity)
         {
-            throw new NotImplementedException();
-        }
-
-        private IPersona MapearPersona()
-        {
-            return new Persona();
+            try
+            {
+                _personaDAL.Eliminar(entity);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
         }
     }
 }

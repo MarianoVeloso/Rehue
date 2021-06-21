@@ -1,5 +1,4 @@
-﻿using Rehue.Abstracciones;
-using Rehue.Interfaces;
+﻿using Rehue.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +23,14 @@ namespace Rehue.BE
             get { return _apellido; }
             set { _apellido = value; }
         }
+
+        private string _ubicacion;
+
+        public string Ubicacion
+        {
+            get { return _ubicacion; }
+            set { _ubicacion = value; }
+        }
+
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Rehue.LogIn
 {
-    public partial class LogIn : RehueDefaultForm
+    public partial class LogIn : Form
     {
         public LogIn()
         {
@@ -30,6 +30,11 @@ namespace Rehue.LogIn
             RegistrarEmpresa form = new RegistrarEmpresa();
 
             form.ShowDialog();
+        }
+
+        private void btnIniciarSesion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces
 {
-    public interface IRolComponent
+    public interface IRolComponent : IEntity
     {
-        int Id { get; set; }
         string Nombre { get; set; }
     }
 }

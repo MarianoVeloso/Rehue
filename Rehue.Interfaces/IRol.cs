@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces
 {
-    public interface IRol
+    public interface IRol : IRolComponent
     {
+        int ObtenerId();
         IList<IRolComponent> ObtenerHijos();
-        void AgregarPermiso(IRolComponent p);
+        void AgregarPermiso(IRolComponent rol);
         void QuitarPermisos();
     }
 }

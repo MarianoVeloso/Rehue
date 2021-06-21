@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Rehue.LogIn
 {
-    public partial class RegistroForm : RehueDefaultForm
+    public partial class RegistroForm : Form
     {
         public RegistroForm()
         {
