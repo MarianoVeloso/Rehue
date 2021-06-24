@@ -9,6 +9,13 @@ namespace Rehue.BE
 {
     public class Persona : Usuario, IPersona
     {
+        private int _reputacion;
+
+        public int Reputacion
+        {
+            get { return _reputacion; }
+            set { _reputacion = value; }
+        }
 
         private string _nombre;
         public string Nombre

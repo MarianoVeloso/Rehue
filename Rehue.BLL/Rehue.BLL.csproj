@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministradorBLL.cs" />
     <Compile Include="EmpresaBLL.cs" />
     <Compile Include="RolComponentBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

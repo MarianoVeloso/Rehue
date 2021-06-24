@@ -17,6 +17,7 @@ namespace Rehue.LogIn
     public partial class RegistrarEmpresa : RegistroForm
     {
         private readonly EmpresaBLL _empresaBLL = new EmpresaBLL();
+        private readonly RehueBLL _rehueBLL = new RehueBLL();
         public RegistrarEmpresa()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace Rehue.LogIn
             IEmpresa empresa = new Empresa()
             {
                 Email = txtEmail.Text,
-                Password = txtPassword.Text,
+                Contraseña = txtPassword.Text,
                 Telefono = txtTelefono.Text,
                 FechaNacimiento = dtFechaNacimiento.Value,
                 RazonSocial = txtRazonSocial.Text,
@@ -42,8 +43,8 @@ namespace Rehue.LogIn
 
             try
             {
-                _empresaBLL.ValidarUsuario(empresa.Email);
-                _empresaBLL.ValidarUsuarioContraseña(empresa);
+                _rehueBLL.ValidarUsuario(empresa.Email);
+                _rehueBLL.ValidarUsuarioContraseña(empresa);
                 _empresaBLL.Guardar(empresa);
 
             }

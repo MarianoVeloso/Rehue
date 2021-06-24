@@ -8,6 +8,7 @@ namespace Rehue.Interfaces
 {
     public interface IEmpresa : IUsuario
     {
+        int Reputacion { get; set; }
         string RazonSocial { get; set; }
         string CuitCuil { get; set; }
         string Ubicacion { get; set; }

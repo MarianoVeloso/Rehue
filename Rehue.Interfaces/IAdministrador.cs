@@ -1,13 +1,12 @@
-﻿using Rehue.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.BE
+namespace Rehue.Interfaces
 {
-    public class Administrador : Usuario, IAdministrador
+    public interface IAdministrador : IUsuario
     {
 
     }

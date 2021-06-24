@@ -9,8 +9,15 @@ namespace Rehue.BE
 {
     public class Empresa : Usuario, IEmpresa
     {
-        private string _razonSocial;
+        private int _reputacion;
 
+        public int Reputacion
+        {
+            get { return _reputacion; }
+            set { _reputacion = value; }
+        }
+
+        private string _razonSocial;
         public string RazonSocial
         {
             get { return _razonSocial; }

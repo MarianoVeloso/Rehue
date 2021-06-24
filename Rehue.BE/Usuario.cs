@@ -28,21 +28,12 @@ namespace Rehue.BE
             set { _fechaNacimiento = value; }
         }
 
-        private string _password;
-        public string Password
+        private string _contraseña;
+        public string Contraseña
         {
-            get { return _password; }
-            set { _password = value; }
+            get { return _contraseña; }
+            set { _contraseña = value; }
         }
-
-        private int _reputacion;
-
-        public int Reputacion
-        {
-            get { return _reputacion; }
-            set { _reputacion = value; }
-        }
-
 
         private IList<IRol> _roles;
         public IList<IRol> Roles

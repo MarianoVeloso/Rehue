@@ -65,7 +65,7 @@ namespace Rehue.DAL
 
         public void Guardar(IEmpresa entity)
         {
-            string encryptPassword = Encriptador.Hash(entity.Password);
+            string encryptPassword = Encriptador.Hash(entity.Contraseña);
             int id = 0;
 
             List<SqlParameter> parametros = new List<SqlParameter>()

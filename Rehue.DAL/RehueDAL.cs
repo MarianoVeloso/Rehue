@@ -11,7 +11,7 @@ namespace Rehue.DAL
 {
     public class RehueDAL
     {
-        Servicio _servicio = new Servicio();
+        private readonly Servicio _servicio = new Servicio();
         public bool ValidarUsuario(string email)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -25,18 +25,33 @@ namespace Rehue.DAL
 
         public bool ValidarUsuarioContraseña(IUsuario entity)
         {
+            int id = 0;
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
                 _servicio.CrearParametro("@email", entity.Email),
-                _servicio.CrearParametro("@password", entity.Password),
-                _servicio.CrearParametro("@id", 0, ParameterDirection.Output)
+                _servicio.CrearParametro("@password", entity.Contraseña)
             };
 
             try
             {
-                _servicio.Leer("validar_usuario_contraseña", parametros);
+                var resultado = _servicio.Leer("validar_usuario_contraseña", parametros);
 
-                return int.Parse(parametros[2].Value.ToString()) == 0;
+
+                foreach (DataRow item in resultado.Rows)
+                {
+                    id = int.Parse(item["id"].ToString());
+                }
+
+                if (id == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    entity.Id = int.Parse(parametros[2].Value.ToString());
+
+                    return true;
+                }
             }
             catch (Exception ex)
             {

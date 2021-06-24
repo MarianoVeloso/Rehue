@@ -18,7 +18,7 @@ namespace Rehue.Servicios
             Usuario = usuario;
         }
 
-        public void Logout()
+        public void LogOut()
         {
             Usuario = null;
         }

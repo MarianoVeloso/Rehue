@@ -1,33 +1,30 @@
-﻿using Rehue.BE;
-using Rehue.DAL;
+﻿using Rehue.DAL;
 using Rehue.Interfaces;
 using Rehue.Servicios;
 using Rehue.Servicios.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Rehue.BLL
 {
-    public class EmpresaBLL : ICrud<IEmpresa>
+    public class AdministradorBLL : ICrud<IAdministrador>
     {
-        private readonly EmpresaDAL _empresaDAL = new EmpresaDAL();
+        private readonly AdministradorDAL _empresaDAL = new AdministradorDAL();
 
-        public IEmpresa ObtenerPorId(int id)
+        public IAdministrador ObtenerPorId(int id)
         {
             return _empresaDAL.ObtenerPorId(id);
         }
 
-        public IList<IEmpresa> ObtenerTodos()
+        public IList<IAdministrador> ObtenerTodos()
         {
             return _empresaDAL.ObtenerTodos();
         }
 
-        public void Guardar(IEmpresa entity)
+        public void Guardar(IAdministrador entity)
         {
             try
             {
@@ -41,7 +38,7 @@ namespace Rehue.BLL
             }
         }
 
-        public void Eliminar(IEmpresa entity)
+        public void Eliminar(IAdministrador entity)
         {
             try
             {

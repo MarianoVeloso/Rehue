@@ -17,6 +17,7 @@ namespace Rehue.LogIn
     public partial class RegistrarPersona : RegistroForm
     {
         private readonly PersonaBLL _personaBLL = new PersonaBLL();
+        private readonly RehueBLL _rehueBLL = new RehueBLL();
         public RegistrarPersona()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace Rehue.LogIn
             IPersona persona = new Persona()
             {
                 Email = txtEmail.Text,
-                Password = txtPassword.Text,
+                Contraseña = txtPassword.Text,
                 Telefono = txtTelefono.Text,
                 FechaNacimiento = dtFechaNacimiento.Value,
                 Nombre = txtNombre.Text,
@@ -37,10 +38,8 @@ namespace Rehue.LogIn
 
             try
             {
-                _personaBLL.ValidarUsuario(persona.Email);
-                _personaBLL.ValidarUsuarioContraseña(persona);
+                _rehueBLL.ValidarUsuario(persona.Email);
                 _personaBLL.Guardar(persona);
-
             }
             catch (ErrorLogInException ex)
             {

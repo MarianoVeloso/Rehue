@@ -10,9 +10,12 @@ using System.Threading.Tasks;
 
 namespace Rehue.BLL
 {
-    public class Rehue
+    public class RehueBLL
     {
         private readonly RehueDAL _rehueDAL = new RehueDAL();
+        private readonly PersonaBLL _personaBLL = new PersonaBLL();
+        private readonly EmpresaBLL _empresaBLL = new EmpresaBLL();
+        private readonly AdministradorBLL _administradorBLL = new AdministradorBLL();
 
         public void ValidarUsuario(string email)
         {
@@ -33,9 +36,9 @@ namespace Rehue.BLL
             }
         }
 
-        public void ValidarUsuarioContraseña(IEmpresa entity)
+        public void ValidarUsuarioContraseña(IUsuario entity)
         {
-            entity.Password = Encriptador.Hash(entity.Password);
+            entity.Contraseña = Encriptador.Hash(entity.Contraseña);
 
             try
             {
@@ -51,6 +54,30 @@ namespace Rehue.BLL
             catch (Exception ex)
             {
                 throw new ErrorLogInException(ex.Message);
+            }
+        }
+
+        public void LogIn(IUsuario entity)
+        {
+            IEmpresa empresa = _empresaBLL.ObtenerPorId(entity.Id);
+
+            if (empresa != null)
+            {
+                Session.Instancia.Login(empresa);
+            }
+            else
+            {
+                IPersona persona = _personaBLL.ObtenerPorId(entity.Id);
+
+                if (persona != null)
+                {
+                    Session.Instancia.Login(persona);
+                }
+                else
+                {
+                    IAdministrador administrador = _administradorBLL.ObtenerPorId(entity.Id);
+                    Session.Instancia.Login(administrador);
+                }
             }
         }
     }

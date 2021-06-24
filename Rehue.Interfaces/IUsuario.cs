@@ -10,9 +10,8 @@ namespace Rehue.Interfaces
     {
         int Id { get; set; }
         string Email { get; set; }
-        string Password { get; set; }
+        string Contraseña { get; set; }
         IList<IRol> Roles { get; set; }
-        int Reputacion { get; set; }
         DateTime FechaNacimiento { get; set; }
         string Telefono { get; set; }
     }

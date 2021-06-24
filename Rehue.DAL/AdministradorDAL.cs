@@ -6,15 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class PersonaDAL : ICrud<IPersona>
+    public class AdministradorDAL : ICrud<IAdministrador>
     {
         private readonly Servicio _servicio = new Servicio();
-        private readonly RolComponentDAL _permisosDAL= new RolComponentDAL();
 
-        public IPersona ObtenerPorId(int id)
+        public IAdministrador ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
@@ -23,37 +25,36 @@ namespace Rehue.DAL
 
             try
             {
-                var resultado = _servicio.Leer("obtener_persona_por_id", parametros);
+                var resultado = _servicio.Leer("obtener_adminsitrador_por_id", parametros);
 
-                IPersona persona = new Persona();
+                IAdministrador administrador = new Administrador();
 
                 foreach (DataRow item in resultado.Rows)
                 {
-                    persona = MapearPersona(item);
+                    administrador = MapearAdministrador(item);
                 }
 
-                return persona;
+                return administrador;
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
-        public IList<IPersona> ObtenerTodos()
+        public IList<IAdministrador> ObtenerTodos()
         {
             try
             {
-                var resultado = _servicio.Leer("obtener_personas");
+                var resultado = _servicio.Leer("obtener_administradores");
 
-                List<IPersona> persona = new List<IPersona>();
+                List<IAdministrador> empresa = new List<IAdministrador>();
 
                 foreach (DataRow item in resultado.Rows)
                 {
-                    persona.Add(MapearPersona(item));
+                    empresa.Add(MapearAdministrador(item));
                 }
 
-                return persona;
+                return empresa;
             }
             catch (OperacionDBException ex)
             {
@@ -61,7 +62,7 @@ namespace Rehue.DAL
             }
         }
 
-        public void Guardar(IPersona entity)
+        public void Guardar(IAdministrador entity)
         {
             string encryptPassword = Encriptador.Hash(entity.Contraseña);
             int id = 0;
@@ -70,29 +71,26 @@ namespace Rehue.DAL
             {
                 _servicio.CrearParametro("@email", entity.Email),
                 _servicio.CrearParametro("@password", encryptPassword),
-                _servicio.CrearParametro("@nombre", entity.Nombre),
-                _servicio.CrearParametro("@apellido", entity.Apellido),
                 _servicio.CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
-                _servicio.CrearParametro("@ubicacion", entity.Ubicacion),
                 _servicio.CrearParametro("@telefono", entity.Telefono),
                 _servicio.CrearParametro("@id", id, ParameterDirection.Output)
             };
 
             try
             {
-                _servicio.RealizarOperacion("registar_persona", parametros);
-
-                entity.Id = int.Parse(parametros[7].Value.ToString());
+                _servicio.RealizarOperacion("registar_administrador", parametros);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
 
-            LogIn(entity.Nombre, entity.Contraseña);
+            entity.Id = int.Parse(parametros[2].Value.ToString());
+
+            Session.Instancia.Login(entity);
         }
 
-        public void Eliminar(IPersona entity)
+        public void Eliminar(IAdministrador entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
@@ -109,45 +107,13 @@ namespace Rehue.DAL
             }
         }
 
-
-        public void LogIn(string email, string password)
+        private IAdministrador MapearAdministrador(DataRow row)
         {
-            string encryptPassword = Encriptador.Hash(password);
-            List<SqlParameter> parametros = new List<SqlParameter>()
-            {
-                _servicio.CrearParametro("@email", email),
-                _servicio.CrearParametro("@password", encryptPassword)
-            };
-            try
-            {
-                var resultado = _servicio.Leer("obtener_usuario", parametros);
-
-                IPersona persona = new Persona();
-                foreach (DataRow item in resultado.Rows)
-                {
-                    persona = MapearPersona(item);
-                }
-
-                Session.Instancia.Login(persona);
-            }
-            catch (OperacionDBException ex)
-            {
-                throw new ErrorLogInException(ex.Message);
-            }
-        }
-
-        private IPersona MapearPersona(DataRow row)
-        {
-            return new Persona()
+            return new Administrador()
             {
                 Id = int.Parse(row["id"].ToString()),
-                Nombre = row["nombre"].ToString(),
-                Apellido = row["apellido"].ToString(),
                 Email = row["email"].ToString(),
                 FechaNacimiento = DateTime.Parse(row["fechaNacimiento"].ToString()),
-                Telefono = row["email"].ToString(),
-
-                //Roles = _permisosDAL.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString()))
             };
         }
     }
