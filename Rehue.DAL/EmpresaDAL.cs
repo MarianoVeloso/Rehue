@@ -73,7 +73,7 @@ namespace Rehue.DAL
                 _servicio.CrearParametro("@email", entity.Email),
                 _servicio.CrearParametro("@password", encryptPassword),
                 _servicio.CrearParametro("@razonSocial", entity.RazonSocial),
-                _servicio.CrearParametro("@cuitCuil", entity.CuitCuil),
+                _servicio.CrearParametro("@cuitCuil", entity.Documento),
                 _servicio.CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
                 _servicio.CrearParametro("@ubicacion", entity.Ubicacion),
                 _servicio.CrearParametro("@telefono", entity.Telefono),
@@ -89,9 +89,7 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
 
-            entity.Id = int.Parse(parametros[2].Value.ToString());
-
-            Session.Instancia.Login(entity);
+            entity.Id = int.Parse(parametros[7].Value.ToString());
         }
 
         public void Eliminar(IEmpresa entity)
@@ -117,7 +115,7 @@ namespace Rehue.DAL
             {
                 Id = int.Parse(row["id"].ToString()),
                 RazonSocial = row["razonSocial"].ToString(),
-                CuitCuil = row["cuitCuil"].ToString(),
+                Documento = int.Parse(row["documento"].ToString()),
                 Email = row["email"].ToString(),
                 FechaNacimiento = DateTime.Parse(row["fechaNacimiento"].ToString()),
                 Ubicacion = row["ubicacion"].ToString()

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numDocumento = new System.Windows.Forms.NumericUpDown();
+            this.lblDocumento = new System.Windows.Forms.Label();
             this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
@@ -38,10 +40,13 @@
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDocumento)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numDocumento);
+            this.groupBox1.Controls.Add(this.lblDocumento);
             this.groupBox1.Controls.Add(this.dtFechaNacimiento);
             this.groupBox1.Controls.Add(this.lblFechaNacimiento);
             this.groupBox1.Controls.Add(this.txtTelefono);
@@ -52,10 +57,32 @@
             this.groupBox1.Controls.Add(this.txtEmail);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(317, 128);
+            this.groupBox1.Size = new System.Drawing.Size(317, 160);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos básicos";
+            // 
+            // numDocumento
+            // 
+            this.numDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.numDocumento.Location = new System.Drawing.Point(110, 125);
+            this.numDocumento.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.numDocumento.Name = "numDocumento";
+            this.numDocumento.Size = new System.Drawing.Size(201, 20);
+            this.numDocumento.TabIndex = 5;
+            // 
+            // lblDocumento
+            // 
+            this.lblDocumento.AutoSize = true;
+            this.lblDocumento.Location = new System.Drawing.Point(6, 132);
+            this.lblDocumento.Name = "lblDocumento";
+            this.lblDocumento.Size = new System.Drawing.Size(62, 13);
+            this.lblDocumento.TabIndex = 8;
+            this.lblDocumento.Text = "Documento";
             // 
             // dtFechaNacimiento
             // 
@@ -131,12 +158,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 147);
+            this.ClientSize = new System.Drawing.Size(338, 184);
             this.Controls.Add(this.groupBox1);
             this.Name = "RegistroForm";
             this.Text = "RegistrarForm";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDocumento)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -152,5 +180,7 @@
         public System.Windows.Forms.Label lblTelefono;
         public System.Windows.Forms.Label lblFechaNacimiento;
         public System.Windows.Forms.DateTimePicker dtFechaNacimiento;
+        public System.Windows.Forms.Label lblDocumento;
+        public System.Windows.Forms.NumericUpDown numDocumento;
     }
 }

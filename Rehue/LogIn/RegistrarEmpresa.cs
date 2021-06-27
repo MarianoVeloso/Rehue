@@ -37,14 +37,13 @@ namespace Rehue.LogIn
                 Telefono = txtTelefono.Text,
                 FechaNacimiento = dtFechaNacimiento.Value,
                 RazonSocial = txtRazonSocial.Text,
-                CuitCuil = txtCuitCuil.Text,
+                Documento = int.Parse(numDocumento.Value.ToString()),
                 Ubicacion = txtUbicacion.Text
             };
 
             try
             {
-                _rehueBLL.ValidarUsuario(empresa.Email);
-                _rehueBLL.ValidarUsuarioContraseña(empresa);
+                _rehueBLL.ValidarEmail(empresa.Email);
                 _empresaBLL.Guardar(empresa);
 
             }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces
 {
-    public interface IEmpresa : IUsuario
+    public interface ITraduccion
     {
-        int Reputacion { get; set; }
-        string RazonSocial { get; set; }
-        string Ubicacion { get; set; }
+        IEtiqueta Etiqueta { get; set; }
+        string Texto { get; set; }
     }
 }

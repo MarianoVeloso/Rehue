@@ -49,5 +49,21 @@ namespace Rehue.BE
             get { return _telefono; }
             set { _telefono = value; }
         }
+
+        private int _documento;
+
+        public int Documento
+        {
+            get { return _documento; }
+            set { _documento = value; }
+        }
+        private IIdioma _idioma;
+
+        public IIdioma Idioma
+        {
+            get { return _idioma; }
+            set { _idioma = value; }
+        }
+
     }
 }

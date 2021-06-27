@@ -44,6 +44,7 @@
     <Compile Include="Acceso.cs" />
     <Compile Include="AdministradorDAL.cs" />
     <Compile Include="EmpresaDAL.cs" />
+    <Compile Include="IdiomaDAL.cs" />
     <Compile Include="RehueDAL.cs" />
     <Compile Include="RolComponentDAL.cs" />
     <Compile Include="PersonaDAL.cs" />

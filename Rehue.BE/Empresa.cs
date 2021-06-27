@@ -24,14 +24,6 @@ namespace Rehue.BE
             set { _razonSocial = value; }
         }
 
-        private string _cuitCuil;
-
-        public string CuitCuil
-        {
-            get { return _cuitCuil; }
-            set { _cuitCuil = value; }
-        }
-
         public Subscripcion Subscripcion
         {
             get => default;

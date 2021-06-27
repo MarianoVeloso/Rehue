@@ -33,13 +33,15 @@ namespace Rehue.LogIn
                 FechaNacimiento = dtFechaNacimiento.Value,
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
-                Ubicacion = txtUbicacion.Text
+                Ubicacion = txtUbicacion.Text,
+                Documento = int.Parse(numDocumento.Value.ToString())
             };
 
             try
             {
-                _rehueBLL.ValidarUsuario(persona.Email);
+                _rehueBLL.ValidarEmail(persona.Email);
                 _personaBLL.Guardar(persona);
+                _personaBLL.LogIn(persona);
             }
             catch (ErrorLogInException ex)
             {

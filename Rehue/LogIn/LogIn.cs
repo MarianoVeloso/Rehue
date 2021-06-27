@@ -43,7 +43,7 @@ namespace Rehue.LogIn
             try
             {
 
-                _rehueBLL.ValidarUsuario(txtUsuario.Text);
+                _rehueBLL.ValidarEmail(txtUsuario.Text);
 
                 //este metodo teoricamente ya devuelve el Id de la persona si esta logeada correctamente
                 IUsuario persona = new Persona() { Email = txtUsuario.Text, Contraseña = txtContraseña.Text };

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces
 {
-    public interface IEmpresa : IUsuario
+    public interface IIdiomaObserver
     {
-        int Reputacion { get; set; }
-        string RazonSocial { get; set; }
-        string Ubicacion { get; set; }
+        void UpdateLanguage(IIdioma idioma);
     }
 }

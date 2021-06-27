@@ -75,6 +75,7 @@ namespace Rehue.DAL
                 _servicio.CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
                 _servicio.CrearParametro("@ubicacion", entity.Ubicacion),
                 _servicio.CrearParametro("@telefono", entity.Telefono),
+                _servicio.CrearParametro("@documento", entity.Documento),
                 _servicio.CrearParametro("@id", id, ParameterDirection.Output)
             };
 
@@ -82,14 +83,12 @@ namespace Rehue.DAL
             {
                 _servicio.RealizarOperacion("registar_persona", parametros);
 
-                entity.Id = int.Parse(parametros[7].Value.ToString());
+                entity.Id = int.Parse(parametros[8].Value.ToString());
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
-
-            LogIn(entity.Nombre, entity.Contraseña);
         }
 
         public void Eliminar(IPersona entity)

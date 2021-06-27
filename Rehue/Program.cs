@@ -17,7 +17,6 @@ namespace Rehue
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LogIn.LogIn());
-            Application.Run(new RehueForm());
 
         }
     }

@@ -17,11 +17,11 @@ namespace Rehue.BLL
         private readonly EmpresaBLL _empresaBLL = new EmpresaBLL();
         private readonly AdministradorBLL _administradorBLL = new AdministradorBLL();
 
-        public void ValidarUsuario(string email)
+        public void ValidarEmail(string email)
         {
             try
             {
-                bool inValido = _rehueDAL.ValidarUsuario(email);
+                bool inValido = _rehueDAL.ValidarEmail(email);
 
                 if (inValido)
                     throw new ErrorLogInException("Usuario existente en la base de datos.");

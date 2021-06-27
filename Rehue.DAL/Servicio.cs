@@ -16,17 +16,16 @@ namespace Rehue.DAL
 
             int res = Acceso.Operar(storedProcedure, parameters);
 
-            if (res == 1)
+            if (res != -1)
             {
                 Acceso.ConfirmarTransaccion();
+                Acceso.Cerrar();
             }
             else
             {
                 throw new OperacionDBException("Ocurrió un error al intentar realizar la operación");
             }
 
-            Acceso.ConfirmarTransaccion();
-            Acceso.Cerrar();
         }
 
         public SqlParameter CrearParametro(string nombre, object valor, ParameterDirection direccion = ParameterDirection.Input)
