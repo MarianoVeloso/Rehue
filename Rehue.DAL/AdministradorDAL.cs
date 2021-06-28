@@ -12,20 +12,19 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class AdministradorDAL : ICrud<IAdministrador>
+    public class AdministradorDAL : Servicio, ICrud<IAdministrador>
     {
-        private readonly Servicio _servicio = new Servicio();
 
         public IAdministrador ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@id", id)
+                CrearParametro("@id", id)
             };
 
             try
             {
-                var resultado = _servicio.Leer("obtener_adminsitrador_por_id", parametros);
+                var resultado = Leer("obtener_adminsitrador_por_id", parametros);
 
                 IAdministrador administrador = new Administrador();
 
@@ -45,7 +44,7 @@ namespace Rehue.DAL
         {
             try
             {
-                var resultado = _servicio.Leer("obtener_administradores");
+                var resultado = Leer("obtener_administradores");
 
                 List<IAdministrador> empresa = new List<IAdministrador>();
 
@@ -69,16 +68,16 @@ namespace Rehue.DAL
 
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@email", entity.Email),
-                _servicio.CrearParametro("@password", encryptPassword),
-                _servicio.CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
-                _servicio.CrearParametro("@telefono", entity.Telefono),
-                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
+                CrearParametro("@email", entity.Email),
+                CrearParametro("@password", encryptPassword),
+                CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
+                CrearParametro("@telefono", entity.Telefono),
+                CrearParametro("@id", id, ParameterDirection.Output)
             };
 
             try
             {
-                _servicio.RealizarOperacion("registar_administrador", parametros);
+                RealizarOperacion("registar_administrador", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -94,12 +93,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@id", entity.Id)
+                CrearParametro("@id", entity.Id)
             };
 
             try
             {
-                _servicio.RealizarOperacion("usuario_eliminar", parametros);
+                RealizarOperacion("usuario_eliminar", parametros);
             }
             catch (OperacionDBException ex)
             {

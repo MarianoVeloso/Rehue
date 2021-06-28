@@ -11,15 +11,14 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class IdiomaDAL
+    public class IdiomaDAL : Servicio
     {
-        private readonly Servicio _servicio = new Servicio();
 
         public IList<IIdioma> ObtenerIdiomas()
         {
             try
             {
-                var resultado = _servicio.Leer("obtener_idiomas");
+                var resultado = Leer("obtener_idiomas");
 
                 List<IIdioma> idiomas = new List<IIdioma>();
 
@@ -40,12 +39,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@id", idIdioma)
+                CrearParametro("@id", idIdioma)
             };
 
             try
             {
-                var resultado = _servicio.Leer("obtener_traducciones", parametros);
+                var resultado = Leer("obtener_traducciones", parametros);
 
                 IDictionary<string, ITraduccion> _traducciones = new Dictionary<string, ITraduccion>();
 

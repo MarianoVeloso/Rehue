@@ -9,16 +9,15 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class RehueDAL
+    public class RehueDAL : Servicio
     {
-        private readonly Servicio _servicio = new Servicio();
         public bool ValidarEmail(string email)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@email", email)
+                CrearParametro("@email", email)
             };
-            var resultado = _servicio.Leer("validar_usuario", parametros);
+            var resultado = Leer("validar_usuario", parametros);
 
             return resultado.Rows.Count >= 1;
         }
@@ -28,13 +27,13 @@ namespace Rehue.DAL
             int id = 0;
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@email", entity.Email),
-                _servicio.CrearParametro("@password", entity.Contraseña)
+                CrearParametro("@email", entity.Email),
+                CrearParametro("@password", entity.Contraseña)
             };
 
             try
             {
-                var resultado = _servicio.Leer("validar_usuario_contraseña", parametros);
+                var resultado = Leer("validar_usuario_contraseña", parametros);
 
 
                 foreach (DataRow item in resultado.Rows)
