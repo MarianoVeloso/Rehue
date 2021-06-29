@@ -16,7 +16,7 @@ namespace Rehue.BLL
     public class PersonaBLL : ICrud<IPersona>
     {
         private readonly PersonaDAL _personaDAL = new PersonaDAL();
-        private readonly RehueDAL _ruehueDAL = new RehueDAL();
+        private readonly RehueBLL _ruehueDLL = new RehueBLL();
 
         public IPersona ObtenerPorId(int id)
         {
@@ -36,6 +36,7 @@ namespace Rehue.BLL
             }
             catch (OperacionDBException ex)
             {
+                //throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorLogInException"].Texto);
                 throw new ErrorLogInException(ex.Message);
             }
         }
@@ -48,6 +49,7 @@ namespace Rehue.BLL
             }
             catch (OperacionDBException ex)
             {
+                //throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorLogInException"].Texto);
                 throw new ErrorLogInException(ex.Message);
             }
         }

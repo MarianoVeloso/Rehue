@@ -7,18 +7,18 @@ namespace Rehue.DAL
 {
     internal static class Acceso
     {
-        private static SqlConnection conexion;
-        private static SqlTransaction transaccion;
+        private static SqlConnection _conexion;
+        private static SqlTransaction _transaccion;
         public static void Abrir()
         {
-            conexion = new SqlConnection("Initial Catalog=Rehue; Data Source=.\\SqlExpress; Integrated Security=SSPI");
-            conexion.Open();
+            _conexion = new SqlConnection("Initial Catalog=Rehue; Data Source=.\\SqlExpress; Integrated Security=SSPI");
+            _conexion.Open();
         }
 
         public static void Cerrar()
         {
-            conexion.Close();
-            conexion = null;
+            _conexion.Close();
+            _conexion = null;
             GC.Collect();
         }
 
@@ -61,7 +61,7 @@ namespace Rehue.DAL
 
         private static SqlCommand CrearComando(string storedProcedure, List<SqlParameter> parametros = null, CommandType tipo = CommandType.Text)
         {
-            SqlCommand comando = new SqlCommand(storedProcedure, conexion)
+            SqlCommand comando = new SqlCommand(storedProcedure, _conexion)
             {
                 CommandType = tipo
             };
@@ -92,9 +92,9 @@ namespace Rehue.DAL
             SqlCommand comando = CrearComando(storedProcedure, parametros, CommandType.StoredProcedure);
             int res;
 
-            if (transaccion != null)
+            if (_transaccion != null)
             {
-                comando.Transaction = transaccion;
+                comando.Transaction = _transaccion;
             }
 
             try
@@ -119,27 +119,27 @@ namespace Rehue.DAL
 
         public static void IniciarTransaccion()
         {
-            if (transaccion != null && conexion.State == ConnectionState.Open)
+            if (_transaccion != null && _conexion.State == ConnectionState.Open)
             {
-                transaccion = conexion.BeginTransaction();
+                _transaccion = _conexion.BeginTransaction();
             }
             else
             {
-                transaccion = conexion.BeginTransaction();
+                _transaccion = _conexion.BeginTransaction();
             }
         }
 
         public static void ConfirmarTransaccion()
         {
-            transaccion.Commit();
-            transaccion.Dispose();
-            transaccion = null;
+            _transaccion.Commit();
+            _transaccion.Dispose();
+            _transaccion = null;
 
         }
 
         public static void CancelarTransaccion()
         {
-            transaccion.Rollback();
+            _transaccion.Rollback();
         }
 
         public static void RegistrarError(string error)

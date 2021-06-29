@@ -145,7 +145,7 @@ namespace Rehue.DAL
                 FechaNacimiento = DateTime.Parse(row["fechaNacimiento"].ToString()),
                 Telefono = row["email"].ToString(),
 
-                //Roles = _permisosDAL.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString()))
+                Roles = _permisosDAL.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString()))
             };
         }
     }

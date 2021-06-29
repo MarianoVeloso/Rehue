@@ -12,20 +12,18 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class RolComponentDAL : ICrud<IRol>
+    public class RolComponentDAL : Servicio, ICrud<IRol>
     {
-        private readonly Servicio _servicio = new Servicio();
-
         public IRol ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@id", id)
+                CrearParametro("@id", id)
             };
 
             try
             {
-                var resultado = _servicio.Leer("obtener_rol_por_id", parametros);
+                var resultado = Leer("obtener_rol_por_id", parametros);
 
                 IRol permiso = new Rol();
 
@@ -46,7 +44,7 @@ namespace Rehue.DAL
         {
             try
             {
-                var resultado = _servicio.Leer("obtener_permisos");
+                var resultado = Leer("obtener_permisos");
 
                 List<IRol> roles = new List<IRol>();
 
@@ -68,13 +66,13 @@ namespace Rehue.DAL
             int id = 0;
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@nombre", entity.Nombre),
-                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
+                CrearParametro("@nombre", entity.Nombre),
+                CrearParametro("@id", id, ParameterDirection.Output)
             };
 
             try
             {
-                _servicio.RealizarOperacion("registrar_rol", parametros);
+                RealizarOperacion("registrar_rol", parametros);
                 entity.Id = int.Parse(parametros[2].Value.ToString());
             }
             catch (OperacionDBException ex)
@@ -83,19 +81,19 @@ namespace Rehue.DAL
             }
         }
 
-        public void SavePermiso(IPermiso entity)
+        public void GuardarPermiso(IPermiso entity)
         {
             int id = 0;
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@nombre", entity.Nombre),
-                _servicio.CrearParametro("@idPadre", entity.IdPadre),
-                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
+                CrearParametro("@nombre", entity.Nombre),
+                CrearParametro("@idPadre", entity.IdPadre),
+                CrearParametro("@id", id, ParameterDirection.Output)
             };
 
             try
             {
-                _servicio.RealizarOperacion("registrar_permiso", parametros);
+                RealizarOperacion("registrar_permiso", parametros);
                 entity.Id = int.Parse(parametros[2].Value.ToString());
             }
             catch (OperacionDBException ex)
@@ -108,12 +106,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@id", entity.Id)
+                CrearParametro("@id", entity.Id)
             };
 
             try
             {
-                _servicio.RealizarOperacion("permiso_eliminar", parametros);
+                RealizarOperacion("permiso_eliminar", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -125,10 +123,10 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@id", idUsuario)
+                CrearParametro("@id", idUsuario)
             };
 
-            var respuesta = _servicio.Leer("Obtener_rol_por_usuario", parametros);
+            var respuesta = Leer("Obtener_rol_por_usuario", parametros);
 
             List<IRol> roles = new List<IRol>();
 
@@ -152,12 +150,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@idPadre", idPadre)
+                CrearParametro("@idPadre", idPadre)
             };
 
             try
             {
-                var resultado = _servicio.Leer("obtener_permisos_por_idPadre", parametros);
+                var resultado = Leer("obtener_permisos_por_idPadre", parametros);
 
                 List<IPermiso> permisos = new List<IPermiso>();
 

@@ -27,7 +27,7 @@ namespace Rehue.BLL
         {
             foreach (var o in _observers)
             {
-                o.UpdateLanguage(idioma);
+                o.ActualizarIdioma(idioma);
             }
         }
 
@@ -52,12 +52,12 @@ namespace Rehue.BLL
             }
             catch (OperacionDBException ex)
             {
+                throw new ErrorLogInException(ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorLogInException"].Texto);
                 throw new ErrorLogInException(ex.Message);
             }
         }
         public static IDictionary<string, ITraduccion> ObtenerTraducciones(IIdioma idioma = null)
         {
-            //si no hay idioma definido, traigo el idioma por default
             if (idioma == null)
             {
                 idioma = ObtenerIdiomaDefault();
@@ -66,9 +66,6 @@ namespace Rehue.BLL
             try
             {
                 //cmd.CommandText = "select t.id_idioma,t.traduccion as traduccion_traduccion, e.id_etiqueta,e.nombre as nombre_etiqueta from traducciones t inner join etiquetas e on t.id_etiqueta=e.id_etiqueta where t.id_idioma = @id_idioma";
-                //cmd.Parameters.AddWithValue("id_idioma", idioma.Id);
-
-                //reader = cmd.ExecuteReader();
 
                 return _idiomaBLL.ObtenerTraducciones(idioma.Id);
 

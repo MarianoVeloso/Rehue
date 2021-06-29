@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Rehue.BLL
 {
-    public class RolComponentBLL
+    public class RolComponentBLL : ICrud<IRol>
     {
         private readonly RolComponentDAL _rolDAL = new RolComponentDAL();
 
-        public IRol GetById(int id)
+        public IRol ObtenerPorId(int id)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace Rehue.BLL
                 throw;
             }
         }
-        public IList<IRol> GetAll()
+        public IList<IRol> ObtenerTodos()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Rehue.BLL
             }
         }
 
-        public void Save(IRol entity)
+        public void Guardar(IRol entity)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace Rehue.BLL
                 throw;
             }
         }
-        public void Delete(IRol entity)
+        public void Eliminar(IRol entity)
         {
             try
             {
