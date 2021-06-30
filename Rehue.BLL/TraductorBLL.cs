@@ -12,7 +12,6 @@ namespace Rehue.BLL
     public static class TraductorBLL
     {
         static IList<IIdiomaObserver> _observers = new List<IIdiomaObserver>();
-        private static IdiomaBLL _idiomaBLL = new IdiomaBLL();
 
         public static void CambiarIdioma(IIdioma idioma)
         {
@@ -48,6 +47,7 @@ namespace Rehue.BLL
         {
             try
             {
+                IdiomaBLL _idiomaBLL = new IdiomaBLL();
                 return _idiomaBLL.ObtenerTodos();
             }
             catch (OperacionDBException ex)
@@ -66,7 +66,7 @@ namespace Rehue.BLL
             try
             {
                 //cmd.CommandText = "select t.id_idioma,t.traduccion as traduccion_traduccion, e.id_etiqueta,e.nombre as nombre_etiqueta from traducciones t inner join etiquetas e on t.id_etiqueta=e.id_etiqueta where t.id_idioma = @id_idioma";
-
+                IdiomaBLL _idiomaBLL = new IdiomaBLL();
                 return _idiomaBLL.ObtenerTraducciones(idioma.Id);
 
             }

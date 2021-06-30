@@ -16,7 +16,6 @@ namespace Rehue.BLL
     public class PersonaBLL : ICrud<IPersona>
     {
         private readonly PersonaDAL _personaDAL = new PersonaDAL();
-        private readonly RehueBLL _ruehueDLL = new RehueBLL();
 
         public IPersona ObtenerPorId(int id)
         {

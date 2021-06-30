@@ -13,9 +13,6 @@ namespace Rehue.BLL
     public class RehueBLL
     {
         private readonly RehueDAL _rehueDAL = new RehueDAL();
-        private readonly PersonaBLL _personaBLL = new PersonaBLL();
-        private readonly EmpresaBLL _empresaBLL = new EmpresaBLL();
-        private readonly AdministradorBLL _administradorBLL = new AdministradorBLL();
 
         public void ValidarEmail(string email)
         {
@@ -59,6 +56,7 @@ namespace Rehue.BLL
 
         public void LogIn(IUsuario entity)
         {
+            EmpresaBLL _empresaBLL = new EmpresaBLL();
             IEmpresa empresa = _empresaBLL.ObtenerPorId(entity.Id);
 
             if (empresa != null)
@@ -67,6 +65,7 @@ namespace Rehue.BLL
             }
             else
             {
+                PersonaBLL _personaBLL = new PersonaBLL();
                 IPersona persona = _personaBLL.ObtenerPorId(entity.Id);
 
                 if (persona != null)
@@ -75,6 +74,7 @@ namespace Rehue.BLL
                 }
                 else
                 {
+                    AdministradorBLL _administradorBLL = new AdministradorBLL();
                     IAdministrador administrador = _administradorBLL.ObtenerPorId(entity.Id);
                     Session.Instancia.Login(administrador);
                 }
