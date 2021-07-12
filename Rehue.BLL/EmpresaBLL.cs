@@ -32,8 +32,6 @@ namespace Rehue.BLL
             try
             {
                 _empresaDAL.Guardar(entity);
-
-                Session.Instancia.Login(entity);
             }
             catch (OperacionDBException ex)
             {
@@ -51,10 +49,6 @@ namespace Rehue.BLL
             {
                 throw new ErrorLogInException(ex.Message);
             }
-        }
-        public void LogIn(IEmpresa entity)
-        {
-            Session.Instancia.Login(entity);
         }
     }
 }

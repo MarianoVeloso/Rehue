@@ -39,22 +39,6 @@ namespace Rehue.BLL
         {
             _observers.Remove(o);
         }
-        public static IIdioma ObtenerIdiomaDefault()
-        {
-            return ObtenerIdiomas().FirstOrDefault();
-        }
-        public static IList<IIdioma> ObtenerIdiomas()
-        {
-            try
-            {
-                IdiomaBLL _idiomaBLL = new IdiomaBLL();
-                return _idiomaBLL.ObtenerTodos();
-            }
-            catch (OperacionDBException ex)
-            {
-                throw new ErrorLogInException(ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorLogInException"].Texto);
-            }
-        }
         public static IDictionary<string, ITraduccion> ObtenerTraducciones(IIdioma idioma)
         {
             try

@@ -52,10 +52,9 @@ namespace Rehue.LogIn
             try
             {
                 _rehueBLL.ValidarEmail(empresa.Email, _idioma);
-                _rehueBLL.ValidarUsuarioContraseña(empresa, _idioma);
                 _empresaBLL.Guardar(empresa);
-                _empresaBLL.LogIn(empresa);
-
+                _rehueBLL.LogIn(empresa, _idioma);
+                this.Close();
             }
             catch (ErrorLogInException ex)
             {

@@ -41,7 +41,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public IList<IEmpresa> ObtenerTodos()
         {
             try
@@ -62,7 +61,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public void Guardar(IEmpresa entity)
         {
             string encryptPassword = Encriptador.Hash(entity.Contraseña);
@@ -90,9 +88,8 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
 
-            entity.Id = int.Parse(parametros[7].Value.ToString());
+            entity.Id = int.Parse(parametros[8].Value.ToString());
         }
-
         public void Eliminar(IEmpresa entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -109,7 +106,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         private IEmpresa MapearEmpresa(DataRow row)
         {
             return new Empresa()

@@ -49,6 +49,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Etiqueta.cs" />
     <Compile Include="Idioma.cs" />
+    <Compile Include="IdiomaObserver.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuComponent.cs" />

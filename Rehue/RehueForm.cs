@@ -20,6 +20,7 @@ namespace Rehue
 {
     public partial class RehueForm : Form, IIdiomaObserver
     {
+        private IDictionary<string, ITraduccion> _traducciones;
         private readonly IdiomaBLL _idiomaBLL = new IdiomaBLL();
         public RehueForm()
         {
@@ -77,6 +78,7 @@ namespace Rehue
             citaToolStripMenuItem.Visible = true;
             crearToolStripMenuItem.Visible = false; 
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
+            MostrarDatosUsuario();
         }
 
         private void MostrarPersona()
@@ -84,7 +86,9 @@ namespace Rehue
             idiomaToolStripMenuItem.Visible = false;
             rolToolStripMenuItem.Visible = false;
             citaToolStripMenuItem.Visible = true;
+            crearToolStripMenuItem.Visible = true;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
+            MostrarDatosUsuario();
         }
 
         private void MostrarAdministrador()
@@ -93,6 +97,7 @@ namespace Rehue
             rolToolStripMenuItem.Visible = true;
             citaToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
+            MostrarDatosUsuario();
         }
 
         private void administrarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -124,25 +129,24 @@ namespace Rehue
 
         public void ActualizarIdioma(IIdioma idioma)
         {
-            var traducciones = TraductorBLL.ObtenerTraducciones(idioma);
+            _traducciones = TraductorBLL.ObtenerTraducciones(idioma);
 
-            idiomaToolStripMenuItem.Text = traducciones["idiomaToolStripMenuItem"].Texto;
-            administrarToolStripMenuItem.Text = traducciones["administrarToolStripMenuItem"].Texto;
-            rolToolStripMenuItem.Text = traducciones["rolToolStripMenuItem"].Texto;
-            administrarToolStripMenuItem1.Text = traducciones["administrarToolStripMenuItem1"].Texto;
-            asignarToolStripMenuItem.Text = traducciones["asignarToolStripMenuItem"].Texto;
-            citaToolStripMenuItem.Text = traducciones["citaToolStripMenuItem"].Texto;
-            crearToolStripMenuItem.Text = traducciones["crearToolStripMenuItem"].Texto;
-            consultarToolStripMenuItem.Text = traducciones["consultarToolStripMenuItem"].Texto;
-            cerrarSesionToolStripMenuItem.Text = traducciones["cerrarSesionToolStripMenuItem"].Texto;
-            MostrarDatosUsuario(traducciones);
+            idiomaToolStripMenuItem.Text = _traducciones["idiomaToolStripMenuItem"].Texto;
+            administrarToolStripMenuItem.Text = _traducciones["administrarToolStripMenuItem"].Texto;
+            rolToolStripMenuItem.Text = _traducciones["rolToolStripMenuItem"].Texto;
+            administrarToolStripMenuItem1.Text = _traducciones["administrarToolStripMenuItem1"].Texto;
+            asignarToolStripMenuItem.Text = _traducciones["asignarToolStripMenuItem"].Texto;
+            citaToolStripMenuItem.Text = _traducciones["citaToolStripMenuItem"].Texto;
+            crearToolStripMenuItem.Text = _traducciones["crearToolStripMenuItem"].Texto;
+            consultarToolStripMenuItem.Text = _traducciones["consultarToolStripMenuItem"].Texto;
+            cerrarSesionToolStripMenuItem.Text = _traducciones["cerrarSesionToolStripMenuItem"].Texto;
         }
 
-        private void MostrarDatosUsuario(IDictionary<string, ITraduccion> traducciones = null)
+        private void MostrarDatosUsuario()
         {
             if (Session.Instancia.IsLogged())
             {
-                lblUsuario.Text = $"{traducciones["lblUsuario"].Texto}: ";
+                lblUsuario.Text = $"{_traducciones["lblUsuario"].Texto}: ";
                 lblUsuarioDato.Text = Session.Instancia.Usuario.Email;
             }
             else

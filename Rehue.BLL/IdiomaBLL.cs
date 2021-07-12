@@ -17,7 +17,6 @@ namespace Rehue.BLL
         {
             throw new NotImplementedException();
         }
-
         public void ActualizarDefault(IIdioma idiomaDefault)
         {
             if(Session.Instancia.IsLogged())
@@ -27,7 +26,6 @@ namespace Rehue.BLL
                 _idiomaDAL.ActualizarDefault(usuario.Id, idiomaDefault.Id);
             }
         }
-
         public void Guardar(IIdioma entity)
         {
             try
@@ -39,12 +37,10 @@ namespace Rehue.BLL
                 throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorBaseDeDatos"].Texto);
             }
         }
-
         public IIdioma ObtenerPorId(int id)
         {
             throw new NotImplementedException();
         }
-
         public IList<IIdioma> ObtenerTodos()
         {
             return _idiomaDAL.ObtenerIdiomas();
@@ -68,7 +64,6 @@ namespace Rehue.BLL
             }
 
         }
-
         public IDictionary<string, ITraduccion> ObtenerTraducciones(int idIdioma)
         {
             return _idiomaDAL.ObtenerTraducciones(idIdioma);

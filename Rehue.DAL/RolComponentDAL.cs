@@ -39,7 +39,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public IList<IRol> ObtenerTodos()
         {
             try
@@ -53,7 +52,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public void Guardar(IRol entity)
         {
             int id = 0;
@@ -75,7 +73,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public void GuardarPermiso(IPermiso entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -93,7 +90,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public void Eliminar(IRol entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -110,7 +106,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public void EliminarHijo(IPermiso entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -139,7 +134,6 @@ namespace Rehue.DAL
 
             return MapearRoles(resultado.Rows);
         }
-
         public void AsignarRolAUsuario(int idUsuario, int idRol)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -173,7 +167,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }        
-
         private IList<IPermiso> ObtenerPermisosPorIdPadre(int idPadre)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -199,7 +192,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         private IRol MapearRol(DataRow row)
         {
             return new Rol()
@@ -208,7 +200,6 @@ namespace Rehue.DAL
                 Nombre = row["nombre"].ToString()
             };
         }
-
         private IPermiso MapearPermiso(DataRow row)
         {
             return new Permiso()
@@ -218,7 +209,6 @@ namespace Rehue.DAL
                 IdPadre = int.Parse(row["idPadre"].ToString())
             };
         }
-
         private List<IRol> MapearRoles(DataRowCollection rows)
         {
             List<IRol> roles = new List<IRol>();

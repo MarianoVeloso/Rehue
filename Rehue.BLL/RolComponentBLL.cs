@@ -36,7 +36,6 @@ namespace Rehue.BLL
                 throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
-
         public void Guardar(IRol entity)
         {
             try

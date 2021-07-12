@@ -49,9 +49,9 @@ namespace Rehue.LogIn
             try
             {
                 _rehueBLL.ValidarEmail(persona.Email, _idioma);
-                _rehueBLL.ValidarUsuarioContraseña(persona, _idioma);
                 _personaBLL.Guardar(persona);
-                _personaBLL.LogIn(persona);
+                _rehueBLL.LogIn(persona, _idioma);
+                this.Close();
             }
             catch (ErrorLogInException ex)
             {

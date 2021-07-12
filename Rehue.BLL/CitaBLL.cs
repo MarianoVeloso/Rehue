@@ -25,22 +25,24 @@ namespace Rehue.BLL
                 throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
-        public void ObtenerCitasPendientesConfirmacion(IEmpresa empresa)
+        public List<ICita> ObtenerCitasPendientesConfirmacion(IEmpresa empresa)
         {
             try
             {
                 _citaDAL.ObtenerCitasPendientesConfirmacion(empresa.Id);
+                return new List<ICita>();
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorObtenerInformacion"].Texto);
             }
         }
-        public void ObtenerCitasCanceladas(IEmpresa empresa)
+        public List<ICita> ObtenerCitasCanceladas(IEmpresa empresa)
         {
             try
             {
                 _citaDAL.ObtenerCitasCanceladas(empresa.Id);
+                return new List<ICita>();
             }
             catch (OperacionDBException ex)
             {

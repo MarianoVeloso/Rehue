@@ -35,7 +35,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public List<ICita> ObtenerCitasPendientesConfirmacion(int idEmpresa)
         {
             try
@@ -61,7 +60,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public List<ICita> ObtenerCitasCanceladas(int idEmpresa)
         {
             try
@@ -86,7 +84,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         private ICita MapearCita(DataRow row)
         {
             return new Cita

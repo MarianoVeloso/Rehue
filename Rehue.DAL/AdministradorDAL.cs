@@ -62,7 +62,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public void Guardar(IAdministrador entity)
         {
             string encryptPassword = Encriptador.Hash(entity.Contraseña);
@@ -90,7 +89,6 @@ namespace Rehue.DAL
 
             Session.Instancia.Login(entity);
         }
-
         public void Eliminar(IAdministrador entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -107,7 +105,6 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         private IAdministrador MapearAdministrador(DataRow row)
         {
             return new Administrador()

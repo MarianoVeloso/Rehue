@@ -50,10 +50,5 @@ namespace Rehue.BLL
                 throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorBaseDeDatos"].Texto);
             }
         }
-
-        public void LogIn(IPersona entity)
-        {
-            Session.Instancia.Login(entity);
-        }
     }
 }

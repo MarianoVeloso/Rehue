@@ -7,9 +7,9 @@ using System.Data.SqlClient;
 
 namespace Rehue.DAL
 {
-    public class Servicio : IServicio
+    public class Servicio
     {
-        public void RealizarOperacion(string storedProcedure, List<SqlParameter> parameters = null)
+        protected void RealizarOperacion(string storedProcedure, List<SqlParameter> parameters = null)
         {
             Acceso.Abrir();
             Acceso.IniciarTransaccion();
@@ -28,12 +28,12 @@ namespace Rehue.DAL
 
         }
 
-        public SqlParameter CrearParametro(string nombre, object valor, ParameterDirection direccion = ParameterDirection.Input)
+        protected SqlParameter CrearParametro(string nombre, object valor, ParameterDirection direccion = ParameterDirection.Input)
         {
             return Acceso.CrearParametro(nombre, valor, direccion);
         }
 
-        public DataTable Leer(string nombre, List<SqlParameter> parametros = null)
+        protected DataTable Leer(string nombre, List<SqlParameter> parametros = null)
         {
             return Acceso.Leer(nombre, parametros);
         }
