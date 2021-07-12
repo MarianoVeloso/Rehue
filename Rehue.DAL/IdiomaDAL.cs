@@ -13,7 +13,74 @@ namespace Rehue.DAL
 {
     public class IdiomaDAL : Servicio
     {
+        public void ActualizarDefault(int idUsuario, int idIdioma)
+        {
+            try
+            {
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    CrearParametro("@idUsuario", idUsuario),
+                    CrearParametro("@idIdioma", idIdioma)
+                };
+                RealizarOperacion("actualizar_default", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
+        public void GuardarIdioma(string nombre)
+        {
+            try
+            {
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    CrearParametro("@nombre", nombre)
+                };
+                RealizarOperacion("registrar_idioma", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
+        public void CrearTraduccion(int idIdioma, int idEtiqueta, string traduccion)
+        {
+            try
+            {
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    CrearParametro("@idIdioma", idIdioma),
+                    CrearParametro("@idEtiqueta", idEtiqueta),
+                    CrearParametro("@traduccion", traduccion),
+                };
+                RealizarOperacion("registrar_traduccion", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
+        public IList<IEtiqueta> ObtenerEtiquetas()
+        {
+            try
+            {
+                var resultado = Leer("obtener_etiquetas");
 
+                List<IEtiqueta> idiomas = new List<IEtiqueta>();
+
+                foreach (DataRow item in resultado.Rows)
+                {
+                    idiomas.Add(MapearEtiqueta(item));
+                }
+
+                return idiomas;
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
         public IList<IIdioma> ObtenerIdiomas()
         {
             try
@@ -34,12 +101,37 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
+        public IIdioma ObtenerIdiomaPorId(int idIdioma)
+        {
+            try
+            {
 
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    CrearParametro("@id", idIdioma)
+                };
+
+                var resultado = Leer("obtener_idioma_por_id", parametros);
+
+                IIdioma idioma = new Idioma();
+
+                foreach (DataRow item in resultado.Rows)
+                {
+                    idioma = MapearIdioma(item);
+                }
+
+                return idioma;
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
         public IDictionary<string, ITraduccion> ObtenerTraducciones(int idIdioma)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", idIdioma)
+                CrearParametro("@idIdioma", idIdioma)
             };
 
             try
@@ -50,15 +142,15 @@ namespace Rehue.DAL
 
                 foreach (DataRow item in resultado.Rows)
                 {
-                    var etiqueta = item["nombre_etiqueta"].ToString();
+                    var etiqueta = item["nombre"].ToString();
                     _traducciones.Add(etiqueta,
                      new Traduccion()
                      {
-                         Texto = item["traduccion_traduccion"].ToString(),
+                         Texto = item["traduccion"].ToString(),
 
                          Etiqueta = new Etiqueta()
                          {
-                             Id = int.Parse(item["id_etiqueta"].ToString()),
+                             Id = int.Parse(item["idetiqueta"].ToString()),
                              Nombre = etiqueta
                          }
                      });
@@ -71,17 +163,21 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         private IIdioma MapearIdioma(DataRow item)
         {
             return new Idioma()
             {
                 Id = int.Parse(item["id"].ToString()),
-                Nombre = item["nombre"].ToString(),
-                Default = bool.Parse(item["idioma_default"].ToString())
-
+                Nombre = item["nombre"].ToString()
             };
         }
-
+        private IEtiqueta MapearEtiqueta(DataRow item)
+        {
+            return new Etiqueta()
+            {
+                Id = int.Parse(item["id"].ToString()),
+                Nombre = item["nombre"].ToString()
+            };
+        }
     }
 }

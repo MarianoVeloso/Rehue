@@ -17,12 +17,9 @@ namespace Rehue.BE
             set { _nombre = value; }
         }
 
-        private bool _default;
-
-        public bool Default
+        public override string ToString()
         {
-            get { return _default; }
-            set { _default = value; }
+            return _nombre;
         }
     }
 }

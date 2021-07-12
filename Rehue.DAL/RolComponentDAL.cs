@@ -46,14 +46,7 @@ namespace Rehue.DAL
             {
                 var resultado = Leer("obtener_permisos");
 
-                List<IRol> roles = new List<IRol>();
-
-                foreach (DataRow item in resultado.Rows)
-                {
-                    roles.Add(MapearRol(item));
-                }
-
-                return roles;
+                return MapearRoles(resultado.Rows);
             }
             catch (OperacionDBException ex)
             {
@@ -68,12 +61,14 @@ namespace Rehue.DAL
             {
                 CrearParametro("@nombre", entity.Nombre),
                 CrearParametro("@id", id, ParameterDirection.Output)
+
             };
 
             try
             {
                 RealizarOperacion("registrar_rol", parametros);
-                entity.Id = int.Parse(parametros[2].Value.ToString());
+
+                entity.Id = int.Parse(parametros[1].Value.ToString());
             }
             catch (OperacionDBException ex)
             {
@@ -83,18 +78,15 @@ namespace Rehue.DAL
 
         public void GuardarPermiso(IPermiso entity)
         {
-            int id = 0;
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@nombre", entity.Nombre),
                 CrearParametro("@idPadre", entity.IdPadre),
-                CrearParametro("@id", id, ParameterDirection.Output)
+                CrearParametro("@idHijo", entity.Id)
             };
 
             try
             {
-                RealizarOperacion("registrar_permiso", parametros);
-                entity.Id = int.Parse(parametros[2].Value.ToString());
+                RealizarOperacion("registrar_permiso_padreHijo", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -119,6 +111,23 @@ namespace Rehue.DAL
             }
         }
 
+        public void EliminarHijo(IPermiso entity)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                CrearParametro("@idHijo", entity.Id),
+                CrearParametro("@idPadre", entity.IdPadre)
+            };
+
+            try
+            {
+                RealizarOperacion("eliminar_rol_padre_hijo", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
         public IList<IRol> ObtenerRolesYPermisosPorUsuario(int idUsuario)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -126,27 +135,46 @@ namespace Rehue.DAL
                 CrearParametro("@id", idUsuario)
             };
 
-            var respuesta = Leer("Obtener_rol_por_usuario", parametros);
+            var resultado = Leer("Obtener_rol_por_usuario", parametros);
 
-            List<IRol> roles = new List<IRol>();
-
-            foreach (DataRow item in respuesta.Rows)
-            {
-                var rol = MapearRol(item);
-
-                var permisos = ObtenerPermisosPorIdPadre(rol.ObtenerId());
-
-                foreach (IPermiso permiso in permisos)
-                {
-                    rol.AgregarPermiso(permiso);
-                }
-                roles.Add(rol);
-            }
-
-            return roles;
+            return MapearRoles(resultado.Rows);
         }
 
-        public IList<IPermiso> ObtenerPermisosPorIdPadre(int idPadre)
+        public void AsignarRolAUsuario(int idUsuario, int idRol)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                CrearParametro("@idUsuario", idUsuario),
+                CrearParametro("@idRol", idRol)
+            };
+            try
+            {
+                RealizarOperacion("registrar_rol_usuario", parametros);
+
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
+        public void EliminarRolAUsuario(int idUsuario, int idRol)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                CrearParametro("@idUsuario", idUsuario),
+                CrearParametro("@idRol", idRol)
+            };
+            try
+            {
+                RealizarOperacion("eliminar_rol_usuario", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }        
+
+        private IList<IPermiso> ObtenerPermisosPorIdPadre(int idPadre)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
@@ -189,6 +217,26 @@ namespace Rehue.DAL
                 Nombre = row["nombre"].ToString(),
                 IdPadre = int.Parse(row["idPadre"].ToString())
             };
+        }
+
+        private List<IRol> MapearRoles(DataRowCollection rows)
+        {
+            List<IRol> roles = new List<IRol>();
+
+            foreach (DataRow item in rows)
+            {
+                var rol = MapearRol(item);
+
+                var permisos = ObtenerPermisosPorIdPadre(rol.ObtenerId());
+
+                foreach (IPermiso permiso in permisos)
+                {
+                    rol.AgregarPermiso(permiso);
+                }
+                roles.Add(rol);
+            }
+
+            return roles;
         }
     }
 }

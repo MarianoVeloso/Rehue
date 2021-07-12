@@ -46,28 +46,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogIn\LogIn.cs">
+    <Compile Include="CitaForms\CitaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogIn\LogIn.Designer.cs">
-      <DependentUpon>LogIn.cs</DependentUpon>
+    <Compile Include="CitaForms\CitaForm.Designer.cs">
+      <DependentUpon>CitaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogIn\RegistrarEmpresa.cs">
+    <Compile Include="CitaForms\ConsultarCitaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogIn\RegistrarEmpresa.Designer.cs">
+    <Compile Include="CitaForms\ConsultarCitaForm.Designer.cs">
+      <DependentUpon>ConsultarCitaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IdiomaForms\IdiomaAltaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IdiomaForms\IdiomaAltaForm.Designer.cs">
+      <DependentUpon>IdiomaAltaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IdiomaForms\IdiomaUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IdiomaForms\IdiomaUC.Designer.cs">
+      <DependentUpon>IdiomaUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogInForms\LogInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogInForms\LogInForm.Designer.cs">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogInForms\RegistrarEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogInForms\RegistrarEmpresa.Designer.cs">
       <DependentUpon>RegistrarEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogIn\RegistrarPersona.cs">
+    <Compile Include="LogInForms\RegistrarPersona.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogIn\RegistrarPersona.Designer.cs">
+    <Compile Include="LogInForms\RegistrarPersona.Designer.cs">
       <DependentUpon>RegistrarPersona.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogIn\RegistroForm.cs">
+    <Compile Include="LogInForms\RegistroForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogIn\RegistroForm.Designer.cs">
+    <Compile Include="LogInForms\RegistroForm.Designer.cs">
       <DependentUpon>RegistroForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -78,16 +102,37 @@
     <Compile Include="RehueForm.Designer.cs">
       <DependentUpon>RehueForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="LogIn\LogIn.resx">
-      <DependentUpon>LogIn.cs</DependentUpon>
+    <Compile Include="RolForms\AsignarRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RolForms\AsignarRoles.Designer.cs">
+      <DependentUpon>AsignarRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RolForms\RolAltaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RolForms\RolAltaForm.Designer.cs">
+      <DependentUpon>RolAltaForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CitaForms\CitaForm.resx">
+      <DependentUpon>CitaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogIn\RegistrarEmpresa.resx">
+    <EmbeddedResource Include="IdiomaForms\IdiomaAltaForm.resx">
+      <DependentUpon>IdiomaAltaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IdiomaForms\IdiomaUC.resx">
+      <DependentUpon>IdiomaUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogInForms\LogInForm.resx">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogInForms\RegistrarEmpresa.resx">
       <DependentUpon>RegistrarEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogIn\RegistrarPersona.resx">
+    <EmbeddedResource Include="LogInForms\RegistrarPersona.resx">
       <DependentUpon>RegistrarPersona.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogIn\RegistroForm.resx">
+    <EmbeddedResource Include="LogInForms\RegistroForm.resx">
       <DependentUpon>RegistroForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -99,6 +144,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RehueForm.resx">
+      <DependentUpon>RehueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RolForms\AsignarRoles.resx">
+      <DependentUpon>AsignarRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RolForms\RolAltaForm.resx">
+      <DependentUpon>RolAltaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -130,8 +184,6 @@
       <Name>Rehue.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Rol\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

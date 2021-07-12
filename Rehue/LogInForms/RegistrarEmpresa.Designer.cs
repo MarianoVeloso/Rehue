@@ -28,30 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpOtrosDatos = new System.Windows.Forms.GroupBox();
             this.txtUbicacion = new System.Windows.Forms.TextBox();
             this.lblUbicacion = new System.Windows.Forms.Label();
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
             this.lblRazonSocial = new System.Windows.Forms.Label();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.grpDatosBasicos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDocumento)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.grpOtrosDatos.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox2
+            // grpOtrosDatos
             // 
-            this.groupBox2.Controls.Add(this.txtUbicacion);
-            this.groupBox2.Controls.Add(this.lblUbicacion);
-            this.groupBox2.Controls.Add(this.txtRazonSocial);
-            this.groupBox2.Controls.Add(this.lblRazonSocial);
-            this.groupBox2.Location = new System.Drawing.Point(12, 178);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(319, 74);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Otros Datos";
+            this.grpOtrosDatos.Controls.Add(this.txtUbicacion);
+            this.grpOtrosDatos.Controls.Add(this.lblUbicacion);
+            this.grpOtrosDatos.Controls.Add(this.txtRazonSocial);
+            this.grpOtrosDatos.Controls.Add(this.lblRazonSocial);
+            this.grpOtrosDatos.Location = new System.Drawing.Point(12, 178);
+            this.grpOtrosDatos.Name = "grpOtrosDatos";
+            this.grpOtrosDatos.Size = new System.Drawing.Size(319, 74);
+            this.grpOtrosDatos.TabIndex = 6;
+            this.grpOtrosDatos.TabStop = false;
+            this.grpOtrosDatos.Text = "Otros Datos";
             // 
             // txtUbicacion
             // 
@@ -114,25 +114,26 @@
             this.ClientSize = new System.Drawing.Size(338, 313);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpOtrosDatos);
             this.Name = "RegistrarEmpresa";
             this.Text = "RegistrarEmpresa";
-            this.Controls.SetChildIndex(this.groupBox2, 0);
+            this.Load += new System.EventHandler(this.RegistrarEmpresa_Load);
+            this.Controls.SetChildIndex(this.grpOtrosDatos, 0);
             this.Controls.SetChildIndex(this.btnCancelar, 0);
             this.Controls.SetChildIndex(this.btnRegistrar, 0);
-            this.Controls.SetChildIndex(this.groupBox1, 0);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Controls.SetChildIndex(this.grpDatosBasicos, 0);
+            this.grpDatosBasicos.ResumeLayout(false);
+            this.grpDatosBasicos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDocumento)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.grpOtrosDatos.ResumeLayout(false);
+            this.grpOtrosDatos.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpOtrosDatos;
         private System.Windows.Forms.Label lblRazonSocial;
         private System.Windows.Forms.TextBox txtRazonSocial;
         private System.Windows.Forms.Button btnRegistrar;

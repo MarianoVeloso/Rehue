@@ -1,28 +1,13 @@
-﻿using System;
+﻿using Rehue.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Rehue.BE
 {
-    public class Cita
+    public class Cita : Entity, ICita
     {
-        private string _ubicacion;
-
-        public string Ubicacion
-        {
-            get { return _ubicacion; }
-            set { _ubicacion = value; }
-        }
-
-        private DateTime _fecha;
-
-        public DateTime Fecha
-        {
-            get { return _fecha; }
-            set { _fecha = value; }
-        }
-
         private int _cantidadComensales;
 
         public int CantidadComensales
@@ -31,37 +16,58 @@ namespace Rehue.BE
             set { _cantidadComensales = value; }
         }
 
+        private IPersona _persona;
 
-        public Persona Persona
+        public IPersona Persona
         {
-            get => default;
-            set
-            {
-            }
+            get { return _persona; }
+            set { _persona = value; }
         }
 
-        public Empresa Empresa
+        private IEmpresa _empresa;
+
+        public IEmpresa Empresa
         {
-            get => default;
-            set
-            {
-            }
+            get { return _empresa; }
+            set { _empresa = value; }
         }
 
-        public EstadoCita EstadoCita
+        private DateTime _fechaCreacion;
+
+        public DateTime FechaCreacion
         {
-            get => default;
-            set
-            {
-            }
+            get { return _fechaCreacion; }
+            set { _fechaCreacion = value; }
         }
 
-        public Denuncia Denuncia
+        private DateTime? _fechaModificacion;
+
+        public DateTime? FechaModificacion
         {
-            get => default;
-            set
-            {
-            }
+            get { return _fechaModificacion; }
+            set { _fechaModificacion = value; }
+        }
+
+        private DateTime? _fechaCancelacion;
+
+        public DateTime? FechaCancelacion
+        {
+            get { return _fechaCancelacion; }
+            set { _fechaCancelacion = value; }
+        }
+        private DateTime _fechaEncuentro;
+
+        public DateTime FechaEncuentro
+        {
+            get { return _fechaEncuentro; }
+            set { _fechaEncuentro = value; }
+        }
+        private IDenuncia _Denuncia;
+
+        public IDenuncia Denuncia
+        {
+            get { return _Denuncia; }
+            set { _Denuncia = value; }
         }
     }
 }

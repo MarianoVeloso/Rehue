@@ -35,7 +35,7 @@ namespace Rehue.Servicios
 
         public bool IsLogged()
         {
-            return false;
+            return Usuario != null;
         }
     }
 }

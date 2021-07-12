@@ -1,5 +1,7 @@
 ﻿using Rehue.DAL;
 using Rehue.Interfaces;
+using Rehue.Servicios;
+using Rehue.Servicios.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +20,9 @@ namespace Rehue.BLL
             {
                 return _rolDAL.ObtenerPorId(id);
             }
-            catch (Exception)
+            catch (OperacionDBException ex)
             {
-
-                throw;
+                throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
         public IList<IRol> ObtenerTodos()
@@ -30,9 +31,9 @@ namespace Rehue.BLL
             {
                 return _rolDAL.ObtenerTodos();
             }
-            catch (Exception)
+            catch (OperacionDBException ex)
             {
-                throw;
+                throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
 
@@ -41,11 +42,21 @@ namespace Rehue.BLL
             try
             {
                 _rolDAL.Guardar(entity);
-            }
-            catch (Exception)
-            {
 
-                throw;
+                foreach (var hijo in entity.ObtenerHijos())
+                {
+                    IPermiso hijoAgregar = (IPermiso)hijo;
+                    hijoAgregar.IdPadre = entity.Id;
+                    _rolDAL.GuardarPermiso(hijoAgregar);
+                }
+            }
+            catch (OperacionDBException ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+            catch (Exception ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
         public void Eliminar(IRol entity)
@@ -54,15 +65,73 @@ namespace Rehue.BLL
             {
                 _rolDAL.Eliminar(entity);
             }
-            catch (Exception)
+            catch (OperacionDBException ex)
             {
-
-                throw;
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+            catch (Exception ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
+        public void EliminarHijo(IPermiso entity)
+        {
+            try
+            {
+                _rolDAL.EliminarHijo(entity);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+            catch (Exception ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+        }
+
         public IList<IRol> ObtenerPorUsuario(int idUsuario)
         {
             return _rolDAL.ObtenerRolesYPermisosPorUsuario(idUsuario);
+        }
+
+        public void AsignarRolAUsuario(IUsuario usuario, IRol rol)
+        {
+            try
+            {
+                _rolDAL.AsignarRolAUsuario(usuario.Id, rol.Id);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+            catch (Exception ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+        }
+        public void EliminarRolAUsuario(IUsuario usuario, IRol rol)
+        {
+            try
+            {
+                _rolDAL.EliminarRolAUsuario(usuario.Id, rol.Id);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+        }
+
+        private Exception RiseException(Exception ex, string message)
+        {
+            if (ex.GetType().Equals(typeof(OperacionDBException)))
+            {
+                return new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)[message].Texto);
+            }
+            else
+            {
+                return new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)[message].Texto);
+            }
         }
     }
 }

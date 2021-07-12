@@ -37,7 +37,7 @@ namespace Rehue.BLL
             }
             catch (OperacionDBException ex)
             {
-                throw new ErrorLogInException(ex.Message);
+                throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(entity.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
 
@@ -51,6 +51,10 @@ namespace Rehue.BLL
             {
                 throw new ErrorLogInException(ex.Message);
             }
+        }
+        public void LogIn(IEmpresa entity)
+        {
+            Session.Instancia.Login(entity);
         }
     }
 }

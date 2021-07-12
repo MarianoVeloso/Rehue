@@ -12,6 +12,7 @@ namespace Rehue.DAL
     public class PersonaDAL : Servicio, ICrud<IPersona>
     {
         private readonly RolComponentDAL _permisosDAL= new RolComponentDAL();
+        private readonly IdiomaDAL _idiomaDAL = new IdiomaDAL();
 
         public IPersona ObtenerPorId(int id)
         {
@@ -75,6 +76,7 @@ namespace Rehue.DAL
                 CrearParametro("@ubicacion", entity.Ubicacion),
                 CrearParametro("@telefono", entity.Telefono),
                 CrearParametro("@documento", entity.Documento),
+                CrearParametro("@idIdioma", entity.Idioma.Id),
                 CrearParametro("@id", id, ParameterDirection.Output)
             };
 
@@ -144,8 +146,8 @@ namespace Rehue.DAL
                 Email = row["email"].ToString(),
                 FechaNacimiento = DateTime.Parse(row["fechaNacimiento"].ToString()),
                 Telefono = row["email"].ToString(),
-
-                Roles = _permisosDAL.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString()))
+                Roles = _permisosDAL.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString())),
+                Idioma = _idiomaDAL.ObtenerIdiomaPorId(int.Parse(row["IdIdioma"].ToString()))
             };
         }
     }

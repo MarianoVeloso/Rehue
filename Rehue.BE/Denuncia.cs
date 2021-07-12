@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rehue.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE
 {
-    public class Denuncia
+    public class Denuncia : IDenuncia
     {
         private string _descripcion;
 
@@ -15,15 +16,6 @@ namespace Rehue.BE
             get { return _descripcion; }
             set { _descripcion = value; }
         }
-
-        //private EstadoDenuncia _estado;
-
-        //public EstadoDenuncia Estado
-        //{
-        //    get { return _estado; }
-        //    set { _estado = value; }
-        //}
-
         public Sancion Sancion
         {
             get => default;
@@ -32,15 +24,7 @@ namespace Rehue.BE
             }
         }
 
-        public Administrador Administrador
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public EstadoDenuncia EstadoDenuncia
+        public IAdministrador Administrador
         {
             get => default;
             set
@@ -55,7 +39,6 @@ namespace Rehue.BE
             get { return _fechaCreacion; }
             set { _fechaCreacion = value; }
         }
-
 
         private DateTime _fechaModificacion;
 

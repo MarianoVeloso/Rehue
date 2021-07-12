@@ -32,5 +32,11 @@ namespace Rehue.BE
         {
             return _hijos.ToArray();
         }
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
+
     }
 }

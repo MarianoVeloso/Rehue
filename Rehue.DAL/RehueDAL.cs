@@ -1,4 +1,5 @@
-﻿using Rehue.Interfaces;
+﻿using Rehue.BE;
+using Rehue.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,40 +23,56 @@ namespace Rehue.DAL
             return resultado.Rows.Count >= 1;
         }
 
-        public bool ValidarUsuarioContraseña(IUsuario entity)
+        public int ObtenerIdUsuario(IUsuario entity, string hash)
         {
             int id = 0;
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
                 CrearParametro("@email", entity.Email),
-                CrearParametro("@password", entity.Contraseña)
+                CrearParametro("@password", hash)
             };
 
             try
             {
-                var resultado = Leer("validar_usuario_contraseña", parametros);
-
+                var resultado = Leer("obtener_id_usuario", parametros);
 
                 foreach (DataRow item in resultado.Rows)
                 {
                     id = int.Parse(item["id"].ToString());
                 }
-
-                if (id == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    entity.Id = int.Parse(parametros[2].Value.ToString());
-
-                    return true;
-                }
+                return id;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public List<IUsuario> ObtenerIdEmailUsuarios()
+        {
+            try
+            {
+                var resultado = Leer("obtener_usuarios");
+                List<IUsuario> usuarios = new List<IUsuario>();
+                foreach (DataRow row in resultado.Rows)
+                {
+                    usuarios.Add(MapearUsuario(row));
+                }
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private IUsuario MapearUsuario(DataRow row)
+        {
+            return new Persona
+            {
+                Id = int.Parse(row["id"].ToString()),
+                Email = row["email"].ToString()
+            };
         }
     }
 }

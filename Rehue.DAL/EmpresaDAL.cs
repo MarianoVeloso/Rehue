@@ -14,6 +14,8 @@ namespace Rehue.DAL
 {
     public class EmpresaDAL : Servicio, ICrud<IEmpresa>
     {
+        private readonly RolComponentDAL _permisosDAL = new RolComponentDAL();
+        private readonly IdiomaDAL _idiomaDAL = new IdiomaDAL();
         public IEmpresa ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -75,6 +77,7 @@ namespace Rehue.DAL
                 CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
                 CrearParametro("@ubicacion", entity.Ubicacion),
                 CrearParametro("@telefono", entity.Telefono),
+                CrearParametro("@idIdioma", entity.Idioma.Id),
                 CrearParametro("@id", id, ParameterDirection.Output)
             };
 
@@ -116,7 +119,8 @@ namespace Rehue.DAL
                 Documento = int.Parse(row["documento"].ToString()),
                 Email = row["email"].ToString(),
                 FechaNacimiento = DateTime.Parse(row["fechaNacimiento"].ToString()),
-                Ubicacion = row["ubicacion"].ToString()
+                Roles = _permisosDAL.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString())),
+                Idioma = _idiomaDAL.ObtenerIdiomaPorId(int.Parse(row["IdIdioma"].ToString()))
             };
         }
     }

@@ -17,11 +17,9 @@ namespace Rehue.BLL
         {
             if (Session.Instancia.IsLogged() == true)
             {
-                Session.Instancia.Usuario.Idioma = idioma;
                 Notificar(idioma);
             }
         }
-
         private static void Notificar(IIdioma idioma)
         {
             foreach (var o in _observers)
@@ -29,19 +27,21 @@ namespace Rehue.BLL
                 o.ActualizarIdioma(idioma);
             }
         }
-
         public static void SuscribirForm(IIdiomaObserver o)
         {
-            _observers.Add(o);
+            string asdasd = o.ToString();
+            bool wtf = _observers.Any(x => x.ToString() == o.ToString());
+
+            if (!_observers.Any(x => x.ToString() == o.ToString()))
+                _observers.Add(o);
         }
         public static void DesuscribirForm(IIdiomaObserver o)
         {
             _observers.Remove(o);
         }
-
         public static IIdioma ObtenerIdiomaDefault()
         {
-            return ObtenerIdiomas().Where(i => i.Default).FirstOrDefault();
+            return ObtenerIdiomas().FirstOrDefault();
         }
         public static IList<IIdioma> ObtenerIdiomas()
         {
@@ -53,22 +53,14 @@ namespace Rehue.BLL
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorLogInException"].Texto);
-                throw new ErrorLogInException(ex.Message);
             }
         }
-        public static IDictionary<string, ITraduccion> ObtenerTraducciones(IIdioma idioma = null)
+        public static IDictionary<string, ITraduccion> ObtenerTraducciones(IIdioma idioma)
         {
-            if (idioma == null)
-            {
-                idioma = ObtenerIdiomaDefault();
-            }
-
             try
             {
-                //cmd.CommandText = "select t.id_idioma,t.traduccion as traduccion_traduccion, e.id_etiqueta,e.nombre as nombre_etiqueta from traducciones t inner join etiquetas e on t.id_etiqueta=e.id_etiqueta where t.id_idioma = @id_idioma";
                 IdiomaBLL _idiomaBLL = new IdiomaBLL();
                 return _idiomaBLL.ObtenerTraducciones(idioma.Id);
-
             }
             catch (OperacionDBException ex)
             {

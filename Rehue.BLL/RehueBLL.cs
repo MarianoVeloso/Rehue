@@ -14,14 +14,14 @@ namespace Rehue.BLL
     {
         private readonly RehueDAL _rehueDAL = new RehueDAL();
 
-        public void ValidarEmail(string email)
+        public void ValidarEmail(string email, IIdioma idioma)
         {
             try
             {
                 bool inValido = _rehueDAL.ValidarEmail(email);
 
                 if (inValido)
-                    throw new ErrorLogInException("Usuario existente en la base de datos.");
+                    throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(idioma)["MailRegistrado"].Texto);
             }
             catch (ErrorLogInException ex)
             {
@@ -33,16 +33,15 @@ namespace Rehue.BLL
             }
         }
 
-        public void ValidarUsuarioContraseña(IUsuario entity)
+        public void ValidarUsuarioContraseña(IUsuario entity, IIdioma idioma)
         {
-            entity.Contraseña = Encriptador.Hash(entity.Contraseña);
-
+            string hash = Encriptador.Hash(entity.Contraseña);
             try
             {
-                bool inValido = _rehueDAL.ValidarUsuarioContraseña(entity);
+                bool inValido = _rehueDAL.ObtenerIdUsuario(entity, hash) == 0;
 
                 if (inValido)
-                    throw new ErrorLogInException("Combinación de Usuario y Contraseña incorrecta.");
+                    throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(idioma)["MailYContrateñaErroneos"].Texto);
             }
             catch (ErrorLogInException ex)
             {
@@ -54,28 +53,55 @@ namespace Rehue.BLL
             }
         }
 
-        public void LogIn(IUsuario entity)
+        public List<IUsuario> ObtenerIdEmailUsuarios()
+        {
+            try
+            {
+                var usuarios= _rehueDAL.ObtenerIdEmailUsuarios();
+
+                return usuarios;
+
+            }
+            catch (ErrorLogInException ex)
+            {
+                throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorBaseDeDatos"].Texto);
+            }
+            catch (Exception ex)
+            {
+                throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorBaseDeDatos"].Texto);
+            }
+        }
+
+        public void LogIn(IUsuario entity, IIdioma idioma)
         {
             EmpresaBLL _empresaBLL = new EmpresaBLL();
-            IEmpresa empresa = _empresaBLL.ObtenerPorId(entity.Id);
 
-            if (empresa != null)
+            string hash = Encriptador.Hash(entity.Contraseña);
+            int entityId = _rehueDAL.ObtenerIdUsuario(entity, hash);
+
+            IEmpresa empresa = _empresaBLL.ObtenerPorId(entityId);
+
+            if (empresa.Id != 0)
             {
                 Session.Instancia.Login(empresa);
             }
             else
             {
                 PersonaBLL _personaBLL = new PersonaBLL();
-                IPersona persona = _personaBLL.ObtenerPorId(entity.Id);
+                IPersona persona = _personaBLL.ObtenerPorId(entityId);
 
-                if (persona != null)
+                if (persona.Id != 0)
                 {
                     Session.Instancia.Login(persona);
                 }
                 else
                 {
                     AdministradorBLL _administradorBLL = new AdministradorBLL();
-                    IAdministrador administrador = _administradorBLL.ObtenerPorId(entity.Id);
+                    IAdministrador administrador = _administradorBLL.ObtenerPorId(entityId);
+
+                    if(administrador.Id == 0)
+                        throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(idioma)["MailYContrateñaErroneos"].Texto);
+
                     Session.Instancia.Login(administrador);
                 }
             }

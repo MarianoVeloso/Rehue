@@ -15,5 +15,9 @@ namespace Rehue.BE
             get { return _idPadre; }
             set { _idPadre = value; }
         }
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }

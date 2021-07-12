@@ -38,6 +38,5 @@ namespace Rehue.BE
             get { return _ubicacion; }
             set { _ubicacion = value; }
         }
-
     }
 }

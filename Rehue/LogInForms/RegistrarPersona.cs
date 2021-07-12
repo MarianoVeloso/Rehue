@@ -14,8 +14,16 @@ using System.Windows.Forms;
 
 namespace Rehue.LogIn
 {
-    public partial class RegistrarPersona : RegistroForm
+    public partial class RegistrarPersona : RegistroForm, IIdiomaObserver
     {
+        private IIdioma _idioma;
+
+        public IIdioma Idioma
+        {
+            get { return _idioma; }
+            set { _idioma = value; }
+        }
+
         private readonly PersonaBLL _personaBLL = new PersonaBLL();
         private readonly RehueBLL _rehueBLL = new RehueBLL();
         public RegistrarPersona()
@@ -34,12 +42,14 @@ namespace Rehue.LogIn
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
                 Ubicacion = txtUbicacion.Text,
+                Idioma = _idioma,
                 Documento = int.Parse(numDocumento.Value.ToString())
             };
 
             try
             {
-                _rehueBLL.ValidarEmail(persona.Email);
+                _rehueBLL.ValidarEmail(persona.Email, _idioma);
+                _rehueBLL.ValidarUsuarioContraseña(persona, _idioma);
                 _personaBLL.Guardar(persona);
                 _personaBLL.LogIn(persona);
             }
@@ -56,6 +66,30 @@ namespace Rehue.LogIn
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+
+        public void ActualizarIdioma(IIdioma idioma)
+        {
+            var traducciones = TraductorBLL.ObtenerTraducciones(idioma);
+
+            lblEmail.Text = traducciones["lblEmail"].Texto;
+            lblContraseña.Text = traducciones["lblContraseña"].Texto;
+            lblTelefono.Text = traducciones["lblTelefono"].Texto;
+            lblFechaNacimiento.Text = traducciones["lblFechaNacimiento"].Texto;
+            lblDocumento.Text = traducciones["lblDocumento"].Texto;
+            lblNombre.Text = traducciones["lblNombre"].Texto;
+            lblApellido.Text = traducciones["lblApellido"].Texto;
+            lblUbicacion.Text = traducciones["lblUbicacion"].Texto;
+            btnRegistrar.Text = traducciones["btnRegistrar"].Texto;
+            btnCancelar.Text = traducciones["btnCancelar"].Texto;
+            grpDatosBasicos.Text = traducciones["grpDatosBasicos"].Texto;
+            grpOtrosDatos.Text = traducciones["grpOtrosDatos"].Texto;
+        }
+
+        private void RegistrarPersona_Load(object sender, EventArgs e)
+        {
+            TraductorBLL.SuscribirForm(this);
         }
     }
 }

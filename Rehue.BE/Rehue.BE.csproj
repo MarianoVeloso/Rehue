@@ -47,8 +47,6 @@
     <Compile Include="Comision.cs" />
     <Compile Include="Denuncia.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="EstadoCita.cs" />
-    <Compile Include="EstadoDenuncia.cs" />
     <Compile Include="Etiqueta.cs" />
     <Compile Include="Idioma.cs" />
     <Compile Include="Item.cs" />

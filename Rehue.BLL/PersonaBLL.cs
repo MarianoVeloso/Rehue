@@ -35,8 +35,7 @@ namespace Rehue.BLL
             }
             catch (OperacionDBException ex)
             {
-                //throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorLogInException"].Texto);
-                throw new ErrorLogInException(ex.Message);
+                throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorBaseDeDatos"].Texto);
             }
         }
 
@@ -48,8 +47,7 @@ namespace Rehue.BLL
             }
             catch (OperacionDBException ex)
             {
-                //throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorLogInException"].Texto);
-                throw new ErrorLogInException(ex.Message);
+                throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorBaseDeDatos"].Texto);
             }
         }
 

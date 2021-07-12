@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Acceso.cs" />
     <Compile Include="AdministradorDAL.cs" />
+    <Compile Include="CitaDAL.cs" />
     <Compile Include="EmpresaDAL.cs" />
     <Compile Include="IdiomaDAL.cs" />
     <Compile Include="RehueDAL.cs" />

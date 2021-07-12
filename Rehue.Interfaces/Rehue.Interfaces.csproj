@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAdministrador.cs" />
+    <Compile Include="ICita.cs" />
     <Compile Include="ICrud.cs" />
+    <Compile Include="IDenuncia.cs" />
     <Compile Include="IEmpresa.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEtiqueta.cs" />

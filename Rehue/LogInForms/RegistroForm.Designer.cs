@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpDatosBasicos = new System.Windows.Forms.GroupBox();
             this.numDocumento = new System.Windows.Forms.NumericUpDown();
             this.lblDocumento = new System.Windows.Forms.Label();
             this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
@@ -39,28 +39,28 @@
             this.lblContraseña = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
+            this.grpDatosBasicos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDocumento)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // grpDatosBasicos
             // 
-            this.groupBox1.Controls.Add(this.numDocumento);
-            this.groupBox1.Controls.Add(this.lblDocumento);
-            this.groupBox1.Controls.Add(this.dtFechaNacimiento);
-            this.groupBox1.Controls.Add(this.lblFechaNacimiento);
-            this.groupBox1.Controls.Add(this.txtTelefono);
-            this.groupBox1.Controls.Add(this.lblTelefono);
-            this.groupBox1.Controls.Add(this.txtPassword);
-            this.groupBox1.Controls.Add(this.lblContraseña);
-            this.groupBox1.Controls.Add(this.lblEmail);
-            this.groupBox1.Controls.Add(this.txtEmail);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(317, 160);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos básicos";
+            this.grpDatosBasicos.Controls.Add(this.numDocumento);
+            this.grpDatosBasicos.Controls.Add(this.lblDocumento);
+            this.grpDatosBasicos.Controls.Add(this.dtFechaNacimiento);
+            this.grpDatosBasicos.Controls.Add(this.lblFechaNacimiento);
+            this.grpDatosBasicos.Controls.Add(this.txtTelefono);
+            this.grpDatosBasicos.Controls.Add(this.lblTelefono);
+            this.grpDatosBasicos.Controls.Add(this.txtPassword);
+            this.grpDatosBasicos.Controls.Add(this.lblContraseña);
+            this.grpDatosBasicos.Controls.Add(this.lblEmail);
+            this.grpDatosBasicos.Controls.Add(this.txtEmail);
+            this.grpDatosBasicos.Location = new System.Drawing.Point(12, 12);
+            this.grpDatosBasicos.Name = "grpDatosBasicos";
+            this.grpDatosBasicos.Size = new System.Drawing.Size(317, 160);
+            this.grpDatosBasicos.TabIndex = 1;
+            this.grpDatosBasicos.TabStop = false;
+            this.grpDatosBasicos.Text = "Datos básicos";
             // 
             // numDocumento
             // 
@@ -106,6 +106,7 @@
             this.txtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTelefono.Location = new System.Drawing.Point(110, 71);
             this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.PasswordChar = '@';
             this.txtTelefono.Size = new System.Drawing.Size(201, 20);
             this.txtTelefono.TabIndex = 3;
             // 
@@ -124,6 +125,7 @@
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Location = new System.Drawing.Point(110, 45);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(201, 20);
             this.txtPassword.TabIndex = 2;
             // 
@@ -159,11 +161,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(338, 184);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpDatosBasicos);
             this.Name = "RegistroForm";
             this.Text = "RegistrarForm";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpDatosBasicos.ResumeLayout(false);
+            this.grpDatosBasicos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDocumento)).EndInit();
             this.ResumeLayout(false);
 
@@ -171,7 +173,7 @@
 
         #endregion
 
-        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.GroupBox grpDatosBasicos;
         public System.Windows.Forms.TextBox txtPassword;
         public System.Windows.Forms.Label lblContraseña;
         public System.Windows.Forms.Label lblEmail;
