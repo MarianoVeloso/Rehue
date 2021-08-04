@@ -109,7 +109,7 @@ namespace Rehue.DAL
             }
             catch (Exception ex)
             {
-                RegistrarError(ex.InnerException.Message);
+                RegistrarError(ex.Message);
                 CancelarTransaccion();
                 res = -1;
             }

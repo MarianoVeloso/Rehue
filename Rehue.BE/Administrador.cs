@@ -9,6 +9,9 @@ namespace Rehue.BE
 {
     public class Administrador : Usuario, IAdministrador
     {
-
+        public override string ObtenerNombre()
+        {
+            return $"{Email}";
+        }
     }
 }

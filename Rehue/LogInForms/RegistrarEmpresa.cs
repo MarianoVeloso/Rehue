@@ -46,7 +46,7 @@ namespace Rehue.LogIn
                 RazonSocial = txtRazonSocial.Text,
                 Documento = int.Parse(numDocumento.Value.ToString()),
                 Ubicacion = txtUbicacion.Text,
-                Idioma = _idioma
+                Idioma = _idioma,
             };
 
             try

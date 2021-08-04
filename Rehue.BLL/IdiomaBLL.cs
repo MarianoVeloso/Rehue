@@ -13,6 +13,8 @@ namespace Rehue.BLL
     public class IdiomaBLL : ICrud<IIdioma>
     {
         private readonly IdiomaDAL _idiomaDAL = new IdiomaDAL();
+
+        
         public void Eliminar(IIdioma entity)
         {
             throw new NotImplementedException();
@@ -21,9 +23,9 @@ namespace Rehue.BLL
         {
             if(Session.Instancia.IsLogged())
             {
-                IUsuario usuario = Session.Instancia.Usuario;
+                _idiomaDAL.ActualizarDefault(Session.Instancia.Usuario.Id, idiomaDefault.Id);
 
-                _idiomaDAL.ActualizarDefault(usuario.Id, idiomaDefault.Id);
+                Session.Instancia.Usuario.Idioma = idiomaDefault;
             }
         }
         public void Guardar(IIdioma entity)

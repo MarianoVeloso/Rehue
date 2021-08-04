@@ -40,20 +40,19 @@ namespace Rehue.BE
             set { _fechaCreacion = value; }
         }
 
-        private DateTime? _fechaModificacion;
-
-        public DateTime? FechaModificacion
-        {
-            get { return _fechaModificacion; }
-            set { _fechaModificacion = value; }
-        }
-
         private DateTime? _fechaCancelacion;
 
         public DateTime? FechaCancelacion
         {
             get { return _fechaCancelacion; }
             set { _fechaCancelacion = value; }
+        }
+        private DateTime? _fechaConfirmacion;
+
+        public DateTime? FechaConfirmacion
+        {
+            get { return _fechaConfirmacion; }
+            set { _fechaConfirmacion = value; }
         }
         private DateTime _fechaEncuentro;
 

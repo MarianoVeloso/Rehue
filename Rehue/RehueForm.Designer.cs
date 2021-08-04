@@ -37,6 +37,7 @@
             this.citaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.denunciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbIdioma = new System.Windows.Forms.ComboBox();
             this.lblUsuario = new System.Windows.Forms.Label();
@@ -54,7 +55,7 @@
             this.cerrarSesionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1189, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1475, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -100,7 +101,8 @@
             // 
             this.citaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.crearToolStripMenuItem,
-            this.consultarToolStripMenuItem});
+            this.consultarToolStripMenuItem,
+            this.denunciasToolStripMenuItem});
             this.citaToolStripMenuItem.Name = "citaToolStripMenuItem";
             this.citaToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.citaToolStripMenuItem.Text = "Cita";
@@ -119,6 +121,13 @@
             this.consultarToolStripMenuItem.Text = "Consultar";
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click);
             // 
+            // denunciasToolStripMenuItem
+            // 
+            this.denunciasToolStripMenuItem.Name = "denunciasToolStripMenuItem";
+            this.denunciasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.denunciasToolStripMenuItem.Text = "Denuncias";
+            this.denunciasToolStripMenuItem.Click += new System.EventHandler(this.denunciasToolStripMenuItem_Click);
+            // 
             // cerrarSesionToolStripMenuItem
             // 
             this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
@@ -128,8 +137,9 @@
             // 
             // cmbIdioma
             // 
+            this.cmbIdioma.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbIdioma.FormattingEnabled = true;
-            this.cmbIdioma.Location = new System.Drawing.Point(1056, 27);
+            this.cmbIdioma.Location = new System.Drawing.Point(1342, 27);
             this.cmbIdioma.Name = "cmbIdioma";
             this.cmbIdioma.Size = new System.Drawing.Size(121, 21);
             this.cmbIdioma.TabIndex = 3;
@@ -137,8 +147,9 @@
             // 
             // lblUsuario
             // 
+            this.lblUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(932, 9);
+            this.lblUsuario.Location = new System.Drawing.Point(1257, 9);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(35, 13);
             this.lblUsuario.TabIndex = 5;
@@ -146,8 +157,9 @@
             // 
             // lblUsuarioDato
             // 
+            this.lblUsuarioDato.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUsuarioDato.AutoSize = true;
-            this.lblUsuarioDato.Location = new System.Drawing.Point(973, 9);
+            this.lblUsuarioDato.Location = new System.Drawing.Point(1298, 9);
             this.lblUsuarioDato.Name = "lblUsuarioDato";
             this.lblUsuarioDato.Size = new System.Drawing.Size(35, 13);
             this.lblUsuarioDato.TabIndex = 6;
@@ -157,7 +169,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1189, 629);
+            this.ClientSize = new System.Drawing.Size(1475, 721);
             this.Controls.Add(this.lblUsuarioDato);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.cmbIdioma);
@@ -189,5 +201,6 @@
         private System.Windows.Forms.ToolStripMenuItem cerrarSesionToolStripMenuItem;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblUsuarioDato;
+        private System.Windows.Forms.ToolStripMenuItem denunciasToolStripMenuItem;
     }
 }

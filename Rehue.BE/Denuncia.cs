@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE
 {
-    public class Denuncia : IDenuncia
+    public class Denuncia : Entity, IDenuncia
     {
         private string _descripcion;
 
@@ -23,13 +23,12 @@ namespace Rehue.BE
             {
             }
         }
+        private IAdministrador _administrador;
 
         public IAdministrador Administrador
         {
-            get => default;
-            set
-            {
-            }
+            get { return _administrador; }
+            set { _administrador = value; }
         }
 
         private DateTime _fechaCreacion;
@@ -40,12 +39,20 @@ namespace Rehue.BE
             set { _fechaCreacion = value; }
         }
 
-        private DateTime _fechaModificacion;
+        private DateTime? _fechaConfirmacion;
 
-        public DateTime FechaModificacion
+        public DateTime? FechaConfirmacion
         {
-            get { return _fechaModificacion; }
-            set { _fechaModificacion = value; }
+            get { return _fechaConfirmacion; }
+            set { _fechaConfirmacion = value; }
+        }
+        
+        private DateTime? _fechaCancelacion;
+
+        public DateTime? FechaCancelacion
+        {
+            get { return _fechaCancelacion; }
+            set { _fechaCancelacion = value; }
         }
     }
 }

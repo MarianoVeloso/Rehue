@@ -15,10 +15,7 @@ namespace Rehue.BLL
 
         public static void CambiarIdioma(IIdioma idioma)
         {
-            if (Session.Instancia.IsLogged() == true)
-            {
-                Notificar(idioma);
-            }
+            Notificar(idioma);
         }
         private static void Notificar(IIdioma idioma)
         {

@@ -58,6 +58,18 @@
     <Compile Include="CitaForms\ConsultarCitaForm.Designer.cs">
       <DependentUpon>ConsultarCitaForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CitaForms\DenunciaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CitaForms\DenunciaForm.Designer.cs">
+      <DependentUpon>DenunciaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CitaForms\GestionarDenunciaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CitaForms\GestionarDenunciaForm.Designer.cs">
+      <DependentUpon>GestionarDenunciaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IdiomaForms\IdiomaAltaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +128,15 @@
     </Compile>
     <EmbeddedResource Include="CitaForms\CitaForm.resx">
       <DependentUpon>CitaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CitaForms\ConsultarCitaForm.resx">
+      <DependentUpon>ConsultarCitaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CitaForms\DenunciaForm.resx">
+      <DependentUpon>DenunciaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CitaForms\GestionarDenunciaForm.resx">
+      <DependentUpon>GestionarDenunciaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IdiomaForms\IdiomaAltaForm.resx">
       <DependentUpon>IdiomaAltaForm.cs</DependentUpon>

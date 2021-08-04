@@ -39,5 +39,9 @@ namespace Rehue.BE
             get { return _ubicacion; }
             set { _ubicacion = value; }
         }
+        public override string ObtenerNombre()
+        {
+            return $"{RazonSocial}";
+        }
     }
 }

@@ -104,8 +104,8 @@ namespace Rehue.IdiomaForms
             {
                 IdiomaUC uc = (IdiomaUC)control;
 
-                if (string.IsNullOrEmpty(uc.Traduccion.Texto))
-                    throw new Exception(TraductorBLL.ObtenerTraducciones(idioma)["ErrorTraduccion"].Texto);
+                if (uc.Traduccion.Texto == null || string.IsNullOrEmpty(uc.Traduccion.Texto))
+                    throw new Exception(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorTraduccion"].Texto);
 
                 var etiqueta = uc.Etiqueta;
 

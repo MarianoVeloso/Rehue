@@ -2,11 +2,12 @@
 
 namespace Rehue.Interfaces
 {
-    public interface IDenuncia
+    public interface IDenuncia: IEntity
     {
         IAdministrador Administrador { get; set; }
         string Descripcion { get; set; }
         DateTime FechaCreacion { get; set; }
-        DateTime FechaModificacion { get; set; }
+        DateTime? FechaConfirmacion{ get; set; }
+        DateTime? FechaCancelacion{ get; set; }
     }
 }

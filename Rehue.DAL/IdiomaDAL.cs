@@ -168,7 +168,8 @@ namespace Rehue.DAL
             return new Idioma()
             {
                 Id = int.Parse(item["id"].ToString()),
-                Nombre = item["nombre"].ToString()
+                Nombre = item["nombre"].ToString(),
+                Defecto = bool.Parse(item["Defecto"].ToString())
             };
         }
         private IEtiqueta MapearEtiqueta(DataRow item)

@@ -10,7 +10,8 @@ namespace Rehue.Interfaces
         IPersona Persona { get; set; }
         DateTime? FechaCancelacion { get; set; }
         DateTime FechaCreacion { get; set; }
-        DateTime? FechaModificacion { get; set; }
         DateTime FechaEncuentro { get; set; }
+        DateTime? FechaConfirmacion{ get; set; }
+
     }
 }

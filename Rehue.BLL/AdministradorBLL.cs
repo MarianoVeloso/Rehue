@@ -29,8 +29,6 @@ namespace Rehue.BLL
             try
             {
                 _administradorDAL.Guardar(entity);
-
-                Session.Instancia.Login(entity);
             }
             catch (OperacionDBException ex)
             {

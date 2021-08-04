@@ -65,5 +65,49 @@ namespace Rehue.BE
             set { _idioma = value; }
         }
 
+        private List<ICita> _citas;
+
+        public List<ICita> Citas
+        {
+            get { return _citas; }
+            set { _citas = value; }
+        }
+
+        public abstract string ObtenerNombre();
+
+        public List<ICita> ObtenerCitasPendienteConfirmacion()
+        {
+            return _citas.Where(x => x.FechaConfirmacion.HasValue == false && x.FechaCancelacion.HasValue == false).ToList();
+        }
+
+        public List<ICita> ObtenerCitasConDenuncia()
+        {
+            return _citas.Where(x => x.Denuncia != null && x.Denuncia.Id != 0).ToList();
+        }
+
+        public List<ICita> ObtenerCitasConfirmadas()
+        {
+            return _citas.Where(x => x.FechaCancelacion.HasValue == false && x.FechaConfirmacion.HasValue).ToList();
+        }
+        public List<ICita> ObtenerCitasCanceladas()
+        {
+            return _citas.Where(x => x.FechaCancelacion.HasValue).ToList();
+        }
+
+        public bool IsInRol(string rol)
+        {
+            return _roles.Any(x => x.Nombre == rol);
+        }
+        public bool HasPermisson(string pNombre)
+        {
+            bool result = false;
+            foreach (var rol in _roles)
+            {
+                if (!result)
+                    result = rol.ObtenerHijos().Any(x => x.Nombre.ToLower() == pNombre.ToLower());
+            }
+
+            return result;
+        }
     }
 }

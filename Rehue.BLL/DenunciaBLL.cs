@@ -10,41 +10,15 @@ using System.Threading.Tasks;
 
 namespace Rehue.BLL
 {
-    public class CitaBLL
+    public class DenunciaBLL
     {
-        private readonly CitaDAL _citaDAL = new CitaDAL();
+        private readonly DenunciaDAL _denunciaDAL = new DenunciaDAL();
 
-        public void CrearCita(ICita cita)
+        public void CrearDenuncia(IDenuncia denuncia, int IdCita)
         {
             try
             {
-                _citaDAL.CrearCita(cita);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-        }
-        public void ConfirmarCita(int idCita)
-        {
-            try
-            {
-                _citaDAL.ConfirmarCita(idCita);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-        }
-        public void CancelarCita(int idCita)
-        {
-            try
-            {
-                _citaDAL.CancelarCita(idCita);
+                _denunciaDAL.CrearDenuncia(denuncia, IdCita);
             }
             catch (OperacionDBException)
             {
@@ -56,27 +30,27 @@ namespace Rehue.BLL
             }
         }
 
-        public ICita ObtenerCitaPorId(int idCita)
+        public List<IDenuncia> ObtenerDenunciaPorIdAdministrador(int idAdministrador)
         {
             try
             {
-                return _citaDAL.ObtenerCitaPorId(idCita);
+                return _denunciaDAL.ObtenerDenunciaPorIdAdministrador(idAdministrador);
             }
             catch (OperacionDBException)
             {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorObtenerInformacion"].Texto);
             }
             catch (Exception)
             {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorObtenerInformacion"].Texto);
             }
         }
 
-        public void ObtenerCitasDeUsuarioLogeado()
+        public void ConfirmarDenuncia(int idDenuncia)
         {
             try
             {
-                Session.Instancia.Usuario.Citas = _citaDAL.ObtenerCitasPorUsuario(Session.Instancia.Usuario.Id, Session.Instancia.Usuario.IsInRol("Empresa"));
+                _denunciaDAL.ConfirmarDenuncia(idDenuncia, Session.Instancia.Usuario.Id);
             }
             catch (OperacionDBException)
             {
@@ -87,11 +61,11 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
-        public List<ICita> ObtenerCitasConDenunciaSinGestion()
+        public void CancelarDenuncia(int idDenuncia)
         {
             try
             {
-                return _citaDAL.ObtenerCitasConDenunciaSinGestion();
+                _denunciaDAL.CancelarDenuncia(idDenuncia, Session.Instancia.Usuario.Id);
             }
             catch (OperacionDBException)
             {

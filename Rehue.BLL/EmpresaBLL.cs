@@ -33,9 +33,9 @@ namespace Rehue.BLL
             {
                 _empresaDAL.Guardar(entity);
             }
-            catch (OperacionDBException ex)
+            catch (OperacionDBException)
             {
-                throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(entity.Idioma)["ErrorGuardarEntidad"].Texto);
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(entity.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
 

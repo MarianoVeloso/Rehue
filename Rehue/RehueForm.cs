@@ -34,11 +34,11 @@ namespace Rehue
 
         private void LoadForm()
         {
+            TraductorBLL.SuscribirForm(this);
+
             var idioma = _idiomaBLL.ObtenerTodos();
             cmbIdioma.DataSource = null;
             cmbIdioma.DataSource = idioma;
-
-            TraductorBLL.SuscribirForm(this);
         }
         private void LogInForm()
         {
@@ -56,18 +56,33 @@ namespace Rehue
             {
                 this.Close();
             }
-            else if (Session.Instancia.Usuario.GetType().Equals(typeof(Empresa)))
+            else if (Session.Instancia.Usuario.IsInRol("Empresa"))
             {
                 MostrarEmpresa();
             }
-            else if (Session.Instancia.Usuario.GetType().Equals(typeof(Persona)))
+            else if (Session.Instancia.Usuario.IsInRol("Persona"))
             {
                 MostrarPersona();
             }
-            else if (Session.Instancia.Usuario.GetType().Equals(typeof(Administrador)))
+            else if (Session.Instancia.Usuario.IsInRol("Administrador"))
             {
                 MostrarAdministrador();
             }
+            else
+            {
+                MostrarUsuarioSinRoles();
+            }
+        }
+
+        private void MostrarUsuarioSinRoles()
+        {
+            idiomaToolStripMenuItem.Visible = false;
+            rolToolStripMenuItem.Visible = false;
+            citaToolStripMenuItem.Visible = false;
+            crearToolStripMenuItem.Visible = false;
+            denunciasToolStripMenuItem.Visible = false;
+            cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
+            MostrarDatosUsuario();
         }
 
         private void MostrarEmpresa()
@@ -75,8 +90,9 @@ namespace Rehue
             idiomaToolStripMenuItem.Visible = false;
             rolToolStripMenuItem.Visible = false;
             citaToolStripMenuItem.Visible = true;
-            citaToolStripMenuItem.Visible = true;
-            crearToolStripMenuItem.Visible = false; 
+            crearToolStripMenuItem.Visible = false;
+            denunciasToolStripMenuItem.Visible = false;
+            consultarToolStripMenuItem.Visible = true;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -87,6 +103,8 @@ namespace Rehue
             rolToolStripMenuItem.Visible = false;
             citaToolStripMenuItem.Visible = true;
             crearToolStripMenuItem.Visible = true;
+            denunciasToolStripMenuItem.Visible = false;
+            consultarToolStripMenuItem.Visible = true;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -96,6 +114,10 @@ namespace Rehue
             idiomaToolStripMenuItem.Visible = true;
             rolToolStripMenuItem.Visible = true;
             citaToolStripMenuItem.Visible = false;
+            denunciasToolStripMenuItem.Visible = true;
+            citaToolStripMenuItem.Visible = true;
+            crearToolStripMenuItem.Visible = false;
+            consultarToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -139,14 +161,14 @@ namespace Rehue
             citaToolStripMenuItem.Text = _traducciones["citaToolStripMenuItem"].Texto;
             crearToolStripMenuItem.Text = _traducciones["crearToolStripMenuItem"].Texto;
             consultarToolStripMenuItem.Text = _traducciones["consultarToolStripMenuItem"].Texto;
-            cerrarSesionToolStripMenuItem.Text = _traducciones["cerrarSesionToolStripMenuItem"].Texto;
+            denunciasToolStripMenuItem.Text = _traducciones["denunciasToolStripMenuItem"].Texto;
+            lblUsuario.Text = $"{_traducciones["lblUsuario"].Texto}: ";
         }
 
         private void MostrarDatosUsuario()
         {
             if (Session.Instancia.IsLogged())
             {
-                lblUsuario.Text = $"{_traducciones["lblUsuario"].Texto}: ";
                 lblUsuarioDato.Text = Session.Instancia.Usuario.Email;
             }
             else
@@ -173,6 +195,13 @@ namespace Rehue
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Session.Instancia.LogOut();
+
+            foreach (Form frm in this.MdiChildren)
+            {
+                frm.Dispose();
+                frm.Close();
+            }
+
             MostrarDatosUsuario();
             LogInForm();
         }
@@ -188,7 +217,20 @@ namespace Rehue
 
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ConsultarCitaForm form = new ConsultarCitaForm()
+            {
+                MdiParent = this
+            };
+            form.Show();
+        }
 
+        private void denunciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GestionarDenunciaForm form = new GestionarDenunciaForm()
+            {
+                MdiParent = this
+            };
+            form.Show();
         }
     }
 }
