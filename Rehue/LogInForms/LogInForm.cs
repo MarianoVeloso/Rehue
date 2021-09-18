@@ -79,5 +79,10 @@ namespace Rehue.LogIn
             TraductorBLL.SuscribirForm(this);
             ActualizarIdioma(_idioma);
         }
+
+        private void LogInForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            TraductorBLL.DesuscribirForm(this);
+        }
     }
 }

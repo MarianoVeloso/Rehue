@@ -1,4 +1,5 @@
-﻿using Rehue.DAL;
+﻿using Rehue.BE;
+using Rehue.DAL;
 using Rehue.Interfaces;
 using Rehue.Servicios;
 using Rehue.Servicios.Helpers;
@@ -14,7 +15,11 @@ namespace Rehue.BLL
     {
         private readonly IdiomaDAL _idiomaDAL = new IdiomaDAL();
 
-        
+        public string ObtenerTraduccionDeIdiomaDefault(string etiqueta, IList<IIdioma> idiomas )
+        {
+            return TraductorBLL.ObtenerTraducciones(idiomas.Where( _ => _.Default).FirstOrDefault()).Keys.Contains(etiqueta) == false ? string.Empty 
+                    : TraductorBLL.ObtenerTraducciones(idiomas.Where(_ => _.Default).FirstOrDefault())[etiqueta].Texto;
+        }
         public void Eliminar(IIdioma entity)
         {
             throw new NotImplementedException();

@@ -24,12 +24,12 @@ namespace Rehue.BE
             set { _persona = value; }
         }
 
-        private IEmpresa _empresa;
+        private IMesa _mesa;
 
-        public IEmpresa Empresa
+        public IMesa Mesa
         {
-            get { return _empresa; }
-            set { _empresa = value; }
+            get { return _mesa; }
+            set { _mesa = value; }
         }
 
         private DateTime _fechaCreacion;

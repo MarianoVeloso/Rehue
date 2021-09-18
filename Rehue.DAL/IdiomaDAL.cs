@@ -169,7 +169,7 @@ namespace Rehue.DAL
             {
                 Id = int.Parse(item["id"].ToString()),
                 Nombre = item["nombre"].ToString(),
-                Defecto = bool.Parse(item["Defecto"].ToString())
+                Default = bool.Parse(item["Defecto"].ToString())
             };
         }
         private IEtiqueta MapearEtiqueta(DataRow item)

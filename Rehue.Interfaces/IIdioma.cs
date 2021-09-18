@@ -9,5 +9,6 @@ namespace Rehue.Interfaces
     public interface IIdioma : IEntity
     {
         string Nombre { get; set; }
+        bool Default { get; set; }
     }
 }

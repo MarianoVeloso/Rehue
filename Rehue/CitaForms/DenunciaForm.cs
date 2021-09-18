@@ -30,7 +30,7 @@ namespace Rehue.CitaForms
 
         private void FormLoad()
         {
-            lblEmpresaValue.Text = _cita.Empresa.ObtenerNombre();
+            lblEmpresaValue.Text = _cita.Mesa.Empresa.ObtenerNombre();
             lblPersonaValue.Text = _cita.Persona.ObtenerNombre();
             lblCantidadComensalesValue.Text = _cita.CantidadComensales.ToString();
             lblFechaCreacionValue.Text = _cita.FechaCreacion.ToString();

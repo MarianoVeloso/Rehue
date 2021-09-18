@@ -111,7 +111,9 @@ namespace Rehue.CitaForms
             this.Controls.Add(this.dtGridCitasConDenuncia);
             this.Controls.Add(this.lblDenuncias);
             this.Name = "GestionarDenunciaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DenunciasForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GestionarDenunciaForm_FormClosed);
             this.Load += new System.EventHandler(this.DenunciasForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCitasConDenuncia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridDenunciasGestionadas)).EndInit();

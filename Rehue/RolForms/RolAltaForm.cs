@@ -18,6 +18,7 @@ namespace Rehue.RolForm
     public partial class RolAltaForm : Form, IIdiomaObserver
     {
         private readonly RolComponentBLL _rolBLL = new RolComponentBLL();
+        private IList<IRol> _roles;
         public RolAltaForm()
         {
             InitializeComponent();
@@ -41,10 +42,10 @@ namespace Rehue.RolForm
         {
             ActualizarIdioma(Session.Instancia.Usuario.Idioma);
             TraductorBLL.SuscribirForm(this);
-            var roles = _rolBLL.ObtenerTodos();
+            _roles = _rolBLL.ObtenerTodos();
 
             lstRoles.DataSource = null;
-            lstRoles.DataSource = roles;
+            lstRoles.DataSource = _roles;
             lstRoles.DisplayMember = "Nombre";
         }
 
@@ -55,15 +56,6 @@ namespace Rehue.RolForm
                 Nombre = txtNuevoRol.Text
             };
 
-            foreach (var hijo in lstRoles.SelectedItems)
-            {
-                IRol rolAgregar = (IRol)hijo;
-                IPermiso permiso = new Permiso()
-                {
-                    Id = rolAgregar.Id
-                };
-                rol.AgregarPermiso(permiso);
-            }
             try
             {
                 _rolBLL.Guardar(rol);
@@ -87,17 +79,24 @@ namespace Rehue.RolForm
                 lstPermisos.DataSource = null;
                 lstPermisos.DataSource = rol.ObtenerHijos();
                 lstPermisos.DisplayMember = "Nombre";
+
+                lstPermisosDisponibles.DataSource = null;
+                lstPermisosDisponibles.DataSource = _roles.Where(x => x.Id != rol.Id).ToList();
             }
         }
 
         private void btnEliminarHijo_Click(object sender, EventArgs e)
         {
-            IPermiso eliminarHijo = (IPermiso)lstPermisos.SelectedItem;
-            if (eliminarHijo != null)
+            var padre = (IRol)lstRoles.SelectedItem;
+            var hijo = (IRol)lstPermisosDisponibles.SelectedItem;
+
+            if (hijo != null)
             {
                 try
                 {
-                    _rolBLL.EliminarHijo(eliminarHijo);
+                    if (!padre.ObtenerHijos().Any(x => x.Id == hijo.Id))
+                        throw new Exception("Hijo no asignado");
+                    _rolBLL.EliminarHijo(new Permiso() {IdPadre = padre.Id, Id = hijo.Id });
                     FormLoad();
                 }
                 catch (ErrorLogInException ex)
@@ -114,6 +113,26 @@ namespace Rehue.RolForm
         private void RolAltaForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             TraductorBLL.DesuscribirForm(this);
+        }
+
+        private void btnAsignarHijo_Click(object sender, EventArgs e)
+        {
+            var padre = (IRol)lstRoles.SelectedItem;
+            var hijo = (IRol)lstPermisosDisponibles.SelectedItem;
+
+            try
+            {
+                _rolBLL.AgregarHijo(new Permiso() { IdPadre = padre.Id, Id = hijo.Id });
+                FormLoad();
+            }
+            catch (ErrorLogInException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

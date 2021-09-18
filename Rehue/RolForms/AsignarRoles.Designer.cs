@@ -130,6 +130,7 @@ namespace Rehue.RolForm
             this.Load += new System.EventHandler(this.AsignarRoles_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 

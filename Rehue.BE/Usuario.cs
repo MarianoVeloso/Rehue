@@ -80,14 +80,15 @@ namespace Rehue.BE
             return _citas.Where(x => x.FechaConfirmacion.HasValue == false && x.FechaCancelacion.HasValue == false).ToList();
         }
 
-        public List<ICita> ObtenerCitasConDenuncia()
+        public List<ICita> ObtenerCitaPendienteResolucion()
         {
-            return _citas.Where(x => x.Denuncia != null && x.Denuncia.Id != 0).ToList();
+            return _citas.Where(x => x.Denuncia.FechaConfirmacion.HasValue == false && x.Denuncia.Id != 0).ToList();
         }
 
         public List<ICita> ObtenerCitasConfirmadas()
         {
-            return _citas.Where(x => x.FechaCancelacion.HasValue == false && x.FechaConfirmacion.HasValue).ToList();
+            return _citas.Where(x => x.FechaCancelacion.HasValue == false && x.FechaConfirmacion.HasValue &&
+                                x.Denuncia.Id == 0).ToList();
         }
         public List<ICita> ObtenerCitasCanceladas()
         {

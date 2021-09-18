@@ -180,6 +180,7 @@
             this.grpDatosBasicos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDocumento)).EndInit();
             this.ResumeLayout(false);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 

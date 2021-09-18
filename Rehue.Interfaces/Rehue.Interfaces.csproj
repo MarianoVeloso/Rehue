@@ -53,6 +53,7 @@
     <Compile Include="IItem.cs" />
     <Compile Include="IMenu.cs" />
     <Compile Include="IMenuComponent.cs" />
+    <Compile Include="IMesa.cs" />
     <Compile Include="IPermiso.cs" />
     <Compile Include="IPersona.cs" />
     <Compile Include="IRol.cs" />

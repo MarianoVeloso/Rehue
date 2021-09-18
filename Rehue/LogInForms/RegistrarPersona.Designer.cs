@@ -148,6 +148,7 @@
             this.grpOtrosDatos.ResumeLayout(false);
             this.grpOtrosDatos.PerformLayout();
             this.ResumeLayout(false);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 

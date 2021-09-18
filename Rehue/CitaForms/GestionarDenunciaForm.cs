@@ -1,4 +1,5 @@
 ﻿using Rehue.BLL;
+using Rehue.Interfaces;
 using Rehue.Servicios;
 using Rehue.Servicios.Helpers;
 using System;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Rehue.CitaForms
 {
-    public partial class GestionarDenunciaForm : Form
+    public partial class GestionarDenunciaForm : Form, IIdiomaObserver
     {
         private readonly CitaBLL _citaBLL = new CitaBLL();
         private readonly DenunciaBLL _denunciaBLL = new DenunciaBLL();
@@ -33,7 +34,7 @@ namespace Rehue.CitaForms
                     NumeroCita = x.Id,
                     FechaCreacion = x.FechaCreacion,
                     FechaEncuentro = x.FechaEncuentro,
-                    Empresa = x.Empresa.ObtenerNombre(),
+                    Empresa = x.Mesa.Empresa.ObtenerNombre(),
                     Usuario = x.Persona.ObtenerNombre(),
                     CantidadDeComensales = x.CantidadComensales,
                     Motivo = x.Denuncia.Descripcion
@@ -42,13 +43,15 @@ namespace Rehue.CitaForms
                 dtGridDenunciasGestionadas.DataSource = null;
                 dtGridDenunciasGestionadas.DataSource = _denunciaBLL.ObtenerDenunciaPorIdAdministrador(Session.Instancia.Usuario.Id).Select(x => new
                 {
-                    Numero = x.Id,
+                    NumeroDenuncia = x.Id,
                     FechaCreacion = x.FechaCreacion,
                     Administrador = x.Administrador.ObtenerNombre(),
                     FechaConfirmacion = x.FechaConfirmacion,
                     FechaCancelacion = x.FechaCancelacion,
                     Motivo = x.Descripcion
                 }).ToList();
+                _idDenuncia = 0;
+                ActualizarIdioma(Session.Instancia.Usuario.Idioma);
             }
             catch (OperacionDBException ex)
             {
@@ -114,10 +117,25 @@ namespace Rehue.CitaForms
 
         private void dtGridCitasConDenuncia_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dtGridCitasConDenuncia.Rows.Count > 0 && dtGridCitasConDenuncia.Rows[e.RowIndex].Cells[0].Value != null)
+            if (dtGridCitasConDenuncia.Rows.Count > 0 && e.RowIndex >= 0 && dtGridCitasConDenuncia.Rows[e.RowIndex].Cells[0].Value != null)
             {
                 _idDenuncia = int.Parse(dtGridCitasConDenuncia.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
+        }
+
+        public void ActualizarIdioma(IIdioma idioma)
+        {
+            var traducciones = TraductorBLL.ObtenerTraducciones(idioma);
+
+            lblDenuncias.Text = traducciones["lblDenuncias"].Texto;
+            lblDenuncias.Text = traducciones["lblDenunciasGestionadas"].Texto;
+            btnConfirmar.Text = traducciones["btnConfirmar"].Texto;
+            btnDenegar.Text = traducciones["btnDenegar"].Texto;
+        }
+
+        private void GestionarDenunciaForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            TraductorBLL.DesuscribirForm(this);
         }
     }
 }

@@ -47,6 +47,7 @@
     <Compile Include="DenunciaDAL.cs" />
     <Compile Include="EmpresaDAL.cs" />
     <Compile Include="IdiomaDAL.cs" />
+    <Compile Include="MesaDAL.cs" />
     <Compile Include="RehueDAL.cs" />
     <Compile Include="RolComponentDAL.cs" />
     <Compile Include="PersonaDAL.cs" />

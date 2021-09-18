@@ -18,6 +18,7 @@ namespace Rehue.IdiomaForms
     public partial class IdiomaAltaForm : Form, IIdiomaObserver
     {
         private readonly IdiomaBLL _idiomaBLL = new IdiomaBLL();
+        private IList<IIdioma> _idiomas;
         public IdiomaAltaForm()
         {
             InitializeComponent();
@@ -32,10 +33,10 @@ namespace Rehue.IdiomaForms
         {
             TraductorBLL.SuscribirForm(this);
             ActualizarIdioma(Session.Instancia.Usuario.Idioma);
-            var idiomas = _idiomaBLL.ObtenerTodos();
+            _idiomas = _idiomaBLL.ObtenerTodos();
 
             lstIdiomas.DataSource = null;
-            lstIdiomas.DataSource = idiomas;
+            lstIdiomas.DataSource = _idiomas;
         }
 
         private void lstIdiomas_SelectedIndexChanged(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace Rehue.IdiomaForms
                     {
                         var control = new IdiomaUC
                         {
-                            Traduccion = new Traduccion(),
+                            Traduccion = new Traduccion { Texto = _idiomaBLL.ObtenerTraduccionDeIdiomaDefault(etiqueta.Nombre, _idiomas) },
                             Etiqueta = etiqueta,
                             Location = new Point(x, y)
                         };
@@ -83,7 +84,8 @@ namespace Rehue.IdiomaForms
             IIdioma idioma = (IIdioma)lstIdiomas.SelectedItem;
             try
             {
-                _idiomaBLL.GuardarTraduccion(ConstruirTraducciones(idioma), idioma);
+                _idiomaBLL.GuardarTraduccion(ConstruirTraducciones(), idioma);
+                MessageBox.Show(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["OperacionExitosa"].Texto);
             }
             catch (ErrorLogInException ex)
             {
@@ -95,7 +97,7 @@ namespace Rehue.IdiomaForms
             }
         }
 
-        private IDictionary<IEtiqueta, ITraduccion> ConstruirTraducciones(IIdioma idioma)
+        private IDictionary<IEtiqueta, ITraduccion> ConstruirTraducciones()
         {
 
             IDictionary<IEtiqueta, ITraduccion> traducciones = new Dictionary<IEtiqueta, ITraduccion>();
@@ -148,6 +150,11 @@ namespace Rehue.IdiomaForms
         private void IdiomaAltaForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             TraductorBLL.DesuscribirForm(this);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

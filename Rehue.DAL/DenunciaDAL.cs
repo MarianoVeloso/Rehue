@@ -100,6 +100,33 @@ namespace Rehue.DAL
             }
         }
 
+        public IDenuncia ObtenerDenunciaPorIdCita(int idCita)
+        {
+            try
+            {
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    CrearParametro("@idCita", idCita)
+                };
+
+                IDenuncia denuncia = new Denuncia();
+                var response = Leer("obtener_denuncia_por_id_cita", parametros);
+                foreach (DataRow item in response.Rows)
+                {
+                    denuncia = MapearDenuncia(item);
+                }
+
+                return denuncia;
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public List<IDenuncia> ObtenerDenunciaPorIdAdministrador(int idAdministrador)
         {
             try

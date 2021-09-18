@@ -13,30 +13,36 @@ namespace Rehue.DAL
 {
     public class CitaDAL : Servicio
     {
-        private readonly EmpresaDAL _empresaDAL = new EmpresaDAL();
         private readonly PersonaDAL _personaDAL = new PersonaDAL();
         private readonly DenunciaDAL _denunciaDAL = new DenunciaDAL();
+        private readonly MesaDAL _mesaDal = new MesaDAL();
         public void CrearCita(ICita cita)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
                 CrearParametro("@idPersona", cita.Persona.Id),
-                CrearParametro("@idEmpresa", cita.Empresa.Id),
+                CrearParametro("@idMesa", cita.Mesa.Id),
                 CrearParametro("@cantidadComensales", cita.CantidadComensales),
                 CrearParametro("@fechaCreacion", cita.FechaCreacion),
                 CrearParametro("@fechaEncuentro", cita.FechaEncuentro),
             };
-
             try
             {
                 RealizarOperacion("registrar_cita", parametros);
+
+
+                parametros = new List<SqlParameter>()
+                {
+                    CrearParametro("@idMesa", cita.Mesa.Id),
+                };
+
+                RealizarOperacion("reservar_mesa", parametros);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-
         public List<ICita> ObtenerCitasConDenunciaSinGestion()
         {
             try
@@ -59,7 +65,6 @@ namespace Rehue.DAL
                 throw new Exception(ex.Message);
             }
         }
-
         public ICita ObtenerCitaPorId(int idCita)
         {
             try
@@ -87,7 +92,6 @@ namespace Rehue.DAL
                 throw new Exception(ex.Message);
             }
         }
-
         public List<ICita> ObtenerCitasPorUsuario(int idUsuario, bool esEmpresa)
         {
             try
@@ -173,13 +177,13 @@ namespace Rehue.DAL
             {
                 Id = int.Parse(row["id"].ToString()),
                 CantidadComensales = int.Parse(row["cantidadComensales"].ToString()),
-                Empresa = _empresaDAL.ObtenerPorId(int.Parse(row["idEmpresa"].ToString())),
+                Mesa = _mesaDal.ObtenerPorId(int.Parse(row["idMesa"].ToString())),
                 Persona = _personaDAL.ObtenerPorId(int.Parse(row["idUsuario"].ToString())),
                 FechaCancelacion = row["fechaCancelacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["fechaCancelacion"].ToString()),
                 FechaCreacion = DateTime.Parse(row["fechaCreacion"].ToString()),
                 FechaEncuentro = DateTime.Parse(row["FechaEncuentro"].ToString()),
                 FechaConfirmacion = row["FechaConfirmacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["FechaConfirmacion"].ToString()),
-                Denuncia = row.Table.Columns.Contains("idDenuncia") ? _denunciaDAL.ObtenerDenunciaPorId(int.Parse(row["idDenuncia"].ToString())) : null
+                Denuncia = _denunciaDAL.ObtenerDenunciaPorIdCita(int.Parse(row["id"].ToString()))
             };
         }
     }

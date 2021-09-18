@@ -17,7 +17,7 @@ namespace Rehue.Interfaces
         IIdioma Idioma { get; set; }
         List<ICita> Citas { get; set; }
         List<ICita> ObtenerCitasPendienteConfirmacion();
-        List<ICita> ObtenerCitasConDenuncia();
+        List<ICita> ObtenerCitaPendienteResolucion();
         List<ICita> ObtenerCitasConfirmadas();
         List<ICita> ObtenerCitasCanceladas();
         bool IsInRol(string rol);

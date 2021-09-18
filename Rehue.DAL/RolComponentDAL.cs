@@ -123,6 +123,23 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
+        public void AgregarHijo(IPermiso entity)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                CrearParametro("@idHijo", entity.Id),
+                CrearParametro("@idPadre", entity.IdPadre)
+            };
+
+            try
+            {
+                RealizarOperacion("agregar_rol_padre_hijo", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
         public IList<IRol> ObtenerRolesYPermisosPorUsuario(int idUsuario)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()

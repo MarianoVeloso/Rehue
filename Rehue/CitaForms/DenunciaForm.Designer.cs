@@ -175,6 +175,7 @@ namespace Rehue.CitaForms
             this.Load += new System.EventHandler(this.DenunciaForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 

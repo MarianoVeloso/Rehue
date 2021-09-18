@@ -46,7 +46,7 @@ namespace Rehue.CitaForms
         private void LoadForm()
         {
             if (Session.Instancia.Usuario.IsInRol("Empresa") &&
-                    Session.Instancia.Usuario.HasPermisson("Confirmar cita"))
+                    Session.Instancia.Usuario.HasPermisson("Confirmar Cita"))
             {
                 btnConfirmar.Visible = true;
             }
@@ -60,49 +60,58 @@ namespace Rehue.CitaForms
         {
             _citaBLL.ObtenerCitasDeUsuarioLogeado();
 
-            dtGridPendienteConfirmacion.DataSource = null;
-            dtGridPendienteConfirmacion.DataSource = Session.Instancia.Usuario.ObtenerCitasPendienteConfirmacion().Select(x => new
-            {
-                Numero = x.Id,
-                FechaCreacion = x.FechaCreacion,
-                FechaEncuentro = x.FechaEncuentro,
-                Empresa = x.Empresa.ObtenerNombre(),
-                Usuario = x.Persona.ObtenerNombre(),
-                CantidadDeComensales = x.CantidadComensales
-            }).ToList();
+            Dictionary<string, Type> columns = new Dictionary<string, Type> {
+                { "NumeroCN", typeof(int) },
+                { "FechaCreacionCN", typeof(DateTime) },
+                { "FechaEncuentroCN", typeof(DateTime) },
+                { "MesaCN", typeof(string) },
+                { "CantidadComensalesCN", typeof(int) },
+                { "UsuarioCN", typeof(string) }
+            };
 
-            dtGridCitasConfirmadas.DataSource = null;
-            dtGridCitasConfirmadas.DataSource = Session.Instancia.Usuario.ObtenerCitasConfirmadas().Select(x => new
-            {
-                Numero = x.Id,
-                FechaCreacion = x.FechaCreacion,
-                FechaEncuentro = x.FechaEncuentro,
-                Empresa = x.Empresa.ObtenerNombre(),
-                Usuario = x.Persona.ObtenerNombre(),
-                CantidadDeComensales = x.CantidadComensales
-            }).ToList();
+            GrillaHelper.CrearColumnasGridCita(columns,
+                new List<string> { "Id", "FechaCreacion", "FechaEncuentro", "Mesa.Descripcion", "CantidadComensales", "Persona"  },
+                Session.Instancia.Usuario.ObtenerCitasPendienteConfirmacion(),
+                dtGridPendienteConfirmacion
+                );
 
-            dtGridCanceladas.DataSource = null;
-            dtGridCanceladas.DataSource = Session.Instancia.Usuario.ObtenerCitasCanceladas().Select(x => new
-            {
-                Numero = x.Id,
-                FechaCreacion = x.FechaCreacion,
-                FechaCancelacion = x.FechaCancelacion,
-                Empresa = x.Empresa.ObtenerNombre(),
-                Usuario = x.Persona.ObtenerNombre(),
-                CantidadDeComensales = x.CantidadComensales
-            }).ToList();
+            GrillaHelper.CrearColumnasGridCita(columns,
+                new List<string> { "Id", "FechaCreacion", "FechaEncuentro", "Mesa.Descripcion", "CantidadComensales", "Persona" },
+                Session.Instancia.Usuario.ObtenerCitasConfirmadas(),
+                dtGridCitasConfirmadas
+                );
 
-            dtGridViewCitasPendienteResolucion.DataSource = null;
-            dtGridViewCitasPendienteResolucion.DataSource = Session.Instancia.Usuario.ObtenerCitasConDenuncia().Select(x => new
-            {
-                Numero = x.Id,
-                FechaCreacion = x.FechaCreacion,
-                Empresa = x.Empresa.ObtenerNombre(),
-                Usuario = x.Persona.ObtenerNombre(),
-                CantidadDeComensales = x.CantidadComensales,
-                DetalleDenuncia = x.Denuncia?.Descripcion
-            }).ToList();
+            columns = new Dictionary<string, Type> {
+                { "NumeroCN", typeof(int) },
+                { "FechaCreacionCN", typeof(DateTime) },
+                { "FechaCancelacionCN", typeof(DateTime) },
+                { "MesaCN", typeof(string) },
+                { "CantidadComensalesCN", typeof(int) },
+                { "UsuarioCN", typeof(string) }
+            };
+
+            GrillaHelper.CrearColumnasGridCita(columns,
+                new List<string> { "Id", "FechaCreacion", "FechaCancelacion", "Mesa.Descripcion", "CantidadComensales", "Persona" },
+                Session.Instancia.Usuario.ObtenerCitasCanceladas(),
+                dtGridCanceladas
+                );
+
+            columns = new Dictionary<string, Type> {
+                { "NumeroCN", typeof(int) },
+                { "FechaCreacionCN", typeof(DateTime) },
+                { "MesaCN", typeof(string) },
+                { "DetalleDenunciaCN", typeof(string) },
+                { "UsuarioCN", typeof(string) }
+            };
+
+            GrillaHelper.CrearColumnasGridCita(columns,
+                new List<string> { "Id", "FechaCreacion", "Mesa.Descripcion", "Denuncia.Descripcion", "Persona" },
+                Session.Instancia.Usuario.ObtenerCitaPendienteResolucion(),
+                dtGridCanceladas
+                );
+
+            _idCitaPendienteConfirmacion = 0;
+            _idCitaADenunciar = 0;
         }
 
         private void btnDenunciar_Click(object sender, EventArgs e)
@@ -112,6 +121,7 @@ namespace Rehue.CitaForms
                 ControlarId(dtGridCitasConfirmadas, _idCitaADenunciar);
                 DenunciaForm form = new DenunciaForm(_citaBLL.ObtenerCitaPorId(_idCitaADenunciar));
                 form.ShowDialog();
+                MostrarDatos();
             }
             catch (OperacionDBException ex)
             {
@@ -175,7 +185,7 @@ namespace Rehue.CitaForms
 
         private void dtGridPendienteConfirmacion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dtGridPendienteConfirmacion.Rows.Count > 0 && dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value != null)
+            if (dtGridPendienteConfirmacion.Rows.Count > 0 && dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0] != null)
             {
                 _idCitaPendienteConfirmacion = int.Parse(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString());
             }

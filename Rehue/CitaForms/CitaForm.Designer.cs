@@ -31,11 +31,12 @@ namespace Rehue.CitaForms
         {
             this.lstEmpresas = new System.Windows.Forms.ListBox();
             this.grpCrearCita = new System.Windows.Forms.GroupBox();
-            this.lblFecha = new System.Windows.Forms.Label();
-            this.dtPckrFecha = new System.Windows.Forms.DateTimePicker();
-            this.lblComensales = new System.Windows.Forms.Label();
-            this.numComensales = new System.Windows.Forms.NumericUpDown();
+            this.lstMesas = new System.Windows.Forms.ListBox();
             this.btnCrear = new System.Windows.Forms.Button();
+            this.numComensales = new System.Windows.Forms.NumericUpDown();
+            this.lblComensales = new System.Windows.Forms.Label();
+            this.dtPckrFecha = new System.Windows.Forms.DateTimePicker();
+            this.lblFecha = new System.Windows.Forms.Label();
             this.grpCrearCita.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numComensales)).BeginInit();
             this.SuspendLayout();
@@ -45,14 +46,16 @@ namespace Rehue.CitaForms
             this.lstEmpresas.FormattingEnabled = true;
             this.lstEmpresas.Location = new System.Drawing.Point(6, 19);
             this.lstEmpresas.Name = "lstEmpresas";
-            this.lstEmpresas.Size = new System.Drawing.Size(311, 238);
+            this.lstEmpresas.Size = new System.Drawing.Size(311, 82);
             this.lstEmpresas.TabIndex = 1;
+            this.lstEmpresas.SelectedIndexChanged += new System.EventHandler(this.lstEmpresas_SelectedIndexChanged);
             // 
             // grpCrearCita
             // 
             this.grpCrearCita.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpCrearCita.Controls.Add(this.lstMesas);
             this.grpCrearCita.Controls.Add(this.btnCrear);
             this.grpCrearCita.Controls.Add(this.numComensales);
             this.grpCrearCita.Controls.Add(this.lblComensales);
@@ -66,37 +69,13 @@ namespace Rehue.CitaForms
             this.grpCrearCita.TabStop = false;
             this.grpCrearCita.Text = "Crear Cita";
             // 
-            // lblFecha
+            // lstMesas
             // 
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(6, 266);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(37, 13);
-            this.lblFecha.TabIndex = 2;
-            this.lblFecha.Text = "Fecha";
-            // 
-            // dtPckrFecha
-            // 
-            this.dtPckrFecha.Location = new System.Drawing.Point(76, 260);
-            this.dtPckrFecha.Name = "dtPckrFecha";
-            this.dtPckrFecha.Size = new System.Drawing.Size(200, 20);
-            this.dtPckrFecha.TabIndex = 3;
-            // 
-            // lblComensales
-            // 
-            this.lblComensales.AutoSize = true;
-            this.lblComensales.Location = new System.Drawing.Point(6, 299);
-            this.lblComensales.Name = "lblComensales";
-            this.lblComensales.Size = new System.Drawing.Size(64, 13);
-            this.lblComensales.TabIndex = 4;
-            this.lblComensales.Text = "Comensales";
-            // 
-            // numComensales
-            // 
-            this.numComensales.Location = new System.Drawing.Point(76, 297);
-            this.numComensales.Name = "numComensales";
-            this.numComensales.Size = new System.Drawing.Size(200, 20);
-            this.numComensales.TabIndex = 5;
+            this.lstMesas.FormattingEnabled = true;
+            this.lstMesas.Location = new System.Drawing.Point(6, 141);
+            this.lstMesas.Name = "lstMesas";
+            this.lstMesas.Size = new System.Drawing.Size(311, 82);
+            this.lstMesas.TabIndex = 7;
             // 
             // btnCrear
             // 
@@ -108,6 +87,38 @@ namespace Rehue.CitaForms
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
+            // numComensales
+            // 
+            this.numComensales.Location = new System.Drawing.Point(76, 297);
+            this.numComensales.Name = "numComensales";
+            this.numComensales.Size = new System.Drawing.Size(200, 20);
+            this.numComensales.TabIndex = 5;
+            // 
+            // lblComensales
+            // 
+            this.lblComensales.AutoSize = true;
+            this.lblComensales.Location = new System.Drawing.Point(6, 299);
+            this.lblComensales.Name = "lblComensales";
+            this.lblComensales.Size = new System.Drawing.Size(64, 13);
+            this.lblComensales.TabIndex = 4;
+            this.lblComensales.Text = "Comensales";
+            // 
+            // dtPckrFecha
+            // 
+            this.dtPckrFecha.Location = new System.Drawing.Point(76, 260);
+            this.dtPckrFecha.Name = "dtPckrFecha";
+            this.dtPckrFecha.Size = new System.Drawing.Size(200, 20);
+            this.dtPckrFecha.TabIndex = 3;
+            // 
+            // lblFecha
+            // 
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.Location = new System.Drawing.Point(6, 266);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(37, 13);
+            this.lblFecha.TabIndex = 2;
+            this.lblFecha.Text = "Fecha";
+            // 
             // CitaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -115,7 +126,9 @@ namespace Rehue.CitaForms
             this.ClientSize = new System.Drawing.Size(356, 393);
             this.Controls.Add(this.grpCrearCita);
             this.Name = "CitaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CitaForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CitaForm_FormClosed);
             this.Load += new System.EventHandler(this.CitaForm_Load);
             this.grpCrearCita.ResumeLayout(false);
             this.grpCrearCita.PerformLayout();
@@ -132,5 +145,6 @@ namespace Rehue.CitaForms
         private System.Windows.Forms.NumericUpDown numComensales;
         private System.Windows.Forms.Label lblComensales;
         private System.Windows.Forms.Button btnCrear;
+        private System.Windows.Forms.ListBox lstMesas;
     }
 }

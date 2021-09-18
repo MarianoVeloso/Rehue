@@ -38,6 +38,9 @@ namespace Rehue.RolForm
             this.lblSeleccionRolHijo = new System.Windows.Forms.Label();
             this.btnEliminarHijo = new System.Windows.Forms.Button();
             this.lstRoles = new System.Windows.Forms.ListBox();
+            this.btnAsignarHijo = new System.Windows.Forms.Button();
+            this.lstPermisosDisponibles = new System.Windows.Forms.ListBox();
+            this.lblPermisos = new System.Windows.Forms.Label();
             this.grpRoles.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +62,7 @@ namespace Rehue.RolForm
             // 
             // btnNuevoRol
             // 
-            this.btnNuevoRol.Location = new System.Drawing.Point(54, 388);
+            this.btnNuevoRol.Location = new System.Drawing.Point(54, 58);
             this.btnNuevoRol.Name = "btnNuevoRol";
             this.btnNuevoRol.Size = new System.Drawing.Size(75, 23);
             this.btnNuevoRol.TabIndex = 8;
@@ -70,13 +73,16 @@ namespace Rehue.RolForm
             // lstPermisos
             // 
             this.lstPermisos.FormattingEnabled = true;
-            this.lstPermisos.Location = new System.Drawing.Point(192, 32);
+            this.lstPermisos.Location = new System.Drawing.Point(336, 32);
             this.lstPermisos.Name = "lstPermisos";
-            this.lstPermisos.Size = new System.Drawing.Size(411, 342);
+            this.lstPermisos.Size = new System.Drawing.Size(267, 342);
             this.lstPermisos.TabIndex = 9;
             // 
             // grpRoles
             // 
+            this.grpRoles.Controls.Add(this.lblPermisos);
+            this.grpRoles.Controls.Add(this.lstPermisosDisponibles);
+            this.grpRoles.Controls.Add(this.btnAsignarHijo);
             this.grpRoles.Controls.Add(this.lblPermisosAsociadosARol);
             this.grpRoles.Controls.Add(this.lblSeleccionRolHijo);
             this.grpRoles.Controls.Add(this.btnEliminarHijo);
@@ -95,7 +101,7 @@ namespace Rehue.RolForm
             // lblPermisosAsociadosARol
             // 
             this.lblPermisosAsociadosARol.AutoSize = true;
-            this.lblPermisosAsociadosARol.Location = new System.Drawing.Point(192, 13);
+            this.lblPermisosAsociadosARol.Location = new System.Drawing.Point(333, 16);
             this.lblPermisosAsociadosARol.Name = "lblPermisosAsociadosARol";
             this.lblPermisosAsociadosARol.Size = new System.Drawing.Size(123, 13);
             this.lblPermisosAsociadosARol.TabIndex = 14;
@@ -104,15 +110,15 @@ namespace Rehue.RolForm
             // lblSeleccionRolHijo
             // 
             this.lblSeleccionRolHijo.AutoSize = true;
-            this.lblSeleccionRolHijo.Location = new System.Drawing.Point(9, 78);
+            this.lblSeleccionRolHijo.Location = new System.Drawing.Point(6, 107);
             this.lblSeleccionRolHijo.Name = "lblSeleccionRolHijo";
-            this.lblSeleccionRolHijo.Size = new System.Drawing.Size(103, 13);
+            this.lblSeleccionRolHijo.Size = new System.Drawing.Size(34, 13);
             this.lblSeleccionRolHijo.TabIndex = 13;
-            this.lblSeleccionRolHijo.Text = "Seleccion roles hijos";
+            this.lblSeleccionRolHijo.Text = "Roles";
             // 
             // btnEliminarHijo
             // 
-            this.btnEliminarHijo.Location = new System.Drawing.Point(526, 388);
+            this.btnEliminarHijo.Location = new System.Drawing.Point(127, 233);
             this.btnEliminarHijo.Name = "btnEliminarHijo";
             this.btnEliminarHijo.Size = new System.Drawing.Size(77, 23);
             this.btnEliminarHijo.TabIndex = 11;
@@ -123,12 +129,40 @@ namespace Rehue.RolForm
             // lstRoles
             // 
             this.lstRoles.FormattingEnabled = true;
-            this.lstRoles.Location = new System.Drawing.Point(9, 97);
+            this.lstRoles.Location = new System.Drawing.Point(0, 123);
             this.lstRoles.Name = "lstRoles";
             this.lstRoles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstRoles.Size = new System.Drawing.Size(120, 277);
+            this.lstRoles.Size = new System.Drawing.Size(120, 251);
             this.lstRoles.TabIndex = 10;
             this.lstRoles.SelectedIndexChanged += new System.EventHandler(this.lstRoles_SelectedIndexChanged);
+            // 
+            // btnAsignarHijo
+            // 
+            this.btnAsignarHijo.Location = new System.Drawing.Point(126, 204);
+            this.btnAsignarHijo.Name = "btnAsignarHijo";
+            this.btnAsignarHijo.Size = new System.Drawing.Size(78, 23);
+            this.btnAsignarHijo.TabIndex = 15;
+            this.btnAsignarHijo.Text = "Asignar hijo";
+            this.btnAsignarHijo.UseVisualStyleBackColor = true;
+            this.btnAsignarHijo.Click += new System.EventHandler(this.btnAsignarHijo_Click);
+            // 
+            // lstPermisosDisponibles
+            // 
+            this.lstPermisosDisponibles.FormattingEnabled = true;
+            this.lstPermisosDisponibles.Location = new System.Drawing.Point(210, 123);
+            this.lstPermisosDisponibles.Name = "lstPermisosDisponibles";
+            this.lstPermisosDisponibles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstPermisosDisponibles.Size = new System.Drawing.Size(120, 251);
+            this.lstPermisosDisponibles.TabIndex = 16;
+            // 
+            // lblPermisos
+            // 
+            this.lblPermisos.AutoSize = true;
+            this.lblPermisos.Location = new System.Drawing.Point(207, 107);
+            this.lblPermisos.Name = "lblPermisos";
+            this.lblPermisos.Size = new System.Drawing.Size(49, 13);
+            this.lblPermisos.TabIndex = 17;
+            this.lblPermisos.Text = "Permisos";
             // 
             // RolAltaForm
             // 
@@ -143,6 +177,7 @@ namespace Rehue.RolForm
             this.grpRoles.ResumeLayout(false);
             this.grpRoles.PerformLayout();
             this.ResumeLayout(false);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 
@@ -156,5 +191,8 @@ namespace Rehue.RolForm
         private System.Windows.Forms.ListBox lstRoles;
         private System.Windows.Forms.Label lblSeleccionRolHijo;
         private System.Windows.Forms.Label lblPermisosAsociadosARol;
+        private System.Windows.Forms.Button btnAsignarHijo;
+        private System.Windows.Forms.ListBox lstPermisosDisponibles;
+        private System.Windows.Forms.Label lblPermisos;
     }
 }

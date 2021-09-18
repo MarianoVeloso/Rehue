@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace Rehue.BLL
 {
-    public class CitaBLL
+    public class MesaBLL
     {
-        private readonly CitaDAL _citaDAL = new CitaDAL();
+        private readonly MesaDAL _mesaDAL = new MesaDAL();
 
-        public void CrearCita(ICita cita)
+        public void CrearMesa(IMesa mesa)
         {
             try
             {
-                _citaDAL.CrearCita(cita);
+                _mesaDAL.CrearMesa(mesa);
             }
             catch (OperacionDBException)
             {
@@ -29,11 +29,11 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
-        public void ConfirmarCita(int idCita)
+        public IMesa ObtenerPorId(int id)
         {
             try
             {
-                _citaDAL.ConfirmarCita(idCita);
+                return _mesaDAL.ObtenerPorId(id);
             }
             catch (OperacionDBException)
             {
@@ -44,11 +44,11 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
-        public void CancelarCita(int idCita)
+        public List<IMesa> ObtenerPorIdEmpresa(int idEmpresa)
         {
             try
             {
-                _citaDAL.CancelarCita(idCita);
+                return _mesaDAL.ObtenerPorIdEmpresa(idEmpresa);
             }
             catch (OperacionDBException)
             {
@@ -59,12 +59,11 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
-
-        public ICita ObtenerCitaPorId(int idCita)
+        public void Eliminar(int id)
         {
             try
             {
-                return _citaDAL.ObtenerCitaPorId(idCita);
+                _mesaDAL.Eliminar(id);
             }
             catch (OperacionDBException)
             {
@@ -75,12 +74,15 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
-
-        public void ObtenerCitasDeUsuarioLogeado()
+        public bool ValidarMesaEnCita(int id)
         {
             try
             {
-                Session.Instancia.Usuario.Citas = _citaDAL.ObtenerCitasPorUsuario(Session.Instancia.Usuario.Id, Session.Instancia.Usuario.IsInRol("Empresa"));
+                IMesa mesa = _mesaDAL.ValidarMesaEnCita(id);
+
+                if (mesa.Id == 0)
+                    return false;
+                return true;
             }
             catch (OperacionDBException)
             {
@@ -90,34 +92,6 @@ namespace Rehue.BLL
             {
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
-        }
-        public List<ICita> ObtenerCitasConDenunciaSinGestion()
-        {
-            try
-            {
-                return _citaDAL.ObtenerCitasConDenunciaSinGestion();
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-        }
-
-        public bool ValidarCitaCreacion()
-        {
-            ObtenerCitasDeUsuarioLogeado();
-            ICita cita = Session.Instancia.Usuario.Citas.Where(x => (DateTime.Now - x.FechaCreacion).TotalHours < 2 && 
-                                                                (x.FechaConfirmacion == null && x.FechaCancelacion == null)).FirstOrDefault();
-
-            //var lalala = (DateTime.Now - cita.FechaCreacion).TotalHours < 2;
-
-            if (cita != null && cita.Id != 0)
-                return false;
-            return true;
         }
     }
 }

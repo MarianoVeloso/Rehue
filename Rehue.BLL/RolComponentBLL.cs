@@ -41,13 +41,6 @@ namespace Rehue.BLL
             try
             {
                 _rolDAL.Guardar(entity);
-
-                foreach (var hijo in entity.ObtenerHijos())
-                {
-                    IPermiso hijoAgregar = (IPermiso)hijo;
-                    hijoAgregar.IdPadre = entity.Id;
-                    _rolDAL.GuardarPermiso(hijoAgregar);
-                }
             }
             catch (OperacionDBException ex)
             {
@@ -57,6 +50,10 @@ namespace Rehue.BLL
             {
                 throw RiseException(ex, "ErrorBaseDeDatos");
             }
+        }
+        public void GuardarPermiso(IPermiso permiso)
+        {
+            _rolDAL.GuardarPermiso(permiso);
         }
         public void Eliminar(IRol entity)
         {
@@ -78,6 +75,22 @@ namespace Rehue.BLL
             try
             {
                 _rolDAL.EliminarHijo(entity);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+            catch (Exception ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+        }
+
+        public void AgregarHijo(IPermiso entity)
+        {
+            try
+            {
+                _rolDAL.AgregarHijo(entity);
             }
             catch (OperacionDBException ex)
             {
