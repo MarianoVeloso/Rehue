@@ -8,28 +8,8 @@ namespace Rehue.BE
 {
     public class Calificacion
     {
-        private string _comentario;
-
-        public string Comentario
-        {
-            get { return _comentario; }
-            set { _comentario = value; }
-        }
-
-        private decimal _puntaje;
-
-        public decimal Puntaje
-        {
-            get { return _puntaje; }
-            set { _puntaje = value; }
-        }
-
-        public Cita Cita
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string Comentario { get; set; }
+        public decimal Puntaje { get; set; }
+        public Cita Cita { get; set; }
     }
 }

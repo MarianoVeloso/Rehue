@@ -9,19 +9,12 @@ namespace Rehue.BE
 {
     public class Idioma : Entity, IIdioma
     {
-        private string _nombre;
-
-        public string Nombre
-        {
-            get { return _nombre; }
-            set { _nombre = value; }
-        }
-
+        public string Nombre { get; set; }
         public bool Default { get; set; }
 
         public override string ToString()
         {
-            return _nombre;
+            return Nombre;
         }
     }
 }

@@ -9,50 +9,11 @@ namespace Rehue.BE
 {
     public class Denuncia : Entity, IDenuncia
     {
-        private string _descripcion;
-
-        public string Descripcion
-        {
-            get { return _descripcion; }
-            set { _descripcion = value; }
-        }
-        public Sancion Sancion
-        {
-            get => default;
-            set
-            {
-            }
-        }
-        private IAdministrador _administrador;
-
-        public IAdministrador Administrador
-        {
-            get { return _administrador; }
-            set { _administrador = value; }
-        }
-
-        private DateTime _fechaCreacion;
-
-        public DateTime FechaCreacion
-        {
-            get { return _fechaCreacion; }
-            set { _fechaCreacion = value; }
-        }
-
-        private DateTime? _fechaConfirmacion;
-
-        public DateTime? FechaConfirmacion
-        {
-            get { return _fechaConfirmacion; }
-            set { _fechaConfirmacion = value; }
-        }
-        
-        private DateTime? _fechaCancelacion;
-
-        public DateTime? FechaCancelacion
-        {
-            get { return _fechaCancelacion; }
-            set { _fechaCancelacion = value; }
-        }
+        public string Descripcion { get; set; }
+        public Sancion Sancion { get; set; }
+        public IAdministrador Administrador { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public DateTime? FechaConfirmacion { get; set; }
+        public DateTime? FechaCancelacion { get; set; }
     }
 }

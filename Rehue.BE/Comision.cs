@@ -8,20 +8,7 @@ namespace Rehue.BE
 {
     public class Comision
     {
-        private DateTime _fechaCreacion;
-
-        public DateTime FechaCreacion
-        {
-            get { return _fechaCreacion; }
-            set { _fechaCreacion = value; }
-        }
-
-        public Cita Cita
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public DateTime FechaCreacion { get; set; }
+        public Cita Cita { get; set; }
     }
 }

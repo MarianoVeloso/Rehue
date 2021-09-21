@@ -8,12 +8,6 @@ namespace Rehue.BE
 {
     public class Sancion
     {
-        private string _description;
-
-        public string Descripcion
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
+        public string Descripcion { get; set; }
     }
 }

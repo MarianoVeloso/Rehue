@@ -7,28 +7,10 @@ namespace Rehue.BE
 {
     public class Subscripcion
     {
-        private DateTime _fechaCreacion;
+        public DateTime FechaCreacion { get; set; }
 
-        public DateTime FechaCreacion
-        {
-            get { return _fechaCreacion; }
-            set { _fechaCreacion = value; }
-        }
+        public DateTime FechaCaducidad { get; set; }
 
-        private DateTime _fechaCaducidad;
-
-        public DateTime FechaCaducidad
-        {
-            get { return _fechaCaducidad; }
-            set { _fechaCaducidad = value; }
-        }
-
-        private int _monto;
-
-        public int Monto
-        {
-            get { return _monto; }
-            set { _monto = value; }
-        }
+        public int Monto { get; set; }
     }
 }

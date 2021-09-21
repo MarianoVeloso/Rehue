@@ -9,36 +9,10 @@ namespace Rehue.BE
 {
     public class Persona : Usuario, IPersona
     {
-        private int _reputacion;
-
-        public int Reputacion
-        {
-            get { return _reputacion; }
-            set { _reputacion = value; }
-        }
-
-        private string _nombre;
-        public string Nombre
-        {
-            get { return _nombre; }
-            set { _nombre = value; }
-        }
-
-        private string _apellido;
-        public string Apellido
-        {
-            get { return _apellido; }
-            set { _apellido = value; }
-        }
-
-        private string _ubicacion;
-
-        public string Ubicacion
-        {
-            get { return _ubicacion; }
-            set { _ubicacion = value; }
-        }
-
+        public int Reputacion { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Ubicacion { get; set; }
         public override string ObtenerNombre()
         {
             return $"{Nombre} {Apellido}";

@@ -9,20 +9,7 @@ namespace Rehue.BE
 {
     public abstract class MenuComponent : Entity, IMenuComponent
     {
-        private IEmpresa _empresa;
-
-        public IEmpresa Empresa
-        {
-            get { return _empresa; }
-            set { _empresa = value; }
-        }
-
-        private DateTime _fechaCreacion;
-
-        public DateTime FechaCreacion
-        {
-            get { return _fechaCreacion; }
-            set { _fechaCreacion = value; }
-        }
+        public IEmpresa Empresa { get; set; }
+        public DateTime FechaCreacion { get; set; }
     }
 }

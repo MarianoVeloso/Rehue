@@ -9,36 +9,11 @@ namespace Rehue.BE
 {
     public class Empresa : Usuario, IEmpresa
     {
-        private int _reputacion;
-
-        public int Reputacion
-        {
-            get { return _reputacion; }
-            set { _reputacion = value; }
-        }
-
-        private string _razonSocial;
-        public string RazonSocial
-        {
-            get { return _razonSocial; }
-            set { _razonSocial = value; }
-        }
-
-        public Subscripcion Subscripcion
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        private string _ubicacion;
-
-        public string Ubicacion
-        {
-            get { return _ubicacion; }
-            set { _ubicacion = value; }
-        }
+        public int Reputacion { get; set; }
+        public string RazonSocial { get; set; }
+        public Subscripcion Subscripcion { get; set; }
+        public string Ubicacion { get; set; }
+        public int MyProperty { get; set; }
         public override string ObtenerNombre()
         {
             return $"{RazonSocial}";
