@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bitacora\Bitacora.cs" />
     <Compile Include="Encriptador.cs" />
+    <Compile Include="GestorDV.cs" />
     <Compile Include="Helpers\ErrorInputException.cs" />
     <Compile Include="Helpers\ErrorLogInException.cs" />
     <Compile Include="Helpers\OperacionDBException.cs" />

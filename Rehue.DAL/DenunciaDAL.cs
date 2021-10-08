@@ -11,22 +11,23 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class DenunciaDAL : Servicio
+    public class DenunciaDAL
     {
+        private readonly IServicio _servicio = new Servicio();
         private readonly AdministradorDAL _administradorDAL = new AdministradorDAL(); 
 
         public void CrearDenuncia(IDenuncia denuncia, int idCita)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@descripcion", denuncia.Descripcion),
-                CrearParametro("@idCita", idCita),
-                CrearParametro("@fechaCreacion", denuncia.FechaCreacion)
+                _servicio.CrearParametro("@descripcion", denuncia.Descripcion),
+                _servicio.CrearParametro("@idCita", idCita),
+                _servicio.CrearParametro("@fechaCreacion", denuncia.FechaCreacion)
             };
 
             try
             {
-                RealizarOperacion("crear_denuncia", parametros);
+                _servicio.RealizarOperacion("crear_denuncia", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -38,14 +39,14 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idDenuncia", idDenuncia),
-                CrearParametro("@fechaConfirmacion", DateTime.Now),
-                CrearParametro("@idAdministrador", idAdministrador)
+                _servicio.CrearParametro("@idDenuncia", idDenuncia),
+                _servicio.CrearParametro("@fechaConfirmacion", DateTime.Now),
+                _servicio.CrearParametro("@idAdministrador", idAdministrador)
             };
 
             try
             {
-                RealizarOperacion("confirmar_denuncia", parametros);
+                _servicio.RealizarOperacion("confirmar_denuncia", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -57,14 +58,14 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idDenuncia", idDenuncia),
-                CrearParametro("@fechaCancelacion", DateTime.Now),
-                CrearParametro("@idAdministrador", idAdministrador)
+                _servicio.CrearParametro("@idDenuncia", idDenuncia),
+                _servicio.CrearParametro("@fechaCancelacion", DateTime.Now),
+                _servicio.CrearParametro("@idAdministrador", idAdministrador)
             };
 
             try
             {
-                RealizarOperacion("cancelar_denuncia", parametros);
+                _servicio.RealizarOperacion("cancelar_denuncia", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -78,11 +79,11 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@id", id)
+                    _servicio.CrearParametro("@id", id)
                 };
 
                 IDenuncia denuncia = new Denuncia();
-                var response = Leer("obtener_denuncia_por_id", parametros);
+                var response = _servicio.Leer("obtener_denuncia_por_id", parametros);
                 foreach (DataRow item in response.Rows)
                 {
                     denuncia = MapearDenuncia(item);
@@ -106,11 +107,11 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idCita", idCita)
+                    _servicio.CrearParametro("@idCita", idCita)
                 };
 
                 IDenuncia denuncia = new Denuncia();
-                var response = Leer("obtener_denuncia_por_id_cita", parametros);
+                var response = _servicio.Leer("obtener_denuncia_por_id_cita", parametros);
                 foreach (DataRow item in response.Rows)
                 {
                     denuncia = MapearDenuncia(item);
@@ -133,11 +134,11 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idAdministrador", idAdministrador)
+                    _servicio.CrearParametro("@idAdministrador", idAdministrador)
                 };
 
                 List<IDenuncia> denuncias = new List<IDenuncia>();
-                var response = Leer("obtener_denuncia_por_id_administrador", parametros);
+                var response = _servicio.Leer("obtener_denuncia_por_id_administrador", parametros);
                 foreach (DataRow item in response.Rows)
                 {
                     denuncias.Add(MapearDenuncia(item));

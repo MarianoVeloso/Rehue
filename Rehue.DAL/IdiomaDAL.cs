@@ -11,18 +11,19 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class IdiomaDAL : Servicio
+    public class IdiomaDAL
     {
+        private readonly IServicio _servicio = new Servicio();
         public void ActualizarDefault(int idUsuario, int idIdioma)
         {
             try
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idUsuario", idUsuario),
-                    CrearParametro("@idIdioma", idIdioma)
+                    _servicio.CrearParametro("@idUsuario", idUsuario),
+                    _servicio.CrearParametro("@idIdioma", idIdioma)
                 };
-                RealizarOperacion("actualizar_default", parametros);
+                _servicio.RealizarOperacion("actualizar_default", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -35,9 +36,9 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@nombre", nombre)
+                    _servicio.CrearParametro("@nombre", nombre)
                 };
-                RealizarOperacion("registrar_idioma", parametros);
+                _servicio.RealizarOperacion("registrar_idioma", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -50,11 +51,11 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idIdioma", idIdioma),
-                    CrearParametro("@idEtiqueta", idEtiqueta),
-                    CrearParametro("@traduccion", traduccion),
+                    _servicio.CrearParametro("@idIdioma", idIdioma),
+                    _servicio.CrearParametro("@idEtiqueta", idEtiqueta),
+                    _servicio.CrearParametro("@traduccion", traduccion),
                 };
-                RealizarOperacion("registrar_traduccion", parametros);
+                _servicio.RealizarOperacion("registrar_traduccion", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -65,7 +66,7 @@ namespace Rehue.DAL
         {
             try
             {
-                var resultado = Leer("obtener_etiquetas");
+                var resultado = _servicio.Leer("obtener_etiquetas");
 
                 List<IEtiqueta> idiomas = new List<IEtiqueta>();
 
@@ -85,7 +86,7 @@ namespace Rehue.DAL
         {
             try
             {
-                var resultado = Leer("obtener_idiomas");
+                var resultado = _servicio.Leer("obtener_idiomas");
 
                 List<IIdioma> idiomas = new List<IIdioma>();
 
@@ -108,10 +109,10 @@ namespace Rehue.DAL
 
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@id", idIdioma)
+                    _servicio.CrearParametro("@id", idIdioma)
                 };
 
-                var resultado = Leer("obtener_idioma_por_id", parametros);
+                var resultado = _servicio.Leer("obtener_idioma_por_id", parametros);
 
                 IIdioma idioma = new Idioma();
 
@@ -131,12 +132,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idIdioma", idIdioma)
+                _servicio.CrearParametro("@idIdioma", idIdioma)
             };
 
             try
             {
-                var resultado = Leer("obtener_traducciones", parametros);
+                var resultado = _servicio.Leer("obtener_traducciones", parametros);
 
                 IDictionary<string, ITraduccion> _traducciones = new Dictionary<string, ITraduccion>();
 

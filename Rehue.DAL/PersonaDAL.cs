@@ -9,21 +9,22 @@ using System.Data.SqlClient;
 
 namespace Rehue.DAL
 {
-    public class PersonaDAL : Servicio, ICrud<IPersona>
+    public class PersonaDAL : ICrud<IPersona>
     {
         private readonly RolComponentDAL _permisosDAL= new RolComponentDAL();
         private readonly IdiomaDAL _idiomaDAL = new IdiomaDAL();
+        private readonly IServicio _servicio = new Servicio();
 
         public IPersona ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", id)
+                _servicio.CrearParametro("@id", id)
             };
 
             try
             {
-                var resultado = Leer("obtener_persona_por_id", parametros);
+                var resultado = _servicio.Leer("obtener_persona_por_id", parametros);
 
                 IPersona persona = new Persona();
 
@@ -44,7 +45,7 @@ namespace Rehue.DAL
         {
             try
             {
-                var resultado = Leer("obtener_personas");
+                var resultado = _servicio.Leer("obtener_personas");
 
                 List<IPersona> persona = new List<IPersona>();
 
@@ -63,26 +64,26 @@ namespace Rehue.DAL
 
         public void Guardar(IPersona entity)
         {
-            string encryptPassword = Encriptador.Hash(entity.Contraseña);
+            string encryptPassword = Encriptador.GenerarHashMD5(entity.Contraseña);
             int id = 0;
 
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@email", entity.Email),
-                CrearParametro("@password", encryptPassword),
-                CrearParametro("@nombre", entity.Nombre),
-                CrearParametro("@apellido", entity.Apellido),
-                CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
-                CrearParametro("@ubicacion", entity.Ubicacion),
-                CrearParametro("@telefono", entity.Telefono),
-                CrearParametro("@documento", entity.Documento),
-                CrearParametro("@idIdioma", entity.Idioma.Id),
-                CrearParametro("@id", id, ParameterDirection.Output)
+                _servicio.CrearParametro("@email", entity.Email),
+                _servicio.CrearParametro("@password", encryptPassword),
+                _servicio.CrearParametro("@nombre", entity.Nombre),
+                _servicio.CrearParametro("@apellido", entity.Apellido),
+                _servicio.CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
+                _servicio.CrearParametro("@ubicacion", entity.Ubicacion),
+                _servicio.CrearParametro("@telefono", entity.Telefono),
+                _servicio.CrearParametro("@documento", entity.Documento),
+                _servicio.CrearParametro("@idIdioma", entity.Idioma.Id),
+                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
             };
 
             try
             {
-                RealizarOperacion("registar_persona", parametros);
+                _servicio.RealizarOperacion("registar_persona", parametros);
 
                 entity.Id = int.Parse(parametros[8].Value.ToString());
             }
@@ -96,12 +97,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", entity.Id)
+                _servicio.CrearParametro("@id", entity.Id)
             };
 
             try
             {
-                RealizarOperacion("usuario_eliminar", parametros);
+                _servicio.RealizarOperacion("usuario_eliminar", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -112,15 +113,15 @@ namespace Rehue.DAL
 
         public void LogIn(string email, string password)
         {
-            string encryptPassword = Encriptador.Hash(password);
+            string encryptPassword = Encriptador.GenerarHashMD5(password);
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@email", email),
-                CrearParametro("@password", encryptPassword)
+                _servicio.CrearParametro("@email", email),
+                _servicio.CrearParametro("@password", encryptPassword)
             };
             try
             {
-                var resultado = Leer("obtener_usuario", parametros);
+                var resultado = _servicio.Leer("obtener_usuario", parametros);
 
                 IPersona persona = new Persona();
                 foreach (DataRow item in resultado.Rows)

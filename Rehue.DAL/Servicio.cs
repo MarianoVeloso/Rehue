@@ -7,19 +7,21 @@ using System.Data.SqlClient;
 
 namespace Rehue.DAL
 {
-    public class Servicio
+    internal class Servicio : IServicio
     {
-        protected void RealizarOperacion(string storedProcedure, List<SqlParameter> parameters = null)
-        {
-            Acceso.Abrir();
-            Acceso.IniciarTransaccion();
+        private readonly IAcceso acceso = new Acceso();
 
-            int res = Acceso.Operar(storedProcedure, parameters);
+        public void RealizarOperacion(string storedProcedure, List<SqlParameter> parameters = null)
+        {
+            acceso.Abrir();
+            acceso.IniciarTransaccion();
+
+            int res = acceso.Operar(storedProcedure, parameters);
 
             if (res != -1)
             {
-                Acceso.ConfirmarTransaccion();
-                Acceso.Cerrar();
+                acceso.ConfirmarTransaccion();
+                acceso.Cerrar();
             }
             else
             {
@@ -28,14 +30,14 @@ namespace Rehue.DAL
 
         }
 
-        protected SqlParameter CrearParametro(string nombre, object valor, ParameterDirection direccion = ParameterDirection.Input)
+        public SqlParameter CrearParametro(string nombre, object valor, ParameterDirection direccion = ParameterDirection.Input)
         {
-            return Acceso.CrearParametro(nombre, valor, direccion);
+            return acceso.CrearParametro(nombre, valor, direccion);
         }
 
-        protected DataTable Leer(string nombre, List<SqlParameter> parametros = null)
+        public DataTable Leer(string nombre, List<SqlParameter> parametros = null)
         {
-            return Acceso.Leer(nombre, parametros);
+            return acceso.Leer(nombre, parametros);
         }
     }
 }

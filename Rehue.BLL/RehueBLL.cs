@@ -35,7 +35,7 @@ namespace Rehue.BLL
 
         public void ValidarUsuarioContraseña(IUsuario entity, IIdioma idioma)
         {
-            string hash = Encriptador.Hash(entity.Contraseña);
+            string hash = Encriptador.GenerarHashMD5(entity.Contraseña);
             try
             {
                 bool inValido = _rehueDAL.ObtenerIdUsuario(entity, hash) == 0;
@@ -76,7 +76,7 @@ namespace Rehue.BLL
         {
             EmpresaBLL _empresaBLL = new EmpresaBLL();
 
-            string hash = Encriptador.Hash(entity.Contraseña);
+            string hash = Encriptador.GenerarHashMD5(entity.Contraseña);
             int entityId = _rehueDAL.ObtenerIdUsuario(entity, hash);
 
             IEmpresa empresa = _empresaBLL.ObtenerPorId(entityId);

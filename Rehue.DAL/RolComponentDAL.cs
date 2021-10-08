@@ -12,18 +12,19 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class RolComponentDAL : Servicio, ICrud<IRol>
+    public class RolComponentDAL: ICrud<IRol>
     {
+        private readonly IServicio _servicio = new Servicio();
         public IRol ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", id)
+                _servicio.CrearParametro("@id", id)
             };
 
             try
             {
-                var resultado = Leer("obtener_rol_por_id", parametros);
+                var resultado = _servicio.Leer("obtener_rol_por_id", parametros);
 
                 IRol permiso = new Rol();
 
@@ -43,7 +44,7 @@ namespace Rehue.DAL
         {
             try
             {
-                var resultado = Leer("obtener_permisos");
+                var resultado = _servicio.Leer("obtener_permisos");
 
                 return MapearRoles(resultado.Rows);
             }
@@ -57,14 +58,14 @@ namespace Rehue.DAL
             int id = 0;
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@nombre", entity.Nombre),
-                CrearParametro("@id", id, ParameterDirection.Output)
+                _servicio.CrearParametro("@nombre", entity.Nombre),
+                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
 
             };
 
             try
             {
-                RealizarOperacion("registrar_rol", parametros);
+                _servicio.RealizarOperacion("registrar_rol", parametros);
 
                 entity.Id = int.Parse(parametros[1].Value.ToString());
             }
@@ -77,13 +78,13 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idPadre", entity.IdPadre),
-                CrearParametro("@idHijo", entity.Id)
+                _servicio.CrearParametro("@idPadre", entity.IdPadre),
+                _servicio.CrearParametro("@idHijo", entity.Id)
             };
 
             try
             {
-                RealizarOperacion("registrar_permiso_padreHijo", parametros);
+                _servicio.RealizarOperacion("registrar_permiso_padreHijo", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -94,12 +95,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", entity.Id)
+                _servicio.CrearParametro("@id", entity.Id)
             };
 
             try
             {
-                RealizarOperacion("permiso_eliminar", parametros);
+                _servicio.RealizarOperacion("permiso_eliminar", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -110,13 +111,13 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idHijo", entity.Id),
-                CrearParametro("@idPadre", entity.IdPadre)
+                _servicio.CrearParametro("@idHijo", entity.Id),
+                _servicio.CrearParametro("@idPadre", entity.IdPadre)
             };
 
             try
             {
-                RealizarOperacion("eliminar_rol_padre_hijo", parametros);
+                _servicio.RealizarOperacion("eliminar_rol_padre_hijo", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -127,13 +128,13 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idHijo", entity.Id),
-                CrearParametro("@idPadre", entity.IdPadre)
+                _servicio.CrearParametro("@idHijo", entity.Id),
+                _servicio.CrearParametro("@idPadre", entity.IdPadre)
             };
 
             try
             {
-                RealizarOperacion("agregar_rol_padre_hijo", parametros);
+                _servicio.RealizarOperacion("agregar_rol_padre_hijo", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -144,10 +145,10 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", idUsuario)
+                _servicio.CrearParametro("@id", idUsuario)
             };
 
-            var resultado = Leer("Obtener_rol_por_usuario", parametros);
+            var resultado = _servicio.Leer("Obtener_rol_por_usuario", parametros);
 
             return MapearRoles(resultado.Rows);
         }
@@ -155,12 +156,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idUsuario", idUsuario),
-                CrearParametro("@idRol", idRol)
+                _servicio.CrearParametro("@idUsuario", idUsuario),
+                _servicio.CrearParametro("@idRol", idRol)
             };
             try
             {
-                RealizarOperacion("registrar_rol_usuario", parametros);
+                _servicio.RealizarOperacion("registrar_rol_usuario", parametros);
 
             }
             catch (OperacionDBException ex)
@@ -172,12 +173,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idUsuario", idUsuario),
-                CrearParametro("@idRol", idRol)
+                _servicio.CrearParametro("@idUsuario", idUsuario),
+                _servicio.CrearParametro("@idRol", idRol)
             };
             try
             {
-                RealizarOperacion("eliminar_rol_usuario", parametros);
+                _servicio.RealizarOperacion("eliminar_rol_usuario", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -188,12 +189,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idPadre", idPadre)
+                _servicio.CrearParametro("@idPadre", idPadre)
             };
 
             try
             {
-                var resultado = Leer("obtener_permisos_por_idPadre", parametros);
+                var resultado = _servicio.Leer("obtener_permisos_por_idPadre", parametros);
 
                 List<IPermiso> permisos = new List<IPermiso>();
 

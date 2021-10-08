@@ -1,28 +1,29 @@
-﻿using System;
+﻿using Rehue.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Rehue.DAL
 {
-    internal static class Acceso
+    internal class Acceso : IAcceso
     {
-        private static SqlConnection _conexion;
-        private static SqlTransaction _transaccion;
-        public static void Abrir()
+        private SqlConnection _conexion;
+        private SqlTransaction _transaccion;
+        public void Abrir()
         {
             _conexion = new SqlConnection("Initial Catalog=Rehue; Data Source=.\\SqlExpress; Integrated Security=SSPI");
             _conexion.Open();
         }
 
-        public static void Cerrar()
+        public void Cerrar()
         {
             _conexion.Close();
             _conexion = null;
             GC.Collect();
         }
 
-        public static SqlParameter CrearParametro(string storedProcedure, object valor, ParameterDirection direccion = ParameterDirection.Input)
+        public SqlParameter CrearParametro(string storedProcedure, object valor, ParameterDirection direccion = ParameterDirection.Input)
         {
             DbType type;
 
@@ -59,7 +60,7 @@ namespace Rehue.DAL
             return p;
         }
 
-        private static SqlCommand CrearComando(string storedProcedure, List<SqlParameter> parametros = null, CommandType tipo = CommandType.Text)
+        private SqlCommand CrearComando(string storedProcedure, List<SqlParameter> parametros = null, CommandType tipo = CommandType.Text)
         {
             SqlCommand comando = new SqlCommand(storedProcedure, _conexion)
             {
@@ -74,7 +75,7 @@ namespace Rehue.DAL
             return comando;
         }
 
-        public static DataTable Leer(string storedProcedure, List<SqlParameter> parametros = null)
+        public DataTable Leer(string storedProcedure, List<SqlParameter> parametros = null)
         {
             SqlDataAdapter adaptador = new SqlDataAdapter();
 
@@ -87,7 +88,7 @@ namespace Rehue.DAL
             return Tabla;
         }
 
-        public static int Operar(string storedProcedure, List<SqlParameter> parametros)
+        public int Operar(string storedProcedure, List<SqlParameter> parametros)
         {
             SqlCommand comando = CrearComando(storedProcedure, parametros, CommandType.StoredProcedure);
             int res;
@@ -117,7 +118,7 @@ namespace Rehue.DAL
             return res;
         }
 
-        public static void IniciarTransaccion()
+        public void IniciarTransaccion()
         {
             if (_transaccion != null && _conexion.State == ConnectionState.Open)
             {
@@ -129,7 +130,7 @@ namespace Rehue.DAL
             }
         }
 
-        public static void ConfirmarTransaccion()
+        public void ConfirmarTransaccion()
         {
             _transaccion.Commit();
             _transaccion.Dispose();
@@ -137,18 +138,18 @@ namespace Rehue.DAL
 
         }
 
-        public static void CancelarTransaccion()
+        public void CancelarTransaccion()
         {
             _transaccion.Rollback();
         }
 
-        public static void RegistrarError(string error)
+        public void RegistrarError(string error)
         {
             //Operar("registrar_error",
             //    new List<SqlParameter>
             //    {
-            //        CrearParametro("@error", error),
-            //        CrearParametro("@fecha", DateTime.Now)
+            //        _servicio.CrearParametro("@error", error),
+            //        _servicio.CrearParametro("@fecha", DateTime.Now)
             //    }
             //);
         }

@@ -2,7 +2,7 @@
 
 namespace Rehue.Interfaces
 {
-    public interface ICita : IEntity
+    public interface ICita : IEntity, IDigitoVerificador
     {
         int CantidadComensales { get; set; }
         IDenuncia Denuncia { get; set; }
@@ -12,6 +12,5 @@ namespace Rehue.Interfaces
         DateTime FechaCreacion { get; set; }
         DateTime FechaEncuentro { get; set; }
         DateTime? FechaConfirmacion { get; set; }
-
     }
 }

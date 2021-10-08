@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAcceso.cs" />
     <Compile Include="IAdministrador.cs" />
     <Compile Include="ICita.cs" />
     <Compile Include="ICrud.cs" />
     <Compile Include="IDenuncia.cs" />
+    <Compile Include="IDigitoVerificador.cs" />
     <Compile Include="IEmpresa.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEtiqueta.cs" />

@@ -11,32 +11,34 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class CitaDAL : Servicio
+    public class CitaDAL
     {
         private readonly PersonaDAL _personaDAL = new PersonaDAL();
         private readonly DenunciaDAL _denunciaDAL = new DenunciaDAL();
         private readonly MesaDAL _mesaDal = new MesaDAL();
+        private readonly IServicio _servicio = new Servicio();
+
         public void CrearCita(ICita cita)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@idPersona", cita.Persona.Id),
-                CrearParametro("@idMesa", cita.Mesa.Id),
-                CrearParametro("@cantidadComensales", cita.CantidadComensales),
-                CrearParametro("@fechaCreacion", cita.FechaCreacion),
-                CrearParametro("@fechaEncuentro", cita.FechaEncuentro),
+                _servicio.CrearParametro("@idPersona", cita.Persona.Id),
+                _servicio.CrearParametro("@idMesa", cita.Mesa.Id),
+                _servicio.CrearParametro("@cantidadComensales", cita.CantidadComensales),
+                _servicio.CrearParametro("@fechaCreacion", cita.FechaCreacion),
+                _servicio.CrearParametro("@fechaEncuentro", cita.FechaEncuentro),
+                _servicio.CrearParametro("@DigitoH", cita.DigitoH),
             };
             try
             {
-                RealizarOperacion("registrar_cita", parametros);
-
+                _servicio.RealizarOperacion("registrar_cita", parametros);
 
                 parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idMesa", cita.Mesa.Id),
+                    _servicio.CrearParametro("@idMesa", cita.Mesa.Id),
                 };
 
-                RealizarOperacion("reservar_mesa", parametros);
+                _servicio.RealizarOperacion("reservar_mesa", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -48,7 +50,7 @@ namespace Rehue.DAL
             try
             {
                 List<ICita> citas = new List<ICita>();
-                var response = Leer("obtener_citas_con_denuncia");
+                var response = _servicio.Leer("obtener_citas_con_denuncia");
                 foreach (DataRow item in response.Rows)
                 {
                     citas.Add(MapearCita(item));
@@ -71,11 +73,11 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@id", idCita)
+                    _servicio.CrearParametro("@id", idCita)
                 };
 
                 ICita cita = new Cita();
-                var response = Leer("obtener_cita_por_id", parametros);
+                var response = _servicio.Leer("obtener_cita_por_id", parametros);
                 foreach (DataRow item in response.Rows)
                 {
                     cita = MapearCita(item);
@@ -98,17 +100,17 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idUsuario", idUsuario)
+                    _servicio.CrearParametro("@idUsuario", idUsuario)
                 };
                 var response = new DataTable();
 
                 if (esEmpresa)
                 {
-                    response = Leer("obtener_citas_empresa", parametros);
+                    response = _servicio.Leer("obtener_citas_empresa", parametros);
                 }
                 else
                 {
-                    response = Leer("obtener_citas_usuario", parametros);
+                    response = _servicio.Leer("obtener_citas_usuario", parametros);
                 }
                 List<ICita> citas = new List<ICita>();
 
@@ -134,12 +136,12 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idCita", idCita),
-                    CrearParametro("@fechaConfirmacion", DateTime.Now),
+                    _servicio.CrearParametro("@idCita", idCita),
+                    _servicio.CrearParametro("@fechaConfirmacion", DateTime.Now),
 
                 };
 
-                RealizarOperacion("confirmar_cita", parametros);
+                _servicio.RealizarOperacion("confirmar_cita", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -156,11 +158,11 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idCita", idCita),
-                    CrearParametro("@fechaCancelacion", DateTime.Now),
+                    _servicio.CrearParametro("@idCita", idCita),
+                    _servicio.CrearParametro("@fechaCancelacion", DateTime.Now),
 
                 };
-                RealizarOperacion("cancelar_cita", parametros);
+                _servicio.RealizarOperacion("cancelar_cita", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -183,7 +185,8 @@ namespace Rehue.DAL
                 FechaCreacion = DateTime.Parse(row["fechaCreacion"].ToString()),
                 FechaEncuentro = DateTime.Parse(row["FechaEncuentro"].ToString()),
                 FechaConfirmacion = row["FechaConfirmacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["FechaConfirmacion"].ToString()),
-                Denuncia = _denunciaDAL.ObtenerDenunciaPorIdCita(int.Parse(row["id"].ToString()))
+                Denuncia = _denunciaDAL.ObtenerDenunciaPorIdCita(int.Parse(row["id"].ToString())),
+                DigitoH = row["DigitoH"].ToString()
             };
         }
     }

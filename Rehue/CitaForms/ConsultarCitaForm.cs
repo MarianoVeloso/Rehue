@@ -70,13 +70,13 @@ namespace Rehue.CitaForms
             };
 
             GrillaHelper.CrearColumnasGridCita(columns,
-                new List<string> { "Id", "FechaCreacion", "FechaEncuentro", "Mesa.Descripcion", "CantidadComensales", "Persona"  },
+                new List<string> { "Id", "FechaCreacion", "FechaEncuentro", "Mesa.Descripcion", "CantidadComensales", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitasPendienteConfirmacion(),
                 dtGridPendienteConfirmacion
                 );
 
             GrillaHelper.CrearColumnasGridCita(columns,
-                new List<string> { "Id", "FechaCreacion", "FechaEncuentro", "Mesa.Descripcion", "CantidadComensales", "Persona" },
+                new List<string> { "Id", "FechaCreacion", "FechaEncuentro", "Mesa.Descripcion", "CantidadComensales", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitasConfirmadas(),
                 dtGridCitasConfirmadas
                 );
@@ -91,7 +91,7 @@ namespace Rehue.CitaForms
             };
 
             GrillaHelper.CrearColumnasGridCita(columns,
-                new List<string> { "Id", "FechaCreacion", "FechaCancelacion", "Mesa.Descripcion", "CantidadComensales", "Persona" },
+                new List<string> { "Id", "FechaCreacion", "FechaCancelacion", "Mesa.Descripcion", "CantidadComensales", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitasCanceladas(),
                 dtGridCanceladas
                 );
@@ -105,7 +105,7 @@ namespace Rehue.CitaForms
             };
 
             GrillaHelper.CrearColumnasGridCita(columns,
-                new List<string> { "Id", "FechaCreacion", "Mesa.Descripcion", "Denuncia.Descripcion", "Persona" },
+                new List<string> { "Id", "FechaCreacion", "Mesa.Descripcion", "Denuncia.Descripcion", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitaPendienteResolucion(),
                 dtGridCanceladas
                 );

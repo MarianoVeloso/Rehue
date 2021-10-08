@@ -12,20 +12,21 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class EmpresaDAL : Servicio, ICrud<IEmpresa>
+    public class EmpresaDAL : ICrud<IEmpresa>
     {
+        private readonly IServicio _servicio = new Servicio();
         private readonly RolComponentDAL _permisosDAL = new RolComponentDAL();
         private readonly IdiomaDAL _idiomaDAL = new IdiomaDAL();
         public IEmpresa ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", id)
+                _servicio.CrearParametro("@id", id)
             };
 
             try
             {
-                var resultado = Leer("obtener_empresa_por_id", parametros);
+                var resultado = _servicio.Leer("obtener_empresa_por_id", parametros);
 
                 IEmpresa empresa = new Empresa();
 
@@ -45,7 +46,7 @@ namespace Rehue.DAL
         {
             try
             {
-                var resultado = Leer("obtener_empresas");
+                var resultado = _servicio.Leer("obtener_empresas");
 
                 List<IEmpresa> empresa = new List<IEmpresa>();
 
@@ -63,25 +64,25 @@ namespace Rehue.DAL
         }
         public void Guardar(IEmpresa entity)
         {
-            string encryptPassword = Encriptador.Hash(entity.Contraseña);
+            string encryptPassword = Encriptador.GenerarHashMD5(entity.Contraseña);
             int id = 0;
 
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@email", entity.Email),
-                CrearParametro("@password", encryptPassword),
-                CrearParametro("@razonSocial", entity.RazonSocial),
-                CrearParametro("@cuitCuil", entity.Documento),
-                CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
-                CrearParametro("@ubicacion", entity.Ubicacion),
-                CrearParametro("@telefono", entity.Telefono),
-                CrearParametro("@idIdioma", entity.Idioma.Id),
-                CrearParametro("@id", id, ParameterDirection.Output)
+                _servicio.CrearParametro("@email", entity.Email),
+                _servicio.CrearParametro("@password", encryptPassword),
+                _servicio.CrearParametro("@razonSocial", entity.RazonSocial),
+                _servicio.CrearParametro("@cuitCuil", entity.Documento),
+                _servicio.CrearParametro("@fechaNacimiento", entity.FechaNacimiento),
+                _servicio.CrearParametro("@ubicacion", entity.Ubicacion),
+                _servicio.CrearParametro("@telefono", entity.Telefono),
+                _servicio.CrearParametro("@idIdioma", entity.Idioma.Id),
+                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
             };
 
             try
             {
-                RealizarOperacion("registar_empresa", parametros);
+                _servicio.RealizarOperacion("registar_empresa", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -94,12 +95,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", entity.Id)
+                _servicio.CrearParametro("@id", entity.Id)
             };
 
             try
             {
-                RealizarOperacion("usuario_eliminar", parametros);
+                _servicio.RealizarOperacion("usuario_eliminar", parametros);
             }
             catch (OperacionDBException ex)
             {

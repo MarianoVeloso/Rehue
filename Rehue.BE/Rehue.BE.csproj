@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administrador.cs" />
+    <Compile Include="NonVerificableAttribute.cs" />
     <Compile Include="Calificacion.cs" />
     <Compile Include="Cita.cs" />
     <Compile Include="Comision.cs" />

@@ -123,8 +123,9 @@ namespace Rehue.Servicios.Helpers
             {
                 if(propName.Contains("(") && propName.Contains(")"))
                 {
-                    var prop = src.GetType().GetProperty(propName);
-                    return prop != null ? prop.GetValue(src, null) : null;
+                    string funcName = propName.Replace("(", string.Empty).Replace(")", string.Empty);
+                    var prop = src.GetType().GetMethod(funcName);
+                    return prop != null ? prop.Invoke(src, null) : null;
                 }
                 else
                 {

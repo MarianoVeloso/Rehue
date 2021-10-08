@@ -18,6 +18,8 @@ namespace Rehue.BLL
         {
             try
             {
+                cita.DigitoH = GestorDV.Instancia.GenerarDVH(cita);
+
                 _citaDAL.CrearCita(cita);
             }
             catch (OperacionDBException)
@@ -112,9 +114,6 @@ namespace Rehue.BLL
             ObtenerCitasDeUsuarioLogeado();
             ICita cita = Session.Instancia.Usuario.Citas.Where(x => (DateTime.Now - x.FechaCreacion).TotalHours < 2 && 
                                                                 (x.FechaConfirmacion == null && x.FechaCancelacion == null)).FirstOrDefault();
-
-            //var lalala = (DateTime.Now - cita.FechaCreacion).TotalHours < 2;
-
             if (cita != null && cita.Id != 0)
                 return false;
             return true;

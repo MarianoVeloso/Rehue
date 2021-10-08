@@ -11,6 +11,16 @@ namespace Rehue.Servicios
     {
         private static Session _instancia;
 
+        public static Session Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new Session();
+                return _instancia;
+            }
+        }
+
         public IUsuario Usuario { get; set; }
 
         public void Login(IUsuario usuario)
@@ -21,16 +31,6 @@ namespace Rehue.Servicios
         public void LogOut()
         {
             Usuario = null;
-        }
-
-        public static Session Instancia
-        {
-            get
-            {
-                if (_instancia == null)
-                    _instancia = new Session();
-                return _instancia;
-            }
         }
 
         public bool IsLogged()

@@ -11,21 +11,22 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class MesaDAL : Servicio
+    public class MesaDAL
     {
+        private readonly IServicio _servicio = new Servicio();
         private readonly EmpresaDAL _empresaDAL = new EmpresaDAL();
         public void CrearMesa(IMesa mesa)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@descripcion", mesa.Descripcion),
-                CrearParametro("@cantidadComensales", mesa.CantidadComensales),
-                CrearParametro("@idEmpresa", mesa.Empresa.Id)
+                _servicio.CrearParametro("@descripcion", mesa.Descripcion),
+                _servicio.CrearParametro("@cantidadComensales", mesa.CantidadComensales),
+                _servicio.CrearParametro("@idEmpresa", mesa.Empresa.Id)
             };
 
             try
             {
-                RealizarOperacion("registrar_mesa", parametros);
+                _servicio.RealizarOperacion("registrar_mesa", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -36,12 +37,12 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", id)
+                _servicio.CrearParametro("@id", id)
             };
 
             try
             {
-                RealizarOperacion("eliminar_mesa", parametros);
+                _servicio.RealizarOperacion("eliminar_mesa", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -52,13 +53,13 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                CrearParametro("@id", id)
+                _servicio.CrearParametro("@id", id)
             };
 
             try
             {
                 IMesa mesa = new Mesa();
-                var response = Leer("validar_mesa_eliminacion", parametros);
+                var response = _servicio.Leer("validar_mesa_eliminacion", parametros);
                 foreach (DataRow item in response.Rows)
                 {
                     mesa = MapearMesa(item);
@@ -76,11 +77,11 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@id", id)
+                    _servicio.CrearParametro("@id", id)
                 };
 
                 IMesa mesa = new Mesa();
-                var response = Leer("obtener_mesa_por_id", parametros);
+                var response = _servicio.Leer("obtener_mesa_por_id", parametros);
                 foreach (DataRow item in response.Rows)
                 {
                     mesa = MapearMesa(item);
@@ -103,11 +104,11 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    CrearParametro("@idEmpresa", idEmpresa)
+                    _servicio.CrearParametro("@idEmpresa", idEmpresa)
                 };
 
                 List<IMesa> mesas = new List<IMesa>();
-                var response = Leer("obtener_mesas_por_idEmpresa", parametros);
+                var response = _servicio.Leer("obtener_mesas_por_idEmpresa", parametros);
                 foreach (DataRow item in response.Rows)
                 {
                     mesas.Add(MapearMesa(item));
