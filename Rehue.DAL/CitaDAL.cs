@@ -130,14 +130,41 @@ namespace Rehue.DAL
                 throw new Exception(ex.Message);
             }
         }
-        public void ConfirmarCita(int idCita)
+        public List<ICita> ObtenerCitasLazy()
+        {
+            try
+            {
+                var response = new DataTable();
+
+                response = _servicio.Leer("obtener_citas");
+
+                List<ICita> citas = new List<ICita>();
+
+                foreach (DataRow item in response.Rows)
+                {
+                    citas.Add(LazyMapearCita(item));
+                }
+
+                return citas;
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ConfirmarCita(ICita cita)
         {
             try
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    _servicio.CrearParametro("@idCita", idCita),
-                    _servicio.CrearParametro("@fechaConfirmacion", DateTime.Now),
+                    _servicio.CrearParametro("@idCita", cita.Id),
+                    _servicio.CrearParametro("@fechaConfirmacion", cita.FechaConfirmacion),
 
                 };
 
@@ -152,14 +179,14 @@ namespace Rehue.DAL
                 throw new Exception(ex.Message);
             }
         }
-        public void CancelarCita(int idCita)
+        public void CancelarCita(ICita cita)
         {
             try
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    _servicio.CrearParametro("@idCita", idCita),
-                    _servicio.CrearParametro("@fechaCancelacion", DateTime.Now),
+                    _servicio.CrearParametro("@idCita", cita.Id),
+                    _servicio.CrearParametro("@fechaCancelacion", cita.FechaCancelacion),
 
                 };
                 _servicio.RealizarOperacion("cancelar_cita", parametros);
@@ -173,6 +200,29 @@ namespace Rehue.DAL
                 throw new Exception(ex.Message);
             }
         }
+
+        public void ActualizarDigitoH(ICita cita)
+        {
+            try
+            {
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    _servicio.CrearParametro("@id", cita.Id),
+                    _servicio.CrearParametro("@digitoH", cita.DigitoH),
+
+                };
+                _servicio.RealizarOperacion("actualizar_digito_cita", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         private ICita MapearCita(DataRow row)
         {
             return new Cita
@@ -186,6 +236,20 @@ namespace Rehue.DAL
                 FechaEncuentro = DateTime.Parse(row["FechaEncuentro"].ToString()),
                 FechaConfirmacion = row["FechaConfirmacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["FechaConfirmacion"].ToString()),
                 Denuncia = _denunciaDAL.ObtenerDenunciaPorIdCita(int.Parse(row["id"].ToString())),
+                DigitoH = row["DigitoH"].ToString()
+            };
+        }
+
+        private ICita LazyMapearCita(DataRow row)
+        {
+            return new Cita
+            {
+                Id = int.Parse(row["id"].ToString()),
+                CantidadComensales = int.Parse(row["cantidadComensales"].ToString()),
+                FechaCancelacion = row["fechaCancelacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["fechaCancelacion"].ToString()),
+                FechaCreacion = DateTime.Parse(row["fechaCreacion"].ToString()),
+                FechaEncuentro = DateTime.Parse(row["FechaEncuentro"].ToString()),
+                FechaConfirmacion = row["FechaConfirmacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["FechaConfirmacion"].ToString()),
                 DigitoH = row["DigitoH"].ToString()
             };
         }

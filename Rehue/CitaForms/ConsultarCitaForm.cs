@@ -177,7 +177,8 @@ namespace Rehue.CitaForms
 
         private void dtGridCitasConfirmadas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dtGridCitasConfirmadas.Rows.Count > 0 && dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value != null)
+            if (e.RowIndex > 0 && dtGridCitasConfirmadas.Rows.Count > 0 &&
+                !string.IsNullOrEmpty(dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value.ToString()))
             {
                 _idCitaADenunciar = int.Parse(dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
@@ -185,7 +186,8 @@ namespace Rehue.CitaForms
 
         private void dtGridPendienteConfirmacion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dtGridPendienteConfirmacion.Rows.Count > 0 && dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0] != null)
+            if (e.RowIndex >= 0 && dtGridPendienteConfirmacion.Rows.Count > 0 &&
+                !string.IsNullOrEmpty(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString()))
             {
                 _idCitaPendienteConfirmacion = int.Parse(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString());
             }

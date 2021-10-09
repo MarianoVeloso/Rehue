@@ -9,6 +9,7 @@ namespace Rehue.BE
 {
     public abstract class Entity : IEntity
     {
+        [NonVerificableAttribute]
         public int Id { get; set; }
     }
 }

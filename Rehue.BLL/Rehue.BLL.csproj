@@ -45,6 +45,7 @@
     <Compile Include="CitaBLL.cs" />
     <Compile Include="DenunciaBLL.cs" />
     <Compile Include="EmpresaBLL.cs" />
+    <Compile Include="GestorDigitoVHBLL.cs" />
     <Compile Include="IdiomaBLL.cs" />
     <Compile Include="MesaBLL.cs" />
     <Compile Include="RolComponentBLL.cs" />

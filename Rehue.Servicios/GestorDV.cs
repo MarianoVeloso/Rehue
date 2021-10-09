@@ -46,5 +46,16 @@ namespace Rehue.Servicios
 
             return Encriptador.GenerarDVMD5Hash(dvh);
         }
+        public string GenerarDVV<T>(List<T> entities)
+        {
+            string response = string.Empty;
+
+            foreach (var item in entities)
+            {
+                response += GenerarDVH(item);
+            }
+
+            return Encriptador.GenerarDVMD5Hash(response);
+        }
     }
 }

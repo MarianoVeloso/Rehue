@@ -46,6 +46,7 @@
     <Compile Include="CitaDAL.cs" />
     <Compile Include="DenunciaDAL.cs" />
     <Compile Include="EmpresaDAL.cs" />
+    <Compile Include="GestorDigitoVHDAL.cs" />
     <Compile Include="IdiomaDAL.cs" />
     <Compile Include="MesaDAL.cs" />
     <Compile Include="RehueDAL.cs" />
