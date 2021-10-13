@@ -14,7 +14,17 @@ namespace Rehue.DAL
 {
     public class RolComponentDAL: ICrud<IRol>
     {
-        private readonly IServicio _servicio = new Servicio();
+        private readonly Servicio _servicio = new Servicio();
+        private static RolComponentDAL _instancia;
+        public static RolComponentDAL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new RolComponentDAL();
+                return _instancia;
+            }
+        }
         public IRol ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()

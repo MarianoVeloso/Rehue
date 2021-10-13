@@ -14,10 +14,18 @@ namespace Rehue.DAL
 {
     public class AdministradorDAL :ICrud<IAdministrador>
     {
-        private readonly IServicio _servicio = new Servicio();
-        private readonly RolComponentDAL _permisosDAL = new RolComponentDAL();
-        private readonly IdiomaDAL _idiomaDAL = new IdiomaDAL();
+        private readonly Servicio _servicio = Servicio.Instancia;
 
+        private static AdministradorDAL _instancia;
+        public static AdministradorDAL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new AdministradorDAL();
+                return _instancia;
+            }
+        }
         public IAdministrador ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -113,8 +121,8 @@ namespace Rehue.DAL
                 Id = int.Parse(row["id"].ToString()),
                 Email = row["email"].ToString(),
                 FechaNacimiento = DateTime.Parse(row["fechaNacimiento"].ToString()),
-                Roles = _permisosDAL.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString())),
-                Idioma = _idiomaDAL.ObtenerIdiomaPorId(int.Parse(row["IdIdioma"].ToString()))
+                Roles = RolComponentDAL.Instancia.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString())),
+                Idioma = IdiomaDAL.Instancia.ObtenerIdiomaPorId(int.Parse(row["IdIdioma"].ToString()))
 
             };
         }

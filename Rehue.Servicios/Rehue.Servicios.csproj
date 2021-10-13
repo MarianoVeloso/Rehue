@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bitacora\Bitacora.cs" />
+    <Compile Include="Bitacora\BitacoraOperador.cs" />
     <Compile Include="Encriptador.cs" />
     <Compile Include="GestorDV.cs" />
     <Compile Include="Helpers\DigitoException.cs" />
@@ -57,5 +57,6 @@
       <Name>Rehue.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

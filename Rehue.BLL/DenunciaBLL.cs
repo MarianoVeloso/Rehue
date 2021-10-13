@@ -12,13 +12,13 @@ namespace Rehue.BLL
 {
     public class DenunciaBLL
     {
-        private readonly DenunciaDAL _denunciaDAL = new DenunciaDAL();
+        private readonly DenunciaDAL _servicio = new DenunciaDAL();
 
         public void CrearDenuncia(IDenuncia denuncia, int IdCita)
         {
             try
             {
-                _denunciaDAL.CrearDenuncia(denuncia, IdCita);
+                _servicio.CrearDenuncia(denuncia, IdCita);
             }
             catch (OperacionDBException)
             {
@@ -34,7 +34,7 @@ namespace Rehue.BLL
         {
             try
             {
-                return _denunciaDAL.ObtenerDenunciaPorIdAdministrador(idAdministrador);
+                return _servicio.ObtenerDenunciaPorIdAdministrador(idAdministrador);
             }
             catch (OperacionDBException)
             {
@@ -50,7 +50,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _denunciaDAL.ConfirmarDenuncia(idDenuncia, Session.Instancia.Usuario.Id);
+                _servicio.ConfirmarDenuncia(idDenuncia, Session.Instancia.Usuario.Id);
             }
             catch (OperacionDBException)
             {
@@ -65,7 +65,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _denunciaDAL.CancelarDenuncia(idDenuncia, Session.Instancia.Usuario.Id);
+                _servicio.CancelarDenuncia(idDenuncia, Session.Instancia.Usuario.Id);
             }
             catch (OperacionDBException)
             {

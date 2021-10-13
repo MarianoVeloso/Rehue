@@ -15,23 +15,23 @@ namespace Rehue.BLL
 {
     public class EmpresaBLL : ICrud<IEmpresa>
     {
-        private readonly EmpresaDAL _empresaDAL = new EmpresaDAL();
+        private readonly EmpresaDAL _servicio = new EmpresaDAL();
 
         public IEmpresa ObtenerPorId(int id)
         {
-            return _empresaDAL.ObtenerPorId(id);
+            return _servicio.ObtenerPorId(id);
         }
 
         public IList<IEmpresa> ObtenerTodos()
         {
-            return _empresaDAL.ObtenerTodos();
+            return _servicio.ObtenerTodos();
         }
 
         public void Guardar(IEmpresa entity)
         {
             try
             {
-                _empresaDAL.Guardar(entity);
+                _servicio.Guardar(entity);
             }
             catch (OperacionDBException)
             {
@@ -43,7 +43,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _empresaDAL.Eliminar(entity);
+                _servicio.Eliminar(entity);
             }
             catch (OperacionDBException ex)
             {

@@ -1,5 +1,5 @@
 ﻿using Rehue.DAL;
-using Rehue.Interfaces;
+using Rehue.Interfaces.Eventos;
 using Rehue.Servicios;
 using Rehue.Servicios.Helpers;
 using System;
@@ -10,79 +10,56 @@ using System.Threading.Tasks;
 
 namespace Rehue.BLL
 {
-    public class MesaBLL
+    public class BitacoraBLL
     {
-        private readonly MesaDAL _servicio = new MesaDAL();
 
-        public void CrearMesa(IMesa mesa)
-        {
-            try
-            {
-                _servicio.CrearMesa(mesa);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-        }
-        public IMesa ObtenerPorId(int id)
-        {
-            try
-            {
-                return _servicio.ObtenerPorId(id);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-        }
-        public List<IMesa> ObtenerPorIdEmpresa(int idEmpresa)
-        {
-            try
-            {
-                return _servicio.ObtenerPorIdEmpresa(idEmpresa);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-        }
-        public void Eliminar(int id)
-        {
-            try
-            {
-                _servicio.Eliminar(id);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-        }
-        public bool ValidarMesaEnCita(int id)
-        {
-            try
-            {
-                IMesa mesa = _servicio.ValidarMesaEnCita(id);
+        private readonly BitacoraDAL _bitacoraDAL = BitacoraDAL.Instancia;
 
-                if (mesa.Id == 0)
-                    return false;
-                return true;
+        private static BitacoraBLL _instancia;
+        public static BitacoraBLL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new BitacoraBLL();
+                return _instancia;
+            }
+        }
+        public void RegistrarEventoLogIn(IEventoLogInExito evento)
+        {
+            try
+            {
+                _bitacoraDAL.RegistrarEventoLogIn(evento);
+            }
+            catch (OperacionDBException)
+            {
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
+            }
+            catch (Exception)
+            {
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
+            }
+        }
+        public void RegistrarEventoLogInError(IEventoLogInError evento)
+        {
+            try
+            {
+                _bitacoraDAL.RegistrarEventoLogIn(evento);
+            }
+            catch (OperacionDBException)
+            {
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
+            }
+            catch (Exception)
+            {
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
+            }
+        }
+        public void RegistrarEventoLogOut(IEventoLogOutExito evento)
+        {
+            try
+            {
+                _bitacoraDAL.RegistrarEventoLogOut(evento);
             }
             catch (OperacionDBException)
             {

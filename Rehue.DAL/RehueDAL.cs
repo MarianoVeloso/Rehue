@@ -12,7 +12,18 @@ namespace Rehue.DAL
 {
     public class RehueDAL
     {
-        private readonly IServicio _servicio = new Servicio();
+        private static RehueDAL _instancia;
+        public static RehueDAL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new RehueDAL();
+                return _instancia;
+            }
+        }
+
+        private readonly Servicio _servicio = new Servicio();
         public bool ValidarEmail(string email)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()

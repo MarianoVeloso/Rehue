@@ -41,8 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Eventos\IEvento.cs" />
+    <Compile Include="Eventos\IEventoLogInError.cs" />
+    <Compile Include="Eventos\IEventoLogInExito.cs" />
+    <Compile Include="Eventos\IEventoLogOutExito.cs" />
     <Compile Include="IAcceso.cs" />
     <Compile Include="IAdministrador.cs" />
+    <Compile Include="Bitacora\IBitacora.cs" />
     <Compile Include="ICita.cs" />
     <Compile Include="ICrud.cs" />
     <Compile Include="IDenuncia.cs" />
@@ -60,7 +65,6 @@
     <Compile Include="IPersona.cs" />
     <Compile Include="IRol.cs" />
     <Compile Include="IRolComponent.cs" />
-    <Compile Include="IServicio.cs" />
     <Compile Include="ITraduccion.cs" />
     <Compile Include="IUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

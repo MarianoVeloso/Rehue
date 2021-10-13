@@ -16,7 +16,8 @@ namespace Rehue.Servicios
             var md5data = md5.ComputeHash(Encoding.ASCII.GetBytes(value));
             return (new ASCIIEncoding()).GetString(md5data);
         }
-        public static string GenerarDVMD5Hash(string value)
+
+        public static string GenerarHashHexadecimal(string value)
         {
             StringBuilder sBuilder = new StringBuilder();
             using (var md5 = MD5.Create())

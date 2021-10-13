@@ -44,7 +44,7 @@ namespace Rehue.Servicios
                 }
             }
 
-            return Encriptador.GenerarDVMD5Hash(dvh);
+            return Encriptador.GenerarHashHexadecimal(dvh);
         }
         public string GenerarDVV<T>(List<T> entities)
         {
@@ -55,7 +55,7 @@ namespace Rehue.Servicios
                 response += GenerarDVH(item);
             }
 
-            return Encriptador.GenerarDVMD5Hash(response);
+            return Encriptador.GenerarHashHexadecimal(response);
         }
     }
 }

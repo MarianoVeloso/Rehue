@@ -13,7 +13,20 @@ namespace Rehue.DAL
 {
     public class IdiomaDAL
     {
-        private readonly IServicio _servicio = new Servicio();
+        private readonly Servicio _servicio = Servicio.Instancia;
+
+        private static IdiomaDAL _instancia;
+
+        public static IdiomaDAL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new IdiomaDAL();
+                return _instancia;
+            }
+        }
+
         public void ActualizarDefault(int idUsuario, int idIdioma)
         {
             try

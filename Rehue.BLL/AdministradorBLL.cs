@@ -12,23 +12,23 @@ namespace Rehue.BLL
 {
     public class AdministradorBLL : ICrud<IAdministrador>
     {
-        private readonly AdministradorDAL _administradorDAL = new AdministradorDAL();
+        private readonly AdministradorDAL _servicio = new AdministradorDAL();
 
         public IAdministrador ObtenerPorId(int id)
         {
-            return _administradorDAL.ObtenerPorId(id);
+            return _servicio.ObtenerPorId(id);
         }
 
         public IList<IAdministrador> ObtenerTodos()
         {
-            return _administradorDAL.ObtenerTodos();
+            return _servicio.ObtenerTodos();
         }
 
         public void Guardar(IAdministrador entity)
         {
             try
             {
-                _administradorDAL.Guardar(entity);
+                _servicio.Guardar(entity);
             }
             catch (OperacionDBException ex)
             {
@@ -40,7 +40,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _administradorDAL.Eliminar(entity);
+                _servicio.Eliminar(entity);
             }
             catch (OperacionDBException ex)
             {

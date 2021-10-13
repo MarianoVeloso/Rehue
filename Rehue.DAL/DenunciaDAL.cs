@@ -13,8 +13,18 @@ namespace Rehue.DAL
 {
     public class DenunciaDAL
     {
-        private readonly IServicio _servicio = new Servicio();
-        private readonly AdministradorDAL _administradorDAL = new AdministradorDAL(); 
+        private readonly Servicio _servicio = Servicio.Instancia;
+
+        private static DenunciaDAL _instancia;
+        public static DenunciaDAL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new DenunciaDAL();
+                return _instancia;
+            }
+        }
 
         public void CrearDenuncia(IDenuncia denuncia, int idCita)
         {
@@ -163,7 +173,7 @@ namespace Rehue.DAL
                 Id = int.Parse(row["id"].ToString()),
                 Descripcion = row["descripcion"].ToString(),
                 FechaCreacion = DateTime.Parse(row["fechaCreacion"].ToString()),
-                Administrador = row["idAdministrador"] == DBNull.Value ? null : _administradorDAL.ObtenerPorId(int.Parse(row["IdAdministrador"].ToString())),
+                Administrador = row["idAdministrador"] == DBNull.Value ? null : AdministradorDAL.Instancia.ObtenerPorId(int.Parse(row["IdAdministrador"].ToString())),
                 FechaCancelacion = row["FechaCancelacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["FechaCancelacion"].ToString()),
                 FechaConfirmacion = row["FechaConfirmacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["FechaConfirmacion"].ToString())
             };

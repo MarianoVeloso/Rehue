@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministradorBLL.cs" />
+    <Compile Include="BitacoraBLL.cs" />
     <Compile Include="CitaBLL.cs" />
     <Compile Include="DenunciaBLL.cs" />
     <Compile Include="EmpresaBLL.cs" />

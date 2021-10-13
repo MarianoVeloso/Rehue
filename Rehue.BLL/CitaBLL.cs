@@ -12,7 +12,7 @@ namespace Rehue.BLL
 {
     public class CitaBLL
     {
-        private readonly CitaDAL _citaDAL = new CitaDAL();
+        private readonly CitaDAL _servicio = new CitaDAL();
         private readonly GestorDigitoVHDAL _gestorDAL = new GestorDigitoVHDAL();
 
         public void CrearCita(ICita cita)
@@ -22,7 +22,7 @@ namespace Rehue.BLL
                 cita.DigitoH = GestorDV.Instancia.GenerarDVH(cita);
                 VerificarDigitos();
 
-                _citaDAL.CrearCita(cita);
+                _servicio.CrearCita(cita);
 
                 ActualizarDigitos(cita);
             }
@@ -43,7 +43,7 @@ namespace Rehue.BLL
                 VerificarDigitos(cita);
 
                 cita.FechaConfirmacion = DateTime.Now;
-                _citaDAL.ConfirmarCita(cita);
+                _servicio.ConfirmarCita(cita);
 
                 ActualizarDigitos(cita);
             }
@@ -68,7 +68,7 @@ namespace Rehue.BLL
                 VerificarDigitos(cita);
 
                 cita.FechaCancelacion = DateTime.Now;
-                _citaDAL.CancelarCita(cita);
+                _servicio.CancelarCita(cita);
 
                 ActualizarDigitos(cita);
             }
@@ -90,7 +90,7 @@ namespace Rehue.BLL
                 {
                     cita.DigitoH = ObtenerHashH(cita);
 
-                    _citaDAL.ActualizarDigitoH(cita);
+                    _servicio.ActualizarDigitoH(cita);
                 }
 
                 string hashV = ObtenerHashV(cita);
@@ -111,7 +111,7 @@ namespace Rehue.BLL
         {
             try
             {
-                return _citaDAL.ObtenerCitaPorId(idCita);
+                return _servicio.ObtenerCitaPorId(idCita);
             }
             catch (OperacionDBException)
             {
@@ -127,7 +127,7 @@ namespace Rehue.BLL
         {
             try
             {
-                Session.Instancia.Usuario.Citas = _citaDAL.ObtenerCitasPorUsuario(Session.Instancia.Usuario.Id, Session.Instancia.Usuario.IsInRol("Empresa"));
+                Session.Instancia.Usuario.Citas = _servicio.ObtenerCitasPorUsuario(Session.Instancia.Usuario.Id, Session.Instancia.Usuario.IsInRol("Empresa"));
             }
             catch (OperacionDBException)
             {
@@ -142,7 +142,7 @@ namespace Rehue.BLL
         {
             try
             {
-                return _citaDAL.ObtenerCitasConDenunciaSinGestion();
+                return _servicio.ObtenerCitasConDenunciaSinGestion();
             }
             catch (OperacionDBException)
             {
@@ -193,7 +193,7 @@ namespace Rehue.BLL
         }
         private string ObtenerHashV(ICita cita)
         {
-            List<ICita> citas = _citaDAL.ObtenerCitasLazy();
+            List<ICita> citas = _servicio.ObtenerCitasLazy();
 
             return GestorDV.Instancia.GenerarDVV(citas);
         }

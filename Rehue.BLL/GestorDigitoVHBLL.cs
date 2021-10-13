@@ -12,27 +12,27 @@ namespace Rehue.BLL
 {
     public class GestorDigitoVHBLL
     {
-        private readonly GestorDigitoVHDAL _gestorDAL = new GestorDigitoVHDAL();
+        private readonly GestorDigitoVHDAL _servicio = new GestorDigitoVHDAL();
         private readonly CitaDAL _citaDAL = new CitaDAL();
 
         public void VerificarCitaDigitos(ICita cita)
         {
             string hashH = GestorDV.Instancia.GenerarDVH(cita);
 
-            if (_gestorDAL.VerificarDigitoH(cita.Id, hashH, "validarDVH_cita") == 0)
+            if (_servicio.VerificarDigitoH(cita.Id, hashH, "validarDVH_cita") == 0)
                 throw new DigitoException(string.Empty);
 
             List<ICita> citas = _citaDAL.ObtenerCitasLazy();
 
             string hashV = GestorDV.Instancia.GenerarDVV(citas);
 
-            if (_gestorDAL.VerificarTablaDigito("Cita") == 0)
+            if (_servicio.VerificarTablaDigito("Cita") == 0)
             {
-                _gestorDAL.CrearDigitoV(hashV, "Cita");
+                _servicio.CrearDigitoV(hashV, "Cita");
             }
             else
             {
-                if (_gestorDAL.VerificarDigitoV(hashV, "Cita", "validarDVV_cita") == 0)
+                if (_servicio.VerificarDigitoV(hashV, "Cita", "validarDVV_cita") == 0)
                     throw new DigitoException(string.Empty);
             }
         }

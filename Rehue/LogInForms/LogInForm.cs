@@ -1,6 +1,10 @@
 ﻿using Rehue.BE;
+using Rehue.BE.Bitacora;
 using Rehue.BLL;
 using Rehue.Interfaces;
+using Rehue.Interfaces.Eventos;
+using Rehue.Servicios;
+using Rehue.Servicios.Bitacora;
 using Rehue.Servicios.Helpers;
 using System;
 using System.Windows.Forms;
@@ -56,20 +60,33 @@ namespace Rehue.LogIn
         }
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
+            IUsuario persona = new Persona() { Email = txtUsuario.Text, Contraseña = txtContraseña.Text };
 
             try
             {
-                IUsuario persona = new Persona() { Email = txtUsuario.Text, Contraseña = txtContraseña.Text };
                 _rehueBLL.ValidarUsuarioContraseña(persona, _idioma);
                 _rehueBLL.LogIn(persona, _idioma);
+
+                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogInExito());
+                IEventoLogInExito evento = (IEventoLogInExito)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario);
+                BitacoraBLL.Instancia.RegistrarEventoLogIn(evento);
+
                 this.Close();
             }
             catch (ErrorLogInException ex)
             {
+                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogInError());
+                IEventoLogInError evento = (IEventoLogInError)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona);
+                BitacoraBLL.Instancia.RegistrarEventoLogInError(evento);
+
                 MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
+                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogInError());
+                IEventoLogInError evento = (IEventoLogInError)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona);
+                BitacoraBLL.Instancia.RegistrarEventoLogInError(evento);
+
                 MessageBox.Show(ex.Message);
             }
         }

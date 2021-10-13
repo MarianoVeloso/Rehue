@@ -13,10 +13,18 @@ namespace Rehue.DAL
 {
     public class CitaDAL
     {
-        private readonly PersonaDAL _personaDAL = new PersonaDAL();
-        private readonly DenunciaDAL _denunciaDAL = new DenunciaDAL();
-        private readonly MesaDAL _mesaDal = new MesaDAL();
-        private readonly IServicio _servicio = new Servicio();
+        private readonly Servicio _servicio = Servicio.Instancia;
+
+        private static CitaDAL _instancia;
+        public static CitaDAL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new CitaDAL();
+                return _instancia;
+            }
+        }
 
         public void CrearCita(ICita cita)
         {
@@ -229,13 +237,13 @@ namespace Rehue.DAL
             {
                 Id = int.Parse(row["id"].ToString()),
                 CantidadComensales = int.Parse(row["cantidadComensales"].ToString()),
-                Mesa = _mesaDal.ObtenerPorId(int.Parse(row["idMesa"].ToString())),
-                Persona = _personaDAL.ObtenerPorId(int.Parse(row["idUsuario"].ToString())),
+                Mesa = MesaDAL.Instancia.ObtenerPorId(int.Parse(row["idMesa"].ToString())),
+                Persona = PersonaDAL.Instancia.ObtenerPorId(int.Parse(row["idUsuario"].ToString())),
                 FechaCancelacion = row["fechaCancelacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["fechaCancelacion"].ToString()),
                 FechaCreacion = DateTime.Parse(row["fechaCreacion"].ToString()),
                 FechaEncuentro = DateTime.Parse(row["FechaEncuentro"].ToString()),
                 FechaConfirmacion = row["FechaConfirmacion"] == DBNull.Value ? (DateTime?)null : DateTime.Parse(row["FechaConfirmacion"].ToString()),
-                Denuncia = _denunciaDAL.ObtenerDenunciaPorIdCita(int.Parse(row["id"].ToString())),
+                Denuncia = DenunciaDAL.Instancia.ObtenerDenunciaPorIdCita(int.Parse(row["id"].ToString())),
                 DigitoH = row["DigitoH"].ToString()
             };
         }

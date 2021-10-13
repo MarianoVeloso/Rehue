@@ -12,13 +12,13 @@ namespace Rehue.BLL
 {
     public class RolComponentBLL : ICrud<IRol>
     {
-        private readonly RolComponentDAL _rolDAL = new RolComponentDAL();
+        private readonly RolComponentDAL _servicio = new RolComponentDAL();
 
         public IRol ObtenerPorId(int id)
         {
             try
             {
-                return _rolDAL.ObtenerPorId(id);
+                return _servicio.ObtenerPorId(id);
             }
             catch (OperacionDBException ex)
             {
@@ -29,7 +29,7 @@ namespace Rehue.BLL
         {
             try
             {
-                return _rolDAL.ObtenerTodos();
+                return _servicio.ObtenerTodos();
             }
             catch (OperacionDBException ex)
             {
@@ -40,7 +40,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _rolDAL.Guardar(entity);
+                _servicio.Guardar(entity);
             }
             catch (OperacionDBException ex)
             {
@@ -53,13 +53,13 @@ namespace Rehue.BLL
         }
         public void GuardarPermiso(IPermiso permiso)
         {
-            _rolDAL.GuardarPermiso(permiso);
+            _servicio.GuardarPermiso(permiso);
         }
         public void Eliminar(IRol entity)
         {
             try
             {
-                _rolDAL.Eliminar(entity);
+                _servicio.Eliminar(entity);
             }
             catch (OperacionDBException ex)
             {
@@ -74,7 +74,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _rolDAL.EliminarHijo(entity);
+                _servicio.EliminarHijo(entity);
             }
             catch (OperacionDBException ex)
             {
@@ -90,7 +90,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _rolDAL.AgregarHijo(entity);
+                _servicio.AgregarHijo(entity);
             }
             catch (OperacionDBException ex)
             {
@@ -104,14 +104,14 @@ namespace Rehue.BLL
 
         public IList<IRol> ObtenerPorUsuario(int idUsuario)
         {
-            return _rolDAL.ObtenerRolesYPermisosPorUsuario(idUsuario);
+            return _servicio.ObtenerRolesYPermisosPorUsuario(idUsuario);
         }
 
         public void AsignarRolAUsuario(IUsuario usuario, IRol rol)
         {
             try
             {
-                _rolDAL.AsignarRolAUsuario(usuario.Id, rol.Id);
+                _servicio.AsignarRolAUsuario(usuario.Id, rol.Id);
             }
             catch (OperacionDBException ex)
             {
@@ -126,7 +126,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _rolDAL.EliminarRolAUsuario(usuario.Id, rol.Id);
+                _servicio.EliminarRolAUsuario(usuario.Id, rol.Id);
             }
             catch (OperacionDBException ex)
             {

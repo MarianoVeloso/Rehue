@@ -7,10 +7,21 @@ using System.Data.SqlClient;
 
 namespace Rehue.DAL
 {
-    internal class Servicio : IServicio
+    internal class Servicio
     {
         private readonly IAcceso acceso = new Acceso();
 
+        private static Servicio _instancia;
+
+        public static Servicio Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new Servicio();
+                return _instancia;
+            }
+        }
         public void RealizarOperacion(string storedProcedure, List<SqlParameter> parameters = null)
         {
             acceso.Abrir();

@@ -15,23 +15,23 @@ namespace Rehue.BLL
 {
     public class PersonaBLL : ICrud<IPersona>
     {
-        private readonly PersonaDAL _personaDAL = new PersonaDAL();
+        private readonly PersonaDAL _servicio = new PersonaDAL();
 
         public IPersona ObtenerPorId(int id)
         {
-            return _personaDAL.ObtenerPorId(id);
+            return _servicio.ObtenerPorId(id);
         }
 
         public IList<IPersona> ObtenerTodos()
         {
-            return _personaDAL.ObtenerTodos();
+            return _servicio.ObtenerTodos();
         }
 
         public void Guardar(IPersona entity)
         {
             try
             {
-                _personaDAL.Guardar(entity);
+                _servicio.Guardar(entity);
             }
             catch (OperacionDBException ex)
             {
@@ -43,7 +43,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _personaDAL.Eliminar(entity);
+                _servicio.Eliminar(entity);
             }
             catch (OperacionDBException ex)
             {

@@ -8,13 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rehue.BE;
+using Rehue.BE.Bitacora;
 using Rehue.BLL;
 using Rehue.CitaForms;
 using Rehue.IdiomaForms;
 using Rehue.Interfaces;
+using Rehue.Interfaces.Eventos;
 using Rehue.LogIn;
 using Rehue.RolForm;
 using Rehue.Servicios;
+using Rehue.Servicios.Bitacora;
 
 namespace Rehue
 {
@@ -207,7 +210,19 @@ namespace Rehue
         }
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Session.Instancia.LogOut();
+            try
+            {
+                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogOutExito());
+                IEventoLogOutExito evento = (IEventoLogOutExito)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario);
+                BitacoraBLL.Instancia.RegistrarEventoLogOut(evento);
+
+                Session.Instancia.LogOut();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
             foreach (Form frm in this.MdiChildren)
             {

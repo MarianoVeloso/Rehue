@@ -12,13 +12,13 @@ namespace Rehue.BLL
 {
     public class RehueBLL
     {
-        private readonly RehueDAL _rehueDAL = new RehueDAL();
+        private readonly RehueDAL _servicio = new RehueDAL();
 
         public void ValidarEmail(string email, IIdioma idioma)
         {
             try
             {
-                bool inValido = _rehueDAL.ValidarEmail(email);
+                bool inValido = _servicio.ValidarEmail(email);
 
                 if (inValido)
                     throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(idioma)["MailRegistrado"].Texto);
@@ -38,7 +38,7 @@ namespace Rehue.BLL
             string hash = Encriptador.GenerarHashMD5(entity.Contraseña);
             try
             {
-                bool inValido = _rehueDAL.ObtenerIdUsuario(entity, hash) == 0;
+                bool inValido = _servicio.ObtenerIdUsuario(entity, hash) == 0;
 
                 if (inValido)
                     throw new ErrorLogInException(TraductorBLL.ObtenerTraducciones(idioma)["MailYContrateñaErroneos"].Texto);
@@ -57,7 +57,7 @@ namespace Rehue.BLL
         {
             try
             {
-                var usuarios= _rehueDAL.ObtenerIdEmailUsuarios();
+                var usuarios= _servicio.ObtenerIdEmailUsuarios();
 
                 return usuarios;
 
@@ -77,7 +77,7 @@ namespace Rehue.BLL
             EmpresaBLL _empresaBLL = new EmpresaBLL();
 
             string hash = Encriptador.GenerarHashMD5(entity.Contraseña);
-            int entityId = _rehueDAL.ObtenerIdUsuario(entity, hash);
+            int entityId = _servicio.ObtenerIdUsuario(entity, hash);
 
             IEmpresa empresa = _empresaBLL.ObtenerPorId(entityId);
 

@@ -13,7 +13,7 @@ namespace Rehue.BLL
 {
     public class IdiomaBLL : ICrud<IIdioma>
     {
-        private readonly IdiomaDAL _idiomaDAL = new IdiomaDAL();
+        private readonly IdiomaDAL _servicio = new IdiomaDAL();
 
         public string ObtenerTraduccionDeIdiomaDefault(string etiqueta, IList<IIdioma> idiomas )
         {
@@ -28,7 +28,7 @@ namespace Rehue.BLL
         {
             if(Session.Instancia.IsLogged())
             {
-                _idiomaDAL.ActualizarDefault(Session.Instancia.Usuario.Id, idiomaDefault.Id);
+                _servicio.ActualizarDefault(Session.Instancia.Usuario.Id, idiomaDefault.Id);
 
                 Session.Instancia.Usuario.Idioma = idiomaDefault;
             }
@@ -37,7 +37,7 @@ namespace Rehue.BLL
         {
             try
             {
-                _idiomaDAL.GuardarIdioma(entity.Nombre);
+                _servicio.GuardarIdioma(entity.Nombre);
             }
             catch (OperacionDBException ex)
             {
@@ -50,11 +50,11 @@ namespace Rehue.BLL
         }
         public IList<IIdioma> ObtenerTodos()
         {
-            return _idiomaDAL.ObtenerIdiomas();
+            return _servicio.ObtenerIdiomas();
         }
         public IList<IEtiqueta> ObtenerEtiquetas()
         {
-            return _idiomaDAL.ObtenerEtiquetas();
+            return _servicio.ObtenerEtiquetas();
         }
         public void GuardarTraduccion(IDictionary<IEtiqueta, ITraduccion> traducciones, IIdioma idioma)
         {
@@ -62,7 +62,7 @@ namespace Rehue.BLL
             {
                 foreach (var item in traducciones)
                 {
-                    _idiomaDAL.CrearTraduccion(idioma.Id, item.Key.Id, item.Value.Texto);
+                    _servicio.CrearTraduccion(idioma.Id, item.Key.Id, item.Value.Texto);
                 }
             }
             catch (OperacionDBException ex)
@@ -73,7 +73,7 @@ namespace Rehue.BLL
         }
         public IDictionary<string, ITraduccion> ObtenerTraducciones(int idIdioma)
         {
-            return _idiomaDAL.ObtenerTraducciones(idIdioma);
+            return _servicio.ObtenerTraducciones(idIdioma);
         }
     }
 }

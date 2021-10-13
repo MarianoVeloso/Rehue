@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.Servicios
+namespace Rehue.Interfaces.Eventos
 {
-    public abstract class Bitacora<T>
+    public interface IEventoLogInError : IEvento
     {
-
+        int IdUsuario { get; set; }
     }
 }

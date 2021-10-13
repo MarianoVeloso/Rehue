@@ -13,8 +13,20 @@ namespace Rehue.DAL
 {
     public class MesaDAL
     {
-        private readonly IServicio _servicio = new Servicio();
-        private readonly EmpresaDAL _empresaDAL = new EmpresaDAL();
+        private readonly Servicio _servicio = Servicio.Instancia;
+
+        private static MesaDAL _instancia;
+
+        public static MesaDAL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new MesaDAL();
+                return _instancia;
+            }
+        }
+
         public void CrearMesa(IMesa mesa)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
@@ -133,7 +145,7 @@ namespace Rehue.DAL
                 CantidadComensales = int.Parse(row["cantidadComensales"].ToString()),
                 Descripcion = row["descripcion"].ToString(),
                 Reservada = bool.Parse(row["reservada"].ToString()),
-                Empresa = _empresaDAL.ObtenerPorId(int.Parse(row["id"].ToString()))
+                Empresa = EmpresaDAL.Instancia.ObtenerPorId(int.Parse(row["id"].ToString()))
             };
         }
     }

@@ -12,7 +12,19 @@ namespace Rehue.DAL
 {
     public class GestorDigitoVHDAL
     {
-        private readonly IServicio _servicio = new Servicio();
+        private readonly Servicio _servicio = Servicio.Instancia;
+
+        private static GestorDigitoVHDAL _instancia;
+
+        public static GestorDigitoVHDAL Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                    _instancia = new GestorDigitoVHDAL();
+                return _instancia;
+            }
+        }
 
         public int VerificarDigitoH(int id, string hash, string storeProcedure)
         {
