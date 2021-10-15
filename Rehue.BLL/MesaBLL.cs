@@ -12,7 +12,7 @@ namespace Rehue.BLL
 {
     public class MesaBLL
     {
-        private readonly MesaDAL _servicio = new MesaDAL();
+        private readonly MesaDAL _servicio = MesaDAL.Instancia;
 
         public void CrearMesa(IMesa mesa)
         {

@@ -42,14 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administrador.cs" />
+    <Compile Include="Backup.cs" />
     <Compile Include="Bitacora\Bitacora.cs" />
     <Compile Include="Bitacora\BitacoraLogInError.cs" />
     <Compile Include="Bitacora\BitacoraLogInExito.cs" />
     <Compile Include="Bitacora\BitacoraLogOutExito.cs" />
-    <Compile Include="Eventos\Evento.cs" />
-    <Compile Include="Eventos\EventoLogInError.cs" />
-    <Compile Include="Eventos\EventoLogInExito.cs" />
-    <Compile Include="Eventos\EventoLogOutExito.cs" />
+    <Compile Include="EventoEnum.cs" />
+    <Compile Include="Log\Log.cs" />
+    <Compile Include="Log\LogSignInError.cs" />
+    <Compile Include="Log\LogSignInExito.cs" />
+    <Compile Include="Log\LogSignOutExito.cs" />
     <Compile Include="NonVerificableAttribute.cs" />
     <Compile Include="Calificacion.cs" />
     <Compile Include="Cita.cs" />

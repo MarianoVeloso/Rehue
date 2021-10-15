@@ -35,68 +35,8 @@ namespace Rehue.Servicios.Helpers
 
                     foreach (var key in keys)
                     {
-                        var lala = GetPropertyValue(item, key);
-                        values.Add(lala);
-                        //var keysSplitted = key.Split('.');
-                        //if (keysSplitted.Length > 0)
-                        //{
-
-
-                        //PropertyInfo property = null;
-                        //for (int i = 0; i < keysSplitted.Length; i++)
-                        //{
-                        //    if (i + 1 == keysSplitted.Length)
-                        //    {
-                        //        if (keysSplitted[i].Contains("(") && keysSplitted[i].Contains(")"))
-                        //        {
-                        //            MethodInfo methodInfo = property.GetGetMethod();
-
-                        //            if (methodInfo != null)
-                        //            {
-                        //                object result = null;
-                        //                //ParameterInfo[] parameters = methodInfo.GetParameters();
-                        //                //object classInstance = Activator.CreateInstance(type, null);
-
-                        //                //if (parameters.Length == 0)
-                        //                //{
-                        //                //    result = methodInfo.Invoke(classInstance, null);
-                        //                //}
-                        //                //else
-                        //                //{
-                        //                //result = methodInfo.Invoke(classInstance, null);
-                        //                //}
-                        //            }
-                        //        }
-                        //        values.Add(item.GetType().GetProperty(keysSplitted[i])?.GetValue(item, null));
-                        //    }
-                        //    else
-                        //    {
-                        //        if (property == null)
-                        //        {
-                        //            property = item.GetType().GetProperty(keysSplitted[i]);
-                        //        }
-                        //        else
-                        //        {
-                        //            if (i == keysSplitted.Length)
-                        //            {
-                        //                values.Add(property?.GetValue(item, null));
-                        //            }
-                        //            else
-                        //            {
-                        //                var type = property.GetType();
-                        //                var property2 = item.GetType().GetProperty(keysSplitted[i]);
-
-                        //                property = property.GetType().GetProperty(keysSplitted[i]);
-                        //            }
-                        //        }
-
-                        //    }
-                        //}
-                        //}
-                        //else
-                        //{
-                        //    values.Add(item.GetType().GetProperty(key)?.GetValue(item, null));
-                        //}
+                        var prop = GetPropertyValue(item, key);
+                        values.Add(prop);
                     }
 
                     dt.Rows.Add(values.ToArray());

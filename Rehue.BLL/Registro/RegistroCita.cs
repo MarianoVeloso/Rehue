@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.Interfaces.Eventos
+namespace Rehue.BLL.Registro
 {
-    public interface IEventoLogOutExito : IEvento
+    public class RegistroCita
     {
-        int IdUsuario { get; set; }
     }
 }

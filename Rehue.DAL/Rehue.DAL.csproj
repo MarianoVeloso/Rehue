@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Acceso.cs" />
     <Compile Include="AdministradorDAL.cs" />
+    <Compile Include="BackupDAL.cs" />
     <Compile Include="BitacoraDAL.cs" />
     <Compile Include="CitaDAL.cs" />
     <Compile Include="DenunciaDAL.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="GestorDigitoVHDAL.cs" />
     <Compile Include="IdiomaDAL.cs" />
     <Compile Include="MesaDAL.cs" />
+    <Compile Include="Registro\RegistroCitaDAL.cs" />
     <Compile Include="RehueDAL.cs" />
     <Compile Include="RolComponentDAL.cs" />
     <Compile Include="PersonaDAL.cs" />

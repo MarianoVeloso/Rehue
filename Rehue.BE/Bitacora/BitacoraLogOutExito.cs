@@ -1,4 +1,4 @@
-﻿using Rehue.BE.Eventos;
+﻿using Rehue.BE.Log;
 using Rehue.Interfaces;
 using Rehue.Interfaces.Eventos;
 using System;
@@ -11,9 +11,9 @@ namespace Rehue.BE.Bitacora
 {
     public class BitacoraLogOutExito : Bitacora<IUsuario>
     {
-        public override IEvento CrearEvento(IUsuario entity)
+        public override ILog CrearEvento(IUsuario entity)
         {
-            return new EventoLogOutExito
+            return new LogSignOutExito
             {
                 FechaFin = DateTime.Now,
                 FechaInicio = DateTime.Now,

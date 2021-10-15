@@ -20,6 +20,14 @@ namespace Rehue.CitaForms
         private readonly EmpresaBLL _empresaBLL = new EmpresaBLL();
         private readonly CitaBLL _citaBLL = new CitaBLL();
         private readonly MesaBLL _mesaBLL = new MesaBLL();
+        private readonly Dictionary<string, Type> columns = new Dictionary<string, Type> {
+            { "NumeroCN", typeof(string) },
+            { "DescripcionCN", typeof(string) },
+            { "CantidadComensalesCN", typeof(int) },
+        };
+        private int _mesaSeleccionada = new int();
+        private List<IMesa> _mesas;
+
         public CitaForm()
         {
             InitializeComponent();
@@ -42,7 +50,7 @@ namespace Rehue.CitaForms
             ICita cita = new Cita()
             {
                 CantidadComensales = (int)numComensales.Value,
-                Mesa = (IMesa)lstMesas.SelectedItem,
+                Mesa = _mesas.Where(x => x.Id == _mesaSeleccionada).First(),
                 Persona = (IPersona)Session.Instancia.Usuario,
                 FechaEncuentro = dtPckrFecha.Value,
                 FechaCreacion = DateTime.Now
@@ -76,8 +84,10 @@ namespace Rehue.CitaForms
 
         private void lstEmpresas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lstMesas.DataSource = null;
-            lstMesas.DataSource = _mesaBLL.ObtenerPorIdEmpresa(((IEmpresa)lstEmpresas.SelectedItem).Id).Where(x => x.Reservada == false).ToList();
+            _mesas = _mesaBLL.ObtenerPorIdEmpresa(((IEmpresa)lstEmpresas.SelectedItem).Id).Where(x => x.Reservada == false).ToList();
+            dtMesas.DataSource = null;
+            GrillaHelper.CrearColumnasGridCita(columns,
+                new List<string> {"Id", "Descripcion", "CantidadComensales" }, _mesas, dtMesas );
         }
 
         private void ValidarCita(ICita cita)
@@ -91,7 +101,7 @@ namespace Rehue.CitaForms
             if (!_citaBLL.ValidarCitaCreacion())
                 throw new Exception(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ValidacionCitaRangoHorario"].Texto);
 
-            if(cita.FechaEncuentro < DateTime.Now)
+            if (cita.FechaEncuentro < DateTime.Now)
                 throw new Exception(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ValidacionCitaFechaInferior"].Texto);
 
         }
@@ -99,6 +109,16 @@ namespace Rehue.CitaForms
         private void CitaForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             TraductorBLL.DesuscribirForm(this);
+        }
+
+
+        private void dtMesas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > 0 && dtMesas.Rows.Count > 0 &&
+                !string.IsNullOrEmpty(dtMesas.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            {
+                _mesaSeleccionada = int.Parse(dtMesas.Rows[e.RowIndex].Cells[0].Value.ToString());
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Rehue.BLL
                 return _instancia;
             }
         }
-        public void RegistrarEventoLogIn(IEventoLogInExito evento)
+        public void RegistrarEventoLogIn(ILogSignInExito evento)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
-        public void RegistrarEventoLogInError(IEventoLogInError evento)
+        public void RegistrarEventoLogInError(ILogSignInError evento)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
-        public void RegistrarEventoLogOut(IEventoLogOutExito evento)
+        public void RegistrarEventoLogOut(ILogSignOutExito evento)
         {
             try
             {

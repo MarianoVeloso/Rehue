@@ -1,4 +1,4 @@
-﻿using Rehue.BE.Eventos;
+﻿using Rehue.BE.Log;
 using Rehue.Interfaces.Bitacora;
 using Rehue.Interfaces.Eventos;
 using System;
@@ -11,6 +11,6 @@ namespace Rehue.BE.Bitacora
 {
     public abstract class Bitacora<T> : IBitacora<T>
     {
-        public abstract IEvento CrearEvento(T entity);
+        public abstract ILog CrearEvento(T entity);
     }
 }

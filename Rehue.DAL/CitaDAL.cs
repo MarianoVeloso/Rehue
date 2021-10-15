@@ -36,10 +36,13 @@ namespace Rehue.DAL
                 _servicio.CrearParametro("@fechaCreacion", cita.FechaCreacion),
                 _servicio.CrearParametro("@fechaEncuentro", cita.FechaEncuentro),
                 _servicio.CrearParametro("@DigitoH", cita.DigitoH),
+                _servicio.CrearParametro("@idCita", cita.Id, ParameterDirection.Output),
             };
             try
             {
                 _servicio.RealizarOperacion("registrar_cita", parametros);
+
+                cita.Id = int.Parse(parametros.Where(x => x.ParameterName == "@idCita").FirstOrDefault().Value.ToString());
 
                 parametros = new List<SqlParameter>()
                 {
@@ -53,6 +56,35 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
+
+
+        public void CrearRegistroCita(ICita cita, int IdUsuarioAccion, EventoEnum evento)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                _servicio.CrearParametro("@idPersona", cita.Persona.Id),
+                _servicio.CrearParametro("@idCita", cita.Id),
+                _servicio.CrearParametro("@idMesa", cita.Mesa.Id),
+                _servicio.CrearParametro("@cantidadComensales", cita.CantidadComensales),
+                _servicio.CrearParametro("@fechaCreacion", cita.FechaCreacion),
+                _servicio.CrearParametro("@fechaEncuentro", cita.FechaEncuentro),
+                _servicio.CrearParametro("@DigitoH", cita.DigitoH),
+                _servicio.CrearParametro("@IdEvento", (int)evento),
+                _servicio.CrearParametro("@IdUsuarioAccion", IdUsuarioAccion),
+                _servicio.CrearParametro("@fechaAccion", DateTime.Now),
+                _servicio.CrearParametro("@FechaCancelacion", cita.FechaCancelacion),
+                _servicio.CrearParametro("@FechaConfirmacion", cita.FechaConfirmacion)
+            };
+            try
+            {
+                _servicio.RealizarOperacion("registrar_cita_registro", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+        }
+
         public List<ICita> ObtenerCitasConDenunciaSinGestion()
         {
             try
@@ -75,6 +107,7 @@ namespace Rehue.DAL
                 throw new Exception(ex.Message);
             }
         }
+
         public ICita ObtenerCitaPorId(int idCita)
         {
             try
@@ -102,6 +135,7 @@ namespace Rehue.DAL
                 throw new Exception(ex.Message);
             }
         }
+
         public List<ICita> ObtenerCitasPorUsuario(int idUsuario, bool esEmpresa)
         {
             try
@@ -220,6 +254,27 @@ namespace Rehue.DAL
 
                 };
                 _servicio.RealizarOperacion("actualizar_digito_cita", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void HabilitarMesa(ICita cita)
+        {
+            try
+            {
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    _servicio.CrearParametro("@idMesa", cita.Mesa.Id)
+
+                };
+
+                _servicio.RealizarOperacion("habilitar_mesa", parametros);
             }
             catch (OperacionDBException ex)
             {

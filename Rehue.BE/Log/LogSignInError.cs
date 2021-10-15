@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.BE.Eventos
+namespace Rehue.BE.Log
 {
-    public class EventoLogOutExito : Evento, IEventoLogOutExito
+    public class LogSignInError : Log, ILogSignInError
     {
         public int IdUsuario { get; set; }
     }

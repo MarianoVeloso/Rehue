@@ -31,22 +31,25 @@ namespace Rehue.CitaForms
         {
             this.lstEmpresas = new System.Windows.Forms.ListBox();
             this.grpCrearCita = new System.Windows.Forms.GroupBox();
-            this.lstMesas = new System.Windows.Forms.ListBox();
+            this.dtMesas = new System.Windows.Forms.DataGridView();
             this.btnCrear = new System.Windows.Forms.Button();
             this.numComensales = new System.Windows.Forms.NumericUpDown();
             this.lblComensales = new System.Windows.Forms.Label();
             this.dtPckrFecha = new System.Windows.Forms.DateTimePicker();
             this.lblFecha = new System.Windows.Forms.Label();
+            this.lblEmpresa = new System.Windows.Forms.Label();
+            this.lblMesaDisponible = new System.Windows.Forms.Label();
             this.grpCrearCita.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtMesas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numComensales)).BeginInit();
             this.SuspendLayout();
             // 
             // lstEmpresas
             // 
             this.lstEmpresas.FormattingEnabled = true;
-            this.lstEmpresas.Location = new System.Drawing.Point(6, 19);
+            this.lstEmpresas.Location = new System.Drawing.Point(0, 32);
             this.lstEmpresas.Name = "lstEmpresas";
-            this.lstEmpresas.Size = new System.Drawing.Size(311, 82);
+            this.lstEmpresas.Size = new System.Drawing.Size(713, 147);
             this.lstEmpresas.TabIndex = 1;
             this.lstEmpresas.SelectedIndexChanged += new System.EventHandler(this.lstEmpresas_SelectedIndexChanged);
             // 
@@ -55,7 +58,9 @@ namespace Rehue.CitaForms
             this.grpCrearCita.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpCrearCita.Controls.Add(this.lstMesas);
+            this.grpCrearCita.Controls.Add(this.lblMesaDisponible);
+            this.grpCrearCita.Controls.Add(this.lblEmpresa);
+            this.grpCrearCita.Controls.Add(this.dtMesas);
             this.grpCrearCita.Controls.Add(this.btnCrear);
             this.grpCrearCita.Controls.Add(this.numComensales);
             this.grpCrearCita.Controls.Add(this.lblComensales);
@@ -64,22 +69,24 @@ namespace Rehue.CitaForms
             this.grpCrearCita.Controls.Add(this.lstEmpresas);
             this.grpCrearCita.Location = new System.Drawing.Point(12, 12);
             this.grpCrearCita.Name = "grpCrearCita";
-            this.grpCrearCita.Size = new System.Drawing.Size(332, 378);
+            this.grpCrearCita.Size = new System.Drawing.Size(719, 509);
             this.grpCrearCita.TabIndex = 2;
             this.grpCrearCita.TabStop = false;
             this.grpCrearCita.Text = "Crear Cita";
             // 
-            // lstMesas
+            // dtMesas
             // 
-            this.lstMesas.FormattingEnabled = true;
-            this.lstMesas.Location = new System.Drawing.Point(6, 141);
-            this.lstMesas.Name = "lstMesas";
-            this.lstMesas.Size = new System.Drawing.Size(311, 82);
-            this.lstMesas.TabIndex = 7;
+            this.dtMesas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtMesas.Location = new System.Drawing.Point(0, 209);
+            this.dtMesas.Name = "dtMesas";
+            this.dtMesas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtMesas.Size = new System.Drawing.Size(713, 176);
+            this.dtMesas.TabIndex = 0;
+            this.dtMesas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtMesas_CellClick);
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(251, 346);
+            this.btnCrear.Location = new System.Drawing.Point(638, 480);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.TabIndex = 6;
@@ -89,7 +96,7 @@ namespace Rehue.CitaForms
             // 
             // numComensales
             // 
-            this.numComensales.Location = new System.Drawing.Point(76, 297);
+            this.numComensales.Location = new System.Drawing.Point(70, 430);
             this.numComensales.Name = "numComensales";
             this.numComensales.Size = new System.Drawing.Size(200, 20);
             this.numComensales.TabIndex = 5;
@@ -97,7 +104,7 @@ namespace Rehue.CitaForms
             // lblComensales
             // 
             this.lblComensales.AutoSize = true;
-            this.lblComensales.Location = new System.Drawing.Point(6, 299);
+            this.lblComensales.Location = new System.Drawing.Point(0, 430);
             this.lblComensales.Name = "lblComensales";
             this.lblComensales.Size = new System.Drawing.Size(64, 13);
             this.lblComensales.TabIndex = 4;
@@ -105,7 +112,7 @@ namespace Rehue.CitaForms
             // 
             // dtPckrFecha
             // 
-            this.dtPckrFecha.Location = new System.Drawing.Point(76, 260);
+            this.dtPckrFecha.Location = new System.Drawing.Point(70, 391);
             this.dtPckrFecha.Name = "dtPckrFecha";
             this.dtPckrFecha.Size = new System.Drawing.Size(200, 20);
             this.dtPckrFecha.TabIndex = 3;
@@ -113,17 +120,35 @@ namespace Rehue.CitaForms
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(6, 266);
+            this.lblFecha.Location = new System.Drawing.Point(0, 397);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(37, 13);
             this.lblFecha.TabIndex = 2;
             this.lblFecha.Text = "Fecha";
             // 
+            // lblEmpresa
+            // 
+            this.lblEmpresa.AutoSize = true;
+            this.lblEmpresa.Location = new System.Drawing.Point(2, 16);
+            this.lblEmpresa.Name = "lblEmpresa";
+            this.lblEmpresa.Size = new System.Drawing.Size(53, 13);
+            this.lblEmpresa.TabIndex = 7;
+            this.lblEmpresa.Text = "Empresas";
+            // 
+            // lblMesaDisponible
+            // 
+            this.lblMesaDisponible.AutoSize = true;
+            this.lblMesaDisponible.Location = new System.Drawing.Point(2, 193);
+            this.lblMesaDisponible.Name = "lblMesaDisponible";
+            this.lblMesaDisponible.Size = new System.Drawing.Size(93, 13);
+            this.lblMesaDisponible.TabIndex = 8;
+            this.lblMesaDisponible.Text = "Mesas disponibles";
+            // 
             // CitaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 393);
+            this.ClientSize = new System.Drawing.Size(743, 524);
             this.Controls.Add(this.grpCrearCita);
             this.Name = "CitaForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -132,6 +157,7 @@ namespace Rehue.CitaForms
             this.Load += new System.EventHandler(this.CitaForm_Load);
             this.grpCrearCita.ResumeLayout(false);
             this.grpCrearCita.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtMesas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numComensales)).EndInit();
             this.ResumeLayout(false);
 
@@ -145,6 +171,8 @@ namespace Rehue.CitaForms
         private System.Windows.Forms.NumericUpDown numComensales;
         private System.Windows.Forms.Label lblComensales;
         private System.Windows.Forms.Button btnCrear;
-        private System.Windows.Forms.ListBox lstMesas;
+        private System.Windows.Forms.DataGridView dtMesas;
+        private System.Windows.Forms.Label lblMesaDisponible;
+        private System.Windows.Forms.Label lblEmpresa;
     }
 }

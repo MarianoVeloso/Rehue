@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces.Eventos
 {
-    public interface IEvento: IEntity
+    public interface ILogSignOutExito : ILog
     {
-        DateTime FechaInicio { get; set; }
-        DateTime FechaFin { get; set; }
-        string Mensaje { get; set; }
+        int IdUsuario { get; set; }
     }
 }

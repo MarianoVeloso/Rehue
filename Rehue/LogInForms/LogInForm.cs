@@ -68,7 +68,7 @@ namespace Rehue.LogIn
                 _rehueBLL.LogIn(persona, _idioma);
 
                 BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogInExito());
-                IEventoLogInExito evento = (IEventoLogInExito)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario);
+                ILogSignInExito evento = (ILogSignInExito)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario);
                 BitacoraBLL.Instancia.RegistrarEventoLogIn(evento);
 
                 this.Close();
@@ -76,7 +76,7 @@ namespace Rehue.LogIn
             catch (ErrorLogInException ex)
             {
                 BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogInError());
-                IEventoLogInError evento = (IEventoLogInError)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona);
+                ILogSignInError evento = (ILogSignInError)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona);
                 BitacoraBLL.Instancia.RegistrarEventoLogInError(evento);
 
                 MessageBox.Show(ex.Message);
@@ -84,7 +84,7 @@ namespace Rehue.LogIn
             catch (Exception ex)
             {
                 BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogInError());
-                IEventoLogInError evento = (IEventoLogInError)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona);
+                ILogSignInError evento = (ILogSignInError)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona);
                 BitacoraBLL.Instancia.RegistrarEventoLogInError(evento);
 
                 MessageBox.Show(ex.Message);

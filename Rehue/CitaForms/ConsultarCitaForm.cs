@@ -107,7 +107,7 @@ namespace Rehue.CitaForms
             GrillaHelper.CrearColumnasGridCita(columns,
                 new List<string> { "Id", "FechaCreacion", "Mesa.Descripcion", "Denuncia.Descripcion", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitaPendienteResolucion(),
-                dtGridCanceladas
+                dtGridViewCitasPendienteResolucion
                 );
 
             _idCitaPendienteConfirmacion = 0;

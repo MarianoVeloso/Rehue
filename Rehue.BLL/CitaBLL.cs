@@ -1,4 +1,5 @@
-﻿using Rehue.DAL;
+﻿using Rehue.BE;
+using Rehue.DAL;
 using Rehue.Interfaces;
 using Rehue.Servicios;
 using Rehue.Servicios.Helpers;
@@ -13,7 +14,7 @@ namespace Rehue.BLL
     public class CitaBLL
     {
         private readonly CitaDAL _servicio = new CitaDAL();
-        private readonly GestorDigitoVHDAL _gestorDAL = new GestorDigitoVHDAL();
+        private readonly GestorDigitoVHDAL _gestorDAL = GestorDigitoVHDAL.Instancia;
 
         public void CrearCita(ICita cita)
         {
@@ -25,6 +26,8 @@ namespace Rehue.BLL
                 _servicio.CrearCita(cita);
 
                 ActualizarDigitos(cita);
+
+                _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.CrearCita);
             }
             catch (OperacionDBException)
             {
@@ -35,6 +38,7 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
+
         public void ConfirmarCita(int idCita)
         {
             try
@@ -46,6 +50,8 @@ namespace Rehue.BLL
                 _servicio.ConfirmarCita(cita);
 
                 ActualizarDigitos(cita);
+
+                _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.ConfirmarCita);
             }
             catch (OperacionDBException)
             {
@@ -60,6 +66,7 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
+
         public void CancelarCita(int idCita)
         {
             try
@@ -69,14 +76,17 @@ namespace Rehue.BLL
 
                 cita.FechaCancelacion = DateTime.Now;
                 _servicio.CancelarCita(cita);
+                HabilitarMesa(cita);
 
                 ActualizarDigitos(cita);
+
+                _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.CancelarCita);
             }
             catch (OperacionDBException)
             {
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
@@ -105,6 +115,23 @@ namespace Rehue.BLL
             {
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
+        }
+
+        public void HabilitarMesa(ICita cita)
+        {
+            try
+            {
+                _servicio.HabilitarMesa(cita);
+            }
+            catch (OperacionDBException)
+            {
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
+            }
+            catch (Exception)
+            {
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
+            }
+
         }
 
         public ICita ObtenerCitaPorId(int idCita)
@@ -138,6 +165,7 @@ namespace Rehue.BLL
                 throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
             }
         }
+
         public List<ICita> ObtenerCitasConDenunciaSinGestion()
         {
             try
@@ -163,7 +191,6 @@ namespace Rehue.BLL
                 return false;
             return true;
         }
-
 
         private void VerificarDigitos(ICita cita = null)
         {
@@ -191,6 +218,7 @@ namespace Rehue.BLL
         {
             return GestorDV.Instancia.GenerarDVH(cita);
         }
+
         private string ObtenerHashV(ICita cita)
         {
             List<ICita> citas = _servicio.ObtenerCitasLazy();

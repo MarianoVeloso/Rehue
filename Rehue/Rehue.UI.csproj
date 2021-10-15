@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackupForms\BackupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackupForms\BackupForm.Designer.cs">
+      <DependentUpon>BackupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CitaForms\CitaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     <Compile Include="RolForms\RolAltaForm.Designer.cs">
       <DependentUpon>RolAltaForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BackupForms\BackupForm.resx">
+      <DependentUpon>BackupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CitaForms\CitaForm.resx">
       <DependentUpon>CitaForm.cs</DependentUpon>
     </EmbeddedResource>

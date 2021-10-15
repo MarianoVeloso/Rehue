@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministradorBLL.cs" />
+    <Compile Include="BackupBLL.cs" />
     <Compile Include="BitacoraBLL.cs" />
     <Compile Include="CitaBLL.cs" />
     <Compile Include="DenunciaBLL.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="GestorDigitoVHBLL.cs" />
     <Compile Include="IdiomaBLL.cs" />
     <Compile Include="MesaBLL.cs" />
+    <Compile Include="Registro\RegistroCita.cs" />
     <Compile Include="RolComponentBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PersonaBLL.cs" />

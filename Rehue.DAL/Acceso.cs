@@ -23,9 +23,17 @@ namespace Rehue.DAL
             GC.Collect();
         }
 
-        public SqlParameter CrearParametro(string storedProcedure, object valor, ParameterDirection direccion = ParameterDirection.Input)
+        public SqlParameter CrearParametro(string paramName, object valor, ParameterDirection direccion = ParameterDirection.Input)
         {
             DbType type;
+
+            SqlParameter p;
+
+            if (valor == null)
+                return new SqlParameter(paramName, DBNull.Value)
+                {
+                    Direction = direccion
+                };
 
             if (valor.GetType().Equals(typeof(bool)))
             {
@@ -52,7 +60,7 @@ namespace Rehue.DAL
                 type = DbType.String;
             }
 
-            SqlParameter p = new SqlParameter(storedProcedure, valor)
+            p = new SqlParameter(paramName, valor)
             {
                 DbType = type,
                 Direction = direccion
@@ -105,7 +113,8 @@ namespace Rehue.DAL
             catch (SqlException ex)
             {
                 RegistrarError(ex.Message);
-                CancelarTransaccion();
+                if (_transaccion != null)
+                    CancelarTransaccion();
                 res = -1;
             }
             catch (Exception ex)

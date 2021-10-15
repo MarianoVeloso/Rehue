@@ -18,6 +18,7 @@ using Rehue.LogIn;
 using Rehue.RolForm;
 using Rehue.Servicios;
 using Rehue.Servicios.Bitacora;
+using Rehue.BackupForms;
 
 namespace Rehue
 {
@@ -105,6 +106,7 @@ namespace Rehue
             denunciasToolStripMenuItem.Visible = false;
             consultarToolStripMenuItem.Visible = true;
             mesaToolStripMenuItem.Visible = true;
+            backupToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -118,6 +120,7 @@ namespace Rehue
             denunciasToolStripMenuItem.Visible = false;
             consultarToolStripMenuItem.Visible = true;
             mesaToolStripMenuItem.Visible = false;
+            backupToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -132,6 +135,7 @@ namespace Rehue
             crearToolStripMenuItem.Visible = false;
             consultarToolStripMenuItem.Visible = false;
             mesaToolStripMenuItem.Visible = false;
+            backupToolStripMenuItem.Visible = true;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -213,7 +217,7 @@ namespace Rehue
             try
             {
                 BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogOutExito());
-                IEventoLogOutExito evento = (IEventoLogOutExito)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario);
+                ILogSignOutExito evento = (ILogSignOutExito)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario);
                 BitacoraBLL.Instancia.RegistrarEventoLogOut(evento);
 
                 Session.Instancia.LogOut();
@@ -264,6 +268,15 @@ namespace Rehue
         private void gestionarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RegistrarMesa form = new RegistrarMesa()
+            {
+                MdiParent = this
+            };
+            form.Show();
+        }
+
+        private void crearToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            BackupForm form = new BackupForm()
             {
                 MdiParent = this
             };

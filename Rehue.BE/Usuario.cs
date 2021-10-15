@@ -26,7 +26,7 @@ namespace Rehue.BE
 
         public List<ICita> ObtenerCitasPendienteConfirmacion()
         {
-            return Citas.Where(x => x.FechaConfirmacion.HasValue == false && x.FechaCancelacion.HasValue == false).ToList();
+            return Citas.Where(x => !x.FechaCancelacion.HasValue && !x.FechaConfirmacion.HasValue).ToList();
         }
 
         public List<ICita> ObtenerCitaPendienteResolucion()

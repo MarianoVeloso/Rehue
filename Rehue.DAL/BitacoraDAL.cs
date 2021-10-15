@@ -1,4 +1,4 @@
-﻿using Rehue.BE.Eventos;
+﻿using Rehue.BE.Log;
 using Rehue.Interfaces.Eventos;
 using Rehue.Servicios.Helpers;
 using System;
@@ -26,11 +26,11 @@ namespace Rehue.DAL
             }
         }
 
-        public void RegistrarEventoLogIn(IEventoLogInExito evento)
+        public void RegistrarEventoLogIn(ILogSignInExito evento)
         {
             try
             {
-                RegistrarEvento(evento);
+                RegistrarLog(evento);
 
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
@@ -38,7 +38,7 @@ namespace Rehue.DAL
                     _servicio.CrearParametro("@eventoId", evento.Id)
                 };
 
-                _servicio.RealizarOperacion("registrar_evento_detalle", parametros);
+                _servicio.RealizarOperacion("registrar_log_detalle", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -46,9 +46,9 @@ namespace Rehue.DAL
             }
         }
 
-        public void RegistrarEventoLogIn(IEventoLogInError evento)
+        public void RegistrarEventoLogIn(ILogSignInError evento)
         {
-            RegistrarEvento(evento);
+            RegistrarLog(evento);
 
             List<SqlParameter> parametros = new List<SqlParameter>()
                 {
@@ -56,14 +56,14 @@ namespace Rehue.DAL
                     _servicio.CrearParametro("@eventoId", evento.Id)
                 };
 
-            _servicio.RealizarOperacion("registrar_evento_detalle", parametros);
+            _servicio.RealizarOperacion("registrar_log_detalle", parametros);
         }
 
-        public void RegistrarEventoLogOut(IEventoLogOutExito evento)
+        public void RegistrarEventoLogOut(ILogSignOutExito evento)
         {
             try
             {
-                RegistrarEvento(evento);
+                RegistrarLog(evento);
 
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
@@ -71,7 +71,7 @@ namespace Rehue.DAL
                     _servicio.CrearParametro("@eventoId", evento.Id)
                 };
 
-                _servicio.RealizarOperacion("registrar_evento_detalle", parametros);
+                _servicio.RealizarOperacion("registrar_log_detalle", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -79,7 +79,7 @@ namespace Rehue.DAL
             }
         }
 
-        private void RegistrarEvento(IEvento evento)
+        private void RegistrarLog(ILog evento)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
@@ -89,7 +89,7 @@ namespace Rehue.DAL
                 _servicio.CrearParametro("@id", evento.Id, ParameterDirection.Output),
             };
 
-            _servicio.RealizarOperacion("registrar_evento", parametros);
+            _servicio.RealizarOperacion("registrar_log", parametros);
             evento.Id = int.Parse(parametros[3].SqlValue.ToString());
         }
     }

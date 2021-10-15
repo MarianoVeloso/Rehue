@@ -36,6 +36,20 @@ namespace Rehue.DAL
             }
             else
             {
+                acceso.Cerrar();
+                throw new OperacionDBException("Ocurrió un error al intentar realizar la operación");
+            }
+
+        }
+
+        public void RealizarOperacionSinTransaccion(string storedProcedure, List<SqlParameter> parameters = null)
+        {
+            acceso.Abrir();
+            int res = acceso.Operar(storedProcedure, parameters);
+            acceso.Cerrar();
+
+            if (res == -1)
+            {
                 throw new OperacionDBException("Ocurrió un error al intentar realizar la operación");
             }
 
