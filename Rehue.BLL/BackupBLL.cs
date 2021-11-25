@@ -36,17 +36,30 @@ namespace Rehue.BLL
 
         public void VerificarRegistroYConexion()
         {
-            RegistryKey RK = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\MICROSOFT\Microsoft SQL Server");
-            if (RK == null)
+            try
             {
-                throw new Exception("No se encontró el SQL Instalado en la máquina, por favor procure instalarlo antes de continuar.");
-            }
+                RegistryKey RK = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\MICROSOFT\Microsoft SQL Server");
+                if (RK == null)
+                {
+                    throw new Exception("No se encontró el SQL Instalado en la máquina, por favor procure instalarlo antes de continuar.");
+                }
 
-            if (!_servicio.VerificarConexion())
+                if (!_servicio.VerificarConexion())
+                {
+                    throw new ConexionDBException("Base de datos no encontrada, restaure un backup para poder proseguir.");
+                }
+
+            }
+            catch (ConexionDBException ex)
             {
-                throw new ConexionDBException("Base de datos no encontrada, restaure un backup para poder proseguir.");
+                XMLWriterException.Escribir(ex);
+                throw;
             }
-
+            catch (Exception ex)
+            {
+                XMLWriterException.Escribir(ex);
+                throw;
+            }
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Rehue.CitaForms
             }
             catch (DigitoException)
             {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["DigitoException"].Texto);
+                MessageBox.Show(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["DigitoException"].Texto);
             }
             catch (Exception ex)
             {

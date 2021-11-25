@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE.Bitacora
 {
-    public class BitacoraLogIn : Bitacora<IUsuario>
+    public class BitacoraSignOut : Bitacora<IUsuario>
     {
         public override ILog<IUsuario> CrearEvento(IUsuario entity, string mensaje)
         {
-            return new LogLogIn<IUsuario>
+            return new LogSignOut<IUsuario>
             {
                 FechaFin = DateTime.Now,
                 FechaInicio = DateTime.Now,

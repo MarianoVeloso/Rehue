@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE.Logs
 {
-    public class LogSignIn<IUsuario> : Log<IUsuario>, ILogSignIn 
+    public class LogSignOut<IUsuario> : Log<IUsuario>, ILogSignOut
     {
         public int IdUsuario { get; set; }
     }

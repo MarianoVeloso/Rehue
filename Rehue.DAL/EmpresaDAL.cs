@@ -146,7 +146,7 @@ namespace Rehue.DAL
                 Roles = RolComponentDAL.Instancia.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString())),
                 Idioma = IdiomaDAL.Instancia.ObtenerIdiomaPorId(int.Parse(row["IdIdioma"].ToString()))
             };
-            if (row["IdSubscripcion"] == DBNull.Value)
+            if (row["IdSubscripcion"] != DBNull.Value)
                 empresa.AgregarSubscripcion(_subscripcionDAL.ObtenerPorId(int.Parse(row["IdSubscripcion"].ToString())));
             return empresa;
         }

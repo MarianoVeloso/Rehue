@@ -1,5 +1,6 @@
 ﻿using Rehue.DAL;
 using Rehue.Interfaces;
+using Rehue.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,15 @@ namespace Rehue.BLL
             return _servicio.ObtenerTodos();
         }
 
-        public void ObtenerPorId(int idSubscripcion)
+        public ISubscripcion ObtenerPorId(int idSubscripcion)
         {
-            _servicio.ObtenerPorId(idSubscripcion);
+            return _servicio.ObtenerPorId(idSubscripcion);
         }
 
         public void PagarSubscripcion(int idEmpresa, int idSubscripcion)
         {
             _servicio.PagarSubscripcion(idEmpresa, idSubscripcion);
+            ((IEmpresa)Session.Instancia.Usuario).AgregarSubscripcion(ObtenerPorId(idSubscripcion));
         }
     }
 }

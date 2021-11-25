@@ -125,6 +125,12 @@
     <Compile Include="LogInForms\RegistroForm.Designer.cs">
       <DependentUpon>RegistroForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logs\LeerLogsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logs\LeerLogsForm.Designer.cs">
+      <DependentUpon>LeerLogsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MesaForms\RegistrarMesa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +156,18 @@
     </Compile>
     <Compile Include="RolForms\RolAltaForm.Designer.cs">
       <DependentUpon>RolAltaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscripcionForms\ComprarSubscripcionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscripcionForms\ComprarSubscripcionForm.Designer.cs">
+      <DependentUpon>ComprarSubscripcionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscripcionForms\CrearSubscripcionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscripcionForms\CrearSubscripcionForm.Designer.cs">
+      <DependentUpon>CrearSubscripcionForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="BackupForms\BackupForm.resx">
       <DependentUpon>BackupForm.cs</DependentUpon>
@@ -184,6 +202,9 @@
     <EmbeddedResource Include="LogInForms\RegistroForm.resx">
       <DependentUpon>RegistroForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Logs\LeerLogsForm.resx">
+      <DependentUpon>LeerLogsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MesaForms\RegistrarMesa.resx">
       <DependentUpon>RegistrarMesa.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +225,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RolForms\RolAltaForm.resx">
       <DependentUpon>RolAltaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscripcionForms\ComprarSubscripcionForm.resx">
+      <DependentUpon>ComprarSubscripcionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscripcionForms\CrearSubscripcionForm.resx">
+      <DependentUpon>CrearSubscripcionForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -237,8 +264,6 @@
       <Name>Rehue.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SubscripcionForms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

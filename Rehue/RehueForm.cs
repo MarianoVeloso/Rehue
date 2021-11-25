@@ -19,6 +19,8 @@ using Rehue.RolForm;
 using Rehue.Servicios;
 using Rehue.Servicios.Bitacora;
 using Rehue.BackupForms;
+using Rehue.SubscripcionForms;
+using Rehue.Logs;
 
 namespace Rehue
 {
@@ -110,6 +112,10 @@ namespace Rehue
             citaToolStripMenuItem.Visible = false;
             crearToolStripMenuItem.Visible = false;
             denunciasToolStripMenuItem.Visible = false;
+            subscripcionToolStripMenuItem.Visible = false;
+            crearToolStripMenuItem2.Visible = false;
+            comprarToolStripMenuItem.Visible = false;
+            leerLogsToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -124,6 +130,10 @@ namespace Rehue
             consultarToolStripMenuItem.Visible = true;
             mesaToolStripMenuItem.Visible = true;
             backupToolStripMenuItem.Visible = false;
+            subscripcionToolStripMenuItem.Visible = true;
+            comprarToolStripMenuItem.Visible = true;
+            crearToolStripMenuItem2.Visible = false;
+            leerLogsToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -138,6 +148,10 @@ namespace Rehue
             consultarToolStripMenuItem.Visible = true;
             mesaToolStripMenuItem.Visible = false;
             backupToolStripMenuItem.Visible = false;
+            subscripcionToolStripMenuItem.Visible = false;
+            crearToolStripMenuItem2.Visible = false;
+            comprarToolStripMenuItem.Visible = false;
+            leerLogsToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -153,6 +167,10 @@ namespace Rehue
             consultarToolStripMenuItem.Visible = false;
             mesaToolStripMenuItem.Visible = false;
             backupToolStripMenuItem.Visible = true;
+            subscripcionToolStripMenuItem.Visible = true;
+            crearToolStripMenuItem2.Visible = true;
+            leerLogsToolStripMenuItem.Visible = true;
+            comprarToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -233,7 +251,7 @@ namespace Rehue
         {
             try
             {
-                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogIn());
+                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraSignOut());
                 ILogSignOut evento = (ILogSignOut)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario, $"El usuario {Session.Instancia.Usuario.ObtenerNombre()} se deslogeo correctamente.");
                 _bitacoraBLL.RegistrarEventoLogOut(evento);
 
@@ -293,6 +311,34 @@ namespace Rehue
         private void crearToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             BackupForm form = new BackupForm()
+            {
+                MdiParent = this
+            };
+            form.Show();
+        }
+
+        private void administrarToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            CrearSubscripcionForm form = new CrearSubscripcionForm()
+            {
+                MdiParent = this
+            };
+            form.Show();
+        }
+
+        private void comprarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ComprarSubscripcionForm form = new ComprarSubscripcionForm()
+            {
+                MdiParent = this
+            };
+            form.Show();
+        }
+
+
+        private void leerLogsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LeerLogsForm form = new LeerLogsForm()
             {
                 MdiParent = this
             };

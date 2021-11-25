@@ -38,13 +38,33 @@ namespace Rehue.Servicios.Helpers
 
             XmlElement root = document.DocumentElement;
 
-            XmlError error = new XmlError { Error = $"{ ex.Message }", FechaError = DateTime.Now.ToString(CultureInfo.CurrentCulture) };
+            XmlError error = new XmlError
+            {
+                Error = $"{ ex.Message }",
+                FechaError = DateTime.Now.ToString(CultureInfo.CurrentCulture),
+                TipoError = ex.GetType().Name.ToString()
+            };
 
-            XmlElement e1 = document.CreateElement(ex.GetType().Name.ToString());
+            XmlElement e1 = document.CreateElement("RehueException");
             e1.InnerText = JsonSerializer.Serialize(error);
             root?.InsertAfter(e1, root.LastChild);
 
             document.Save(path + @"\\Errors.xml");
+        }
+        public static List<XmlError> ObtenerErrores()
+        {
+            string path = @"C:\Rehue\Logs";
+            XmlDocument document = new XmlDocument();
+            document.Load(path + @"\\Errors.xml");
+
+            List<XmlError> errores = new List<XmlError>();
+
+            foreach (XmlNode item in document.DocumentElement.ChildNodes)
+            {
+                errores.Add(JsonSerializer.Deserialize<XmlError>(item.InnerText));
+            }
+
+            return errores;
         }
     }
 }

@@ -9,9 +9,8 @@ namespace Rehue.BE
     public class Subscripcion : Entity, ISubscripcion
     {
         public DateTime FechaCreacion { get; set; }
-        public DateTime FechaCaducidad { get; set; }
-        public decimal Costo { get; set; }
+        public bool PuedeCrearMenu { get; set; }
         public string Descripcion { get; set; }
-        public string Codigo { get; set; }
+        public decimal Costo { get; set; }
     }
 }

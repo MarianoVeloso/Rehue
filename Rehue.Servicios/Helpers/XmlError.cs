@@ -8,6 +8,7 @@ namespace Rehue.Servicios
 {
     public class XmlError
     {
+        public string TipoError { get; set; }
         public string Error { get; set; }
         public string FechaError { get; set; }
     }

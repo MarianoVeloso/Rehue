@@ -32,10 +32,9 @@ namespace Rehue.DAL
             {
                 List<SqlParameter> parametros = new List<SqlParameter>()
                 {
-                    _servicio.CrearParametro("@Codigo", subscripcion.Codigo),
                     _servicio.CrearParametro("@FechaCreacion", subscripcion.FechaCreacion),
-                    _servicio.CrearParametro("@FechaCaducidad", subscripcion.FechaCaducidad),
                     _servicio.CrearParametro("@Descripcion", subscripcion.Descripcion),
+                    _servicio.CrearParametro("@PuedeCrearMenu", subscripcion.PuedeCrearMenu),
                     _servicio.CrearParametro("@Costo", subscripcion.Costo)
 
                 };
@@ -115,7 +114,7 @@ namespace Rehue.DAL
             };
             try
             {
-                _servicio.RealizarOperacion("crear_subscripcion", parametros);
+                _servicio.RealizarOperacion("generar_pago_subscripcion", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -132,9 +131,9 @@ namespace Rehue.DAL
             return new Subscripcion()
             {
                 Id = int.Parse(row["id"].ToString()),
-                Codigo = row["Codigo"].ToString(),
-                Descripcion = row["description"].ToString(),
-                FechaCaducidad = DateTime.Parse(row["FechaCaducidad"].ToString()),
+                Costo = decimal.Parse(row["Costo"].ToString()),
+                Descripcion = row["descripcion"].ToString(),
+                PuedeCrearMenu = Boolean.Parse(row["PuedeCrearMenu"].ToString()),
                 FechaCreacion = DateTime.Parse(row["FechaCreacion"].ToString())
             };
         }

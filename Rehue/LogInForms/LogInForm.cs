@@ -68,8 +68,7 @@ namespace Rehue.LogIn
                 _rehueBLL.ValidarUsuarioContraseña(persona, _idioma);
                 _rehueBLL.LogIn(persona, _idioma);
 
-                //error de cast
-                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogIn());
+                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraSignIn());
                 ILogSignIn evento = (ILogSignIn)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario, $"El usuario {Session.Instancia.Usuario.ObtenerNombre()} inició sesión correctamente.");
                 _bitacoraBLL.RegistrarEventoLogIn(evento);
 
@@ -77,18 +76,18 @@ namespace Rehue.LogIn
             }
             catch (ErrorLogInException ex)
             {
-                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogIn());
-                ILogSignIn evento = (ILogSignIn)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona, $"El usuario {Session.Instancia.Usuario.ObtenerNombre()} se registró erróneamente en el sitio.");
-                _bitacoraBLL.RegistrarEventoLogIn(evento);
+                //BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraSignIn());
+                //ILogSignIn evento = (ILogSignIn)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona, $"El usuario {Session.Instancia.Usuario.ObtenerNombre()} se registró erróneamente en el sitio.");
+                //_bitacoraBLL.RegistrarEventoLogIn(evento);
 
                 MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
                 //si el usuario falla al registrarse, el id es cero y da error
-                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogIn());
-                ILogSignIn evento = (ILogSignIn)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona, $"El usuario {Session.Instancia.Usuario.ObtenerNombre()} se registró erróneamente en el sitio.");
-                _bitacoraBLL.RegistrarEventoLogIn(evento);
+                //BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraSignIn());
+                //ILogSignIn evento = (ILogSignIn)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(persona, $"El usuario {Session.Instancia.Usuario.ObtenerNombre()} se registró erróneamente en el sitio.");
+                //_bitacoraBLL.RegistrarEventoLogIn(evento);
                 MessageBox.Show(ex.Message);
             }
         }
