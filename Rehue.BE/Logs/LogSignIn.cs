@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.BE.Log
+namespace Rehue.BE.Logs
 {
-    public class LogSignInExito : Log, ILogSignInExito
+    public class LogLogIn<IUsuario> : Log<IUsuario>, ILogSignIn 
     {
         public int IdUsuario { get; set; }
     }

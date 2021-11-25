@@ -62,7 +62,7 @@ namespace Rehue.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@idPersona", cita.Persona.Id),
+                _servicio.CrearParametro("@IdUsuarioCreador", cita.Persona.Id),
                 _servicio.CrearParametro("@idCita", cita.Id),
                 _servicio.CrearParametro("@idMesa", cita.Mesa.Id),
                 _servicio.CrearParametro("@cantidadComensales", cita.CantidadComensales),

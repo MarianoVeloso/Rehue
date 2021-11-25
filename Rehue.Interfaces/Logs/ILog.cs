@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces.Eventos
 {
-    public interface ILog: IEntity
+    public interface ILog<T>: IEntity
     {
         DateTime FechaInicio { get; set; }
         DateTime FechaFin { get; set; }

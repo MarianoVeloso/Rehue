@@ -12,7 +12,7 @@ namespace Rehue.Servicios.Helpers
 {
     public static class GrillaHelper
     {
-        public static void CrearColumnasGridCita<T>(IDictionary<string, Type> headers, IList<string> keys, IList<T> items, DataGridView grid)
+        public static void CrearGrilla<T>(IDictionary<string, Type> headers, IList<string> keys, IList<T> items, DataGridView grid)
         {
             DataTable dt = new DataTable();
 
@@ -48,7 +48,6 @@ namespace Rehue.Servicios.Helpers
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

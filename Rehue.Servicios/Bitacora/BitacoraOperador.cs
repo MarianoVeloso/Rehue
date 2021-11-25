@@ -29,9 +29,9 @@ namespace Rehue.Servicios.Bitacora
             _bitacora = bitacora;
         }
 
-        public ILog ObtenerEvento(T entity)
+        public ILog<T> ObtenerEvento(T entity, string mensaje)
         {
-            return _bitacora.CrearEvento(entity);
+            return _bitacora.CrearEvento(entity, mensaje);
         }
     }
 }

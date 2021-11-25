@@ -34,7 +34,7 @@ namespace Rehue.DAL
             };
             try
             {
-                _servicio.RealizarOperacionSinTransaccion("registrar_backup", parametros);
+                _servicio.RealizarOperacion("registrar_backup", parametros);
             }
             catch (OperacionDBException ex)
             {
@@ -64,6 +64,60 @@ namespace Rehue.DAL
                 throw new Exception(ex.Message);
             }
         }
+        public IBackup ObtenerPorId(int id)
+        {
+            try
+            {
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    _servicio.CrearParametro("@Id", id)
+                };
+
+                IBackup backup = new Backup();
+                var response = _servicio.Leer("obtener_backup_por_id", parametros);
+                foreach (DataRow item in response.Rows)
+                {
+                    backup = MapearBackup(item);
+                }
+
+                return backup;
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void RestaturarBackup(string ubicacion)
+        {
+            try
+            {
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    _servicio.CrearParametro("@ubicacion", ubicacion)
+                };
+
+                _servicio.RestaurarBackup("restaurar_backup", parametros);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool VerificarConexion()
+        {
+            return _servicio.VerificarConexion();
+        }
+
         private IBackup MapearBackup(DataRow row)
         {
             return new Backup
@@ -71,7 +125,8 @@ namespace Rehue.DAL
                 Id = int.Parse(row["id"].ToString()),
                 Nombre = row["Nombre"].ToString(),
                 FechaCreacion = DateTime.Parse(row["FechaCreacion"].ToString()),
-                Ubicacion = row["Ubicacion"].ToString()
+                Ubicacion = row["Ubicacion"].ToString(),
+                Tamaño = decimal.Parse(row["Tamaño"].ToString())
             };
         }
     }

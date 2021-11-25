@@ -1,8 +1,12 @@
-﻿using Rehue.Interfaces;
+﻿using Newtonsoft.Json;
+using Rehue.BE;
+using Rehue.Interfaces;
+using Rehue.Servicios.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace Rehue.DAL
 {
@@ -13,6 +17,11 @@ namespace Rehue.DAL
         public void Abrir()
         {
             _conexion = new SqlConnection("Initial Catalog=Rehue; Data Source=.\\SqlExpress; Integrated Security=SSPI");
+            _conexion.Open();
+        }
+        public void AbrirMaster()
+        {
+            _conexion = new SqlConnection("Initial Catalog=master; Data Source=.\\SqlExpress; Integrated Security=SSPI");
             _conexion.Open();
         }
 
@@ -112,14 +121,13 @@ namespace Rehue.DAL
             }
             catch (SqlException ex)
             {
-                RegistrarError(ex.Message);
+                RegistrarError(ex);
                 if (_transaccion != null)
                     CancelarTransaccion();
                 res = -1;
             }
             catch (Exception ex)
             {
-                RegistrarError(ex.Message);
                 CancelarTransaccion();
                 res = -1;
             }
@@ -152,15 +160,36 @@ namespace Rehue.DAL
             _transaccion.Rollback();
         }
 
-        public void RegistrarError(string error)
+        public bool VerificarConexion()
         {
-            //Operar("registrar_error",
-            //    new List<SqlParameter>
-            //    {
-            //        _servicio.CrearParametro("@error", error),
-            //        _servicio.CrearParametro("@fecha", DateTime.Now)
-            //    }
-            //);
+            string conStr = "Initial Catalog=Rehue; Data Source=.\\SqlExpress; Integrated Security=SSPI";
+            string cmdText = "SELECT * FROM master.dbo.sysdatabases WHERE name ='" + "Rehue" + "'";
+            bool isExist = false;
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand(cmdText, con))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            isExist = reader.HasRows;
+                        }
+                    }
+                    con.Close();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            return isExist;
+        }
+
+        public void RegistrarError(Exception ex)
+        {
+            XMLWriterException.Escribir(ex);
         }
     }
 }

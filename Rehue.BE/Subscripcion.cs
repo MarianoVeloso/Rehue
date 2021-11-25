@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Rehue.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Rehue.BE
 {
-    public class Subscripcion
+    public class Subscripcion : Entity, ISubscripcion
     {
         public DateTime FechaCreacion { get; set; }
-
         public DateTime FechaCaducidad { get; set; }
-
-        public int Monto { get; set; }
+        public decimal Costo { get; set; }
+        public string Descripcion { get; set; }
+        public string Codigo { get; set; }
     }
 }

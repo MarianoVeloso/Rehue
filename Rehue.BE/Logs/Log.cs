@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.BE.Log
+namespace Rehue.BE.Logs
 {
-    public abstract class Log: Entity, ILog
+    public abstract class Log<T> : Entity, ILog<T>
     {
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }

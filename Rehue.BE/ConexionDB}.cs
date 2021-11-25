@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rehue.Interfaces.Eventos
+namespace Rehue.BE
 {
-    public interface ILogSignInError : ILog
+    public class ConexionDB
     {
-        int IdUsuario { get; set; }
+        public string Conexion { get; set; }
     }
 }

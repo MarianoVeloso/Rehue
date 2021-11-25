@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces.Eventos
 {
-    public interface ILogSignInExito : ILog
+    public interface ILogSignIn : ILog<IUsuario>
     {
         int IdUsuario { get; set; }
     }

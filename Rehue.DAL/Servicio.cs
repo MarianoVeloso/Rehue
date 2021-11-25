@@ -55,6 +55,14 @@ namespace Rehue.DAL
 
         }
 
+        public void RestaurarBackup(string storedProcedure, List<SqlParameter> parameters = null)
+        {
+            acceso.AbrirMaster();
+
+            int res = acceso.Operar(storedProcedure, parameters);
+            acceso.Cerrar();
+        }
+
         public SqlParameter CrearParametro(string nombre, object valor, ParameterDirection direccion = ParameterDirection.Input)
         {
             return acceso.CrearParametro(nombre, valor, direccion);
@@ -63,6 +71,11 @@ namespace Rehue.DAL
         public DataTable Leer(string nombre, List<SqlParameter> parametros = null)
         {
             return acceso.Leer(nombre, parametros);
+        }
+
+        public bool VerificarConexion()
+        {
+            return acceso.VerificarConexion();
         }
     }
 }

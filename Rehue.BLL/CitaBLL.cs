@@ -18,168 +18,78 @@ namespace Rehue.BLL
 
         public void CrearCita(ICita cita)
         {
-            try
-            {
-                cita.DigitoH = GestorDV.Instancia.GenerarDVH(cita);
-                VerificarDigitos();
+            cita.DigitoH = GestorDV.Instancia.GenerarDVH(cita);
+            VerificarDigitos();
 
-                _servicio.CrearCita(cita);
+            _servicio.CrearCita(cita);
 
-                ActualizarDigitos(cita);
+            ActualizarDigitos(cita);
 
-                _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.CrearCita);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
+            _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.CrearCita);
         }
 
         public void ConfirmarCita(int idCita)
         {
-            try
-            {
-                ICita cita = ObtenerCitaPorId(idCita);
-                VerificarDigitos(cita);
+            ICita cita = ObtenerCitaPorId(idCita);
+            VerificarDigitos(cita);
 
-                cita.FechaConfirmacion = DateTime.Now;
-                _servicio.ConfirmarCita(cita);
+            cita.FechaConfirmacion = DateTime.Now;
+            _servicio.ConfirmarCita(cita);
 
-                ActualizarDigitos(cita);
+            ActualizarDigitos(cita);
 
-                _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.ConfirmarCita);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (DigitoException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["DigitoException"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
+            _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.ConfirmarCita);
         }
 
         public void CancelarCita(int idCita)
         {
-            try
-            {
-                ICita cita = ObtenerCitaPorId(idCita);
-                VerificarDigitos(cita);
+            ICita cita = ObtenerCitaPorId(idCita);
+            VerificarDigitos(cita);
 
-                cita.FechaCancelacion = DateTime.Now;
-                _servicio.CancelarCita(cita);
-                HabilitarMesa(cita);
+            cita.FechaCancelacion = DateTime.Now;
+            _servicio.CancelarCita(cita);
+            HabilitarMesa(cita);
 
-                ActualizarDigitos(cita);
+            ActualizarDigitos(cita);
 
-                _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.CancelarCita);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception ex)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
+            _servicio.CrearRegistroCita(cita, Session.Instancia.Usuario.Id, EventoEnum.CancelarCita);
         }
 
         private void ActualizarDigitos(ICita cita = null)
         {
-            try
+            if (cita != null)
             {
-                if (cita != null)
-                {
-                    cita.DigitoH = ObtenerHashH(cita);
+                cita.DigitoH = ObtenerHashH(cita);
 
-                    _servicio.ActualizarDigitoH(cita);
-                }
+                _servicio.ActualizarDigitoH(cita);
+            }
 
-                string hashV = ObtenerHashV(cita);
+            string hashV = ObtenerHashV(cita);
 
-                _gestorDAL.ActualizarDigitoV(hashV, "Cita");
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
+            _gestorDAL.ActualizarDigitoV(hashV, "Cita");
         }
 
         public void HabilitarMesa(ICita cita)
         {
-            try
-            {
-                _servicio.HabilitarMesa(cita);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
+            _servicio.HabilitarMesa(cita);
 
         }
 
         public ICita ObtenerCitaPorId(int idCita)
         {
-            try
-            {
-                return _servicio.ObtenerCitaPorId(idCita);
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
+            ICita cita = _servicio.ObtenerCitaPorId(idCita);
+            VerificarDigitos(cita);
+            return cita;
         }
 
         public void ObtenerCitasDeUsuarioLogeado()
         {
-            try
-            {
-                Session.Instancia.Usuario.Citas = _servicio.ObtenerCitasPorUsuario(Session.Instancia.Usuario.Id, Session.Instancia.Usuario.IsInRol("Empresa"));
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
+            Session.Instancia.Usuario.Citas = _servicio.ObtenerCitasPorUsuario(Session.Instancia.Usuario.Id, Session.Instancia.Usuario.IsInRol("Empresa"));
         }
 
         public List<ICita> ObtenerCitasConDenunciaSinGestion()
         {
-            try
-            {
-                return _servicio.ObtenerCitasConDenunciaSinGestion();
-            }
-            catch (OperacionDBException)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
-            catch (Exception)
-            {
-                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["ErrorGuardarEntidad"].Texto);
-            }
+            return _servicio.ObtenerCitasConDenunciaSinGestion();
         }
 
         public bool ValidarCitaCreacion()

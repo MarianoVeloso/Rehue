@@ -12,5 +12,6 @@ namespace Rehue.BE
         public string Ubicacion { get; set; }
         public DateTime FechaCreacion { get; set; }
         public string Nombre { get; set; }
+        public decimal Tamaño { get; set; }
     }
 }

@@ -9,14 +9,22 @@ namespace Rehue.BE
 {
     public class Empresa : Usuario, IEmpresa
     {
-        public int Reputacion { get; set; }
         public string RazonSocial { get; set; }
-        public Subscripcion Subscripcion { get; set; }
+        private ISubscripcion _subscripcion { get; set; }
         public string Ubicacion { get; set; }
-        public int MyProperty { get; set; }
         public override string ObtenerNombre()
         {
             return $"{RazonSocial}";
+        }
+
+        public void AgregarSubscripcion(ISubscripcion subscripcion)
+        {
+            _subscripcion = subscripcion;
+        }
+
+        public ISubscripcion ObtenerSubscripcion()
+        {
+            return _subscripcion;
         }
     }
 }

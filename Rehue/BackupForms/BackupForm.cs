@@ -40,10 +40,14 @@ namespace Rehue.BackupForms
                 { "NombreCN", typeof(string) },
                 { "UbicacionCN", typeof(string) },
                 { "FechaCreacionCN", typeof(DateTime) },
+                { "TamañoCN", typeof(decimal) }
             };
 
-            GrillaHelper.CrearColumnasGridCita(columns,
-                new List<string> { "Id", "Nombre", "Ubicacion", "FechaCreacion" }, _servicio.ObtenerTodos(), dtBackups);
+            GrillaHelper.CrearGrilla(columns,
+                new List<string> { "Id", "Nombre", "Ubicacion", "FechaCreacion", "Tamaño" }, _servicio.ObtenerTodos(), dtBackups);
+            lblRuta.Text = string.Empty;
+            lblNombreRestoreValue.Text = string.Empty;
+            lblUbicacionRestoreValue.Text = string.Empty;
         }
 
         private void btnSeleccionarCarpeta_Click(object sender, EventArgs e)
@@ -92,6 +96,37 @@ namespace Rehue.BackupForms
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
                 throw new Exception(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["BackupNombreIncompleto"].Texto);
+        }
+
+        private void dtBackups_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                int id = int.Parse(dtBackups[0, e.RowIndex].Value.ToString());
+
+                IBackup backup = _servicio.ObtenerPorId(id);
+
+                lblNombreRestoreValue.Text = backup.Nombre;
+                lblUbicacionRestoreValue.Text = backup.Ubicacion;
+                btnConfirmarRestore.Enabled = true;
+            }
+        }
+
+        private void btnConfirmarRestore_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicio.RestaturarBackup(lblUbicacionRestoreValue.Text);
+                LoadForm();
+            }
+            catch (OperacionDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

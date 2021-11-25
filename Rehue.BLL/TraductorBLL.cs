@@ -41,7 +41,9 @@ namespace Rehue.BLL
             try
             {
                 IdiomaBLL _idiomaBLL = new IdiomaBLL();
-                return _idiomaBLL.ObtenerTraducciones(idioma.Id);
+                if (idioma != null)
+                    return _idiomaBLL.ObtenerTraducciones(idioma.Id);
+                return null;
             }
             catch (OperacionDBException ex)
             {

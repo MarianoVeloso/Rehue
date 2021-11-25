@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -7,6 +8,7 @@ namespace Rehue.Interfaces
     public interface IAcceso
     {
         void Abrir();
+        void AbrirMaster();
         void CancelarTransaccion();
         void Cerrar();
         void ConfirmarTransaccion();
@@ -14,6 +16,7 @@ namespace Rehue.Interfaces
         void IniciarTransaccion();
         DataTable Leer(string storedProcedure, List<SqlParameter> parametros = null);
         int Operar(string storedProcedure, List<SqlParameter> parametros);
-        void RegistrarError(string error);
+        void RegistrarError(Exception ex);
+        bool VerificarConexion();
     }
 }

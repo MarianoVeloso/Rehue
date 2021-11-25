@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,6 +57,12 @@
     </Compile>
     <Compile Include="BackupForms\BackupForm.Designer.cs">
       <DependentUpon>BackupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackupForms\RestaurarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackupForms\RestaurarForm.Designer.cs">
+      <DependentUpon>RestaurarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CitaForms\CitaForm.cs">
       <SubType>Form</SubType>
@@ -193,6 +205,7 @@
     <EmbeddedResource Include="RolForms\RolAltaForm.resx">
       <DependentUpon>RolAltaForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -224,6 +237,8 @@
       <Name>Rehue.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SubscripcionForms\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

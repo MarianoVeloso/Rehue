@@ -38,8 +38,15 @@ namespace Rehue.BackupForms
             this.lblRuta = new System.Windows.Forms.Label();
             this.dtBackups = new System.Windows.Forms.DataGridView();
             this.lblCreados = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblNombreRestoreValue = new System.Windows.Forms.Label();
+            this.lblNombreRestore = new System.Windows.Forms.Label();
+            this.btnConfirmarRestore = new System.Windows.Forms.Button();
+            this.lblUbicacionRestoreValue = new System.Windows.Forms.Label();
+            this.lblUbicacionRestore = new System.Windows.Forms.Label();
             this.grpCrear.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtBackups)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSeleccionarCarpeta
@@ -55,9 +62,9 @@ namespace Rehue.BackupForms
             // lblCarpetaSeleccionada
             // 
             this.lblCarpetaSeleccionada.AutoSize = true;
-            this.lblCarpetaSeleccionada.Location = new System.Drawing.Point(12, 16);
+            this.lblCarpetaSeleccionada.Location = new System.Drawing.Point(12, 18);
             this.lblCarpetaSeleccionada.Name = "lblCarpetaSeleccionada";
-            this.lblCarpetaSeleccionada.Size = new System.Drawing.Size(115, 13);
+            this.lblCarpetaSeleccionada.Size = new System.Drawing.Size(145, 16);
             this.lblCarpetaSeleccionada.TabIndex = 1;
             this.lblCarpetaSeleccionada.Text = "Carpeta Seleccionada:";
             // 
@@ -79,17 +86,17 @@ namespace Rehue.BackupForms
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(15, 45);
+            this.lblNombre.Location = new System.Drawing.Point(15, 64);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(44, 13);
+            this.lblNombre.Size = new System.Drawing.Size(56, 16);
             this.lblNombre.TabIndex = 5;
             this.lblNombre.Text = "Nombre";
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(15, 64);
+            this.txtNombre.Location = new System.Drawing.Point(15, 83);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.Size = new System.Drawing.Size(100, 22);
             this.txtNombre.TabIndex = 4;
             // 
             // btnConfirmar
@@ -106,10 +113,11 @@ namespace Rehue.BackupForms
             // lblRuta
             // 
             this.lblRuta.AutoSize = true;
-            this.lblRuta.Location = new System.Drawing.Point(6, 29);
+            this.lblRuta.Location = new System.Drawing.Point(15, 34);
             this.lblRuta.Name = "lblRuta";
-            this.lblRuta.Size = new System.Drawing.Size(0, 13);
+            this.lblRuta.Size = new System.Drawing.Size(68, 16);
             this.lblRuta.TabIndex = 2;
+            this.lblRuta.Text = "Ubicacion";
             // 
             // dtBackups
             // 
@@ -117,21 +125,87 @@ namespace Rehue.BackupForms
             this.dtBackups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtBackups.Location = new System.Drawing.Point(12, 154);
             this.dtBackups.Name = "dtBackups";
-            this.dtBackups.Size = new System.Drawing.Size(706, 258);
+            this.dtBackups.ReadOnly = true;
+            this.dtBackups.RowHeadersWidth = 51;
+            this.dtBackups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtBackups.Size = new System.Drawing.Size(857, 258);
             this.dtBackups.TabIndex = 3;
+            this.dtBackups.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtBackups_CellClick);
             // 
             // lblCreados
             // 
             this.lblCreados.AutoSize = true;
             this.lblCreados.Location = new System.Drawing.Point(12, 138);
             this.lblCreados.Name = "lblCreados";
-            this.lblCreados.Size = new System.Drawing.Size(90, 13);
+            this.lblCreados.Size = new System.Drawing.Size(113, 16);
             this.lblCreados.TabIndex = 4;
             this.lblCreados.Text = "Backups creados";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblNombreRestoreValue);
+            this.groupBox1.Controls.Add(this.lblNombreRestore);
+            this.groupBox1.Controls.Add(this.btnConfirmarRestore);
+            this.groupBox1.Controls.Add(this.lblUbicacionRestoreValue);
+            this.groupBox1.Controls.Add(this.lblUbicacionRestore);
+            this.groupBox1.Location = new System.Drawing.Point(448, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(418, 122);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Restaurar backup";
+            // 
+            // lblNombreRestoreValue
+            // 
+            this.lblNombreRestoreValue.AutoSize = true;
+            this.lblNombreRestoreValue.Location = new System.Drawing.Point(15, 71);
+            this.lblNombreRestoreValue.Name = "lblNombreRestoreValue";
+            this.lblNombreRestoreValue.Size = new System.Drawing.Size(59, 16);
+            this.lblNombreRestoreValue.TabIndex = 6;
+            this.lblNombreRestoreValue.Text = "Nombre:";
+            // 
+            // lblNombreRestore
+            // 
+            this.lblNombreRestore.AutoSize = true;
+            this.lblNombreRestore.Location = new System.Drawing.Point(12, 55);
+            this.lblNombreRestore.Name = "lblNombreRestore";
+            this.lblNombreRestore.Size = new System.Drawing.Size(59, 16);
+            this.lblNombreRestore.TabIndex = 5;
+            this.lblNombreRestore.Text = "Nombre:";
+            // 
+            // btnConfirmarRestore
+            // 
+            this.btnConfirmarRestore.Enabled = false;
+            this.btnConfirmarRestore.Location = new System.Drawing.Point(294, 93);
+            this.btnConfirmarRestore.Name = "btnConfirmarRestore";
+            this.btnConfirmarRestore.Size = new System.Drawing.Size(118, 23);
+            this.btnConfirmarRestore.TabIndex = 3;
+            this.btnConfirmarRestore.Text = "Confirmar";
+            this.btnConfirmarRestore.UseVisualStyleBackColor = true;
+            this.btnConfirmarRestore.Click += new System.EventHandler(this.btnConfirmarRestore_Click);
+            // 
+            // lblUbicacionRestoreValue
+            // 
+            this.lblUbicacionRestoreValue.AutoSize = true;
+            this.lblUbicacionRestoreValue.Location = new System.Drawing.Point(15, 34);
+            this.lblUbicacionRestoreValue.Name = "lblUbicacionRestoreValue";
+            this.lblUbicacionRestoreValue.Size = new System.Drawing.Size(68, 16);
+            this.lblUbicacionRestoreValue.TabIndex = 2;
+            this.lblUbicacionRestoreValue.Text = "Ubicacion";
+            // 
+            // lblUbicacionRestore
+            // 
+            this.lblUbicacionRestore.AutoSize = true;
+            this.lblUbicacionRestore.Location = new System.Drawing.Point(12, 16);
+            this.lblUbicacionRestore.Name = "lblUbicacionRestore";
+            this.lblUbicacionRestore.Size = new System.Drawing.Size(71, 16);
+            this.lblUbicacionRestore.TabIndex = 1;
+            this.lblUbicacionRestore.Text = "Ubicacion:";
+            // 
             // BackupForm
             // 
-            this.ClientSize = new System.Drawing.Size(730, 424);
+            this.ClientSize = new System.Drawing.Size(878, 424);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblCreados);
             this.Controls.Add(this.dtBackups);
             this.Controls.Add(this.grpCrear);
@@ -139,6 +213,8 @@ namespace Rehue.BackupForms
             this.grpCrear.ResumeLayout(false);
             this.grpCrear.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtBackups)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,5 +231,11 @@ namespace Rehue.BackupForms
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.DataGridView dtBackups;
         private System.Windows.Forms.Label lblCreados;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblNombreRestore;
+        private System.Windows.Forms.Button btnConfirmarRestore;
+        private System.Windows.Forms.Label lblUbicacionRestoreValue;
+        private System.Windows.Forms.Label lblUbicacionRestore;
+        private System.Windows.Forms.Label lblNombreRestoreValue;
     }
 }

@@ -15,6 +15,7 @@ namespace Rehue.DAL
     public class EmpresaDAL : ICrud<IEmpresa>
     {
         private readonly Servicio _servicio = Servicio.Instancia;
+        private readonly SubscripcionDAL _subscripcionDAL = SubscripcionDAL.Instancia;
 
         private static EmpresaDAL _instancia;
         public static EmpresaDAL Instancia
@@ -51,6 +52,10 @@ namespace Rehue.DAL
             {
                 throw new ErrorLogInException(ex.Message);
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public IList<IEmpresa> ObtenerTodos()
         {
@@ -70,6 +75,10 @@ namespace Rehue.DAL
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
         public void Guardar(IEmpresa entity)
@@ -98,6 +107,10 @@ namespace Rehue.DAL
             {
                 throw new ErrorLogInException(ex.Message);
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
             entity.Id = int.Parse(parametros[8].Value.ToString());
         }
@@ -116,10 +129,14 @@ namespace Rehue.DAL
             {
                 throw new ErrorLogInException(ex.Message);
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         private IEmpresa MapearEmpresa(DataRow row)
         {
-            return new Empresa()
+            IEmpresa empresa = new Empresa()
             {
                 Id = int.Parse(row["id"].ToString()),
                 RazonSocial = row["razonSocial"].ToString(),
@@ -129,6 +146,9 @@ namespace Rehue.DAL
                 Roles = RolComponentDAL.Instancia.ObtenerRolesYPermisosPorUsuario(int.Parse(row["id"].ToString())),
                 Idioma = IdiomaDAL.Instancia.ObtenerIdiomaPorId(int.Parse(row["IdIdioma"].ToString()))
             };
+            if (row["IdSubscripcion"] == DBNull.Value)
+                empresa.AgregarSubscripcion(_subscripcionDAL.ObtenerPorId(int.Parse(row["IdSubscripcion"].ToString())));
+            return empresa;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Rehue.BE.Log;
+﻿using Rehue.BE.Logs;
 using Rehue.Interfaces;
 using Rehue.Interfaces.Eventos;
 using System;
@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Rehue.BE.Bitacora
 {
-    public class BitacoraLogInExito : Bitacora<IUsuario>
+    public class BitacoraLogIn : Bitacora<IUsuario>
     {
-        public override ILog CrearEvento(IUsuario entity)
+        public override ILog<IUsuario> CrearEvento(IUsuario entity, string mensaje)
         {
-            return new LogSignInExito
+            return new LogLogIn<IUsuario>
             {
                 FechaFin = DateTime.Now,
                 FechaInicio = DateTime.Now,
-                Mensaje = string.Format($"El usuario {entity.ObtenerNombre()} inició sesión correctamente."),
+                Mensaje = string.Format(mensaje),
                 IdUsuario = entity.Id
             };
         }

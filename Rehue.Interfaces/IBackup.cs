@@ -7,5 +7,6 @@ namespace Rehue.Interfaces
         string Nombre { get; set; }
         DateTime FechaCreacion { get; set; }
         string Ubicacion { get; set; }
+        decimal Tamaño { get; set; }
     }
 }

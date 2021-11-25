@@ -4,6 +4,6 @@ namespace Rehue.Interfaces.Bitacora
 {
     public interface IBitacora<T>
     {
-        ILog CrearEvento(T entity);
+        ILog<T> CrearEvento(T entity, string mensaje);
     }
 }

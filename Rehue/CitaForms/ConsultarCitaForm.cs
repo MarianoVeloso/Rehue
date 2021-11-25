@@ -17,8 +17,11 @@ namespace Rehue.CitaForms
     public partial class ConsultarCitaForm : Form, IIdiomaObserver
     {
         private readonly CitaBLL _citaBLL = new CitaBLL();
+        private readonly PdfWriterBLL _pdfBLL = new PdfWriterBLL();
         private int _idCitaPendienteConfirmacion;
         private int _idCitaADenunciar;
+        private int _idCitaCancelada;
+        private int _idPendienteResolución;
         public ConsultarCitaForm()
         {
             InitializeComponent();
@@ -69,13 +72,13 @@ namespace Rehue.CitaForms
                 { "UsuarioCN", typeof(string) }
             };
 
-            GrillaHelper.CrearColumnasGridCita(columns,
+            GrillaHelper.CrearGrilla(columns,
                 new List<string> { "Id", "FechaCreacion", "FechaEncuentro", "Mesa.Descripcion", "CantidadComensales", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitasPendienteConfirmacion(),
                 dtGridPendienteConfirmacion
                 );
 
-            GrillaHelper.CrearColumnasGridCita(columns,
+            GrillaHelper.CrearGrilla(columns,
                 new List<string> { "Id", "FechaCreacion", "FechaEncuentro", "Mesa.Descripcion", "CantidadComensales", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitasConfirmadas(),
                 dtGridCitasConfirmadas
@@ -90,7 +93,7 @@ namespace Rehue.CitaForms
                 { "UsuarioCN", typeof(string) }
             };
 
-            GrillaHelper.CrearColumnasGridCita(columns,
+            GrillaHelper.CrearGrilla(columns,
                 new List<string> { "Id", "FechaCreacion", "FechaCancelacion", "Mesa.Descripcion", "CantidadComensales", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitasCanceladas(),
                 dtGridCanceladas
@@ -104,7 +107,7 @@ namespace Rehue.CitaForms
                 { "UsuarioCN", typeof(string) }
             };
 
-            GrillaHelper.CrearColumnasGridCita(columns,
+            GrillaHelper.CrearGrilla(columns,
                 new List<string> { "Id", "FechaCreacion", "Mesa.Descripcion", "Denuncia.Descripcion", "Persona.ObtenerNombre()" },
                 Session.Instancia.Usuario.ObtenerCitaPendienteResolucion(),
                 dtGridViewCitasPendienteResolucion
@@ -112,6 +115,8 @@ namespace Rehue.CitaForms
 
             _idCitaPendienteConfirmacion = 0;
             _idCitaADenunciar = 0;
+            _idCitaCancelada = 0;
+            _idPendienteResolución = 0;
         }
 
         private void btnDenunciar_Click(object sender, EventArgs e)
@@ -175,24 +180,6 @@ namespace Rehue.CitaForms
             }
         }
 
-        private void dtGridCitasConfirmadas_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex > 0 && dtGridCitasConfirmadas.Rows.Count > 0 &&
-                !string.IsNullOrEmpty(dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value.ToString()))
-            {
-                _idCitaADenunciar = int.Parse(dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value.ToString());
-            }
-        }
-
-        private void dtGridPendienteConfirmacion_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && dtGridPendienteConfirmacion.Rows.Count > 0 &&
-                !string.IsNullOrEmpty(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString()))
-            {
-                _idCitaPendienteConfirmacion = int.Parse(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString());
-            }
-        }
-
         private void ControlarId(DataGridView dataGrid, int id)
         {
             if (dataGrid.Rows.Count == 0 || id == 0)
@@ -227,6 +214,129 @@ namespace Rehue.CitaForms
         private void dtGridCitasConfirmadas_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dtGridCitasConfirmadas.ClearSelection();
+        }
+
+        private void btnExportarPDFPendienteConfirmacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_idCitaPendienteConfirmacion != 0)
+                {
+                    ICita cita = null;
+                    cita = _citaBLL.ObtenerCitaPorId(_idCitaPendienteConfirmacion);
+
+                    _pdfBLL.CrearPDFCita(cita);
+                }
+            }
+            catch (OperacionDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnExportarConfirmada_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_idCitaADenunciar != 0)
+                {
+                    ICita cita = null;
+                    cita = _citaBLL.ObtenerCitaPorId(_idCitaADenunciar);
+
+                    _pdfBLL.CrearPDFCita(cita);
+                }
+            }
+            catch (OperacionDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void btnExportarCanceladas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_idCitaCancelada != 0)
+                {
+                    ICita cita = null;
+                    cita = _citaBLL.ObtenerCitaPorId(_idCitaCancelada);
+                    _pdfBLL.CrearPDFCita(cita);
+                }
+            }
+            catch (OperacionDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void btnExportarPendienteResolucion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_idPendienteResolución != 0)
+                {
+                    ICita cita = null;
+                    cita = _citaBLL.ObtenerCitaPorId(_idPendienteResolución);
+                    _pdfBLL.CrearPDFCita(cita);
+                }
+            }
+            catch (OperacionDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dtGridCanceladas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dtGridCanceladas.Rows.Count > 0 &&
+                !string.IsNullOrEmpty(dtGridCanceladas.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            {
+                _idCitaPendienteConfirmacion = int.Parse(dtGridCanceladas.Rows[e.RowIndex].Cells[0].Value.ToString());
+            }
+        }
+
+        private void dtGridCitasConfirmadas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > 0 && dtGridCitasConfirmadas.Rows.Count > 0 &&
+                !string.IsNullOrEmpty(dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            {
+                _idCitaADenunciar = int.Parse(dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value.ToString());
+            }
+        }
+        private void dtGridPendienteConfirmacion_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dtGridPendienteConfirmacion.Rows.Count > 0 &&
+                !string.IsNullOrEmpty(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            {
+                _idCitaPendienteConfirmacion = int.Parse(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString());
+            }
+        }
+
+        private void dtGridViewCitasPendienteResolucion_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dtGridViewCitasPendienteResolucion.Rows.Count > 0 &&
+                !string.IsNullOrEmpty(dtGridViewCitasPendienteResolucion.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            {
+                _idPendienteResolución = int.Parse(dtGridViewCitasPendienteResolucion.Rows[e.RowIndex].Cells[0].Value.ToString());
+            }
         }
     }
 }

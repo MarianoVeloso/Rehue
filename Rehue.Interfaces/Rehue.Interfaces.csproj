@@ -42,10 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBackup.cs" />
+    <Compile Include="ISubscripcion.cs" />
     <Compile Include="Logs\ILog.cs" />
-    <Compile Include="Logs\ILogSignInError.cs" />
-    <Compile Include="Logs\ILogSignInExito.cs" />
-    <Compile Include="Logs\ILogSignOutExito.cs" />
+    <Compile Include="Logs\ILogSignIn.cs" />
     <Compile Include="IAcceso.cs" />
     <Compile Include="IAdministrador.cs" />
     <Compile Include="Bitacora\IBitacora.cs" />
@@ -68,6 +67,7 @@
     <Compile Include="IRolComponent.cs" />
     <Compile Include="ITraduccion.cs" />
     <Compile Include="IUsuario.cs" />
+    <Compile Include="Logs\ILogSignOut.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

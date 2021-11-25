@@ -19,3 +19,4 @@ Version.h
 Version.cpp
 *.vs
 *.zip
+/packages/

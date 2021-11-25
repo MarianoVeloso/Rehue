@@ -26,14 +26,25 @@ namespace Rehue
     {
         private IDictionary<string, ITraduccion> _traducciones;
         private readonly IdiomaBLL _idiomaBLL = new IdiomaBLL();
+        private readonly BitacoraBLL _bitacoraBLL = new BitacoraBLL();
+        private readonly BackupBLL _backupBLL = new BackupBLL();
         public RehueForm()
         {
             InitializeComponent();
         }
         private void RehueForm_Load(object sender, EventArgs e)
         {
-            LoadForm();
-            LogInForm();
+            try
+            {
+                VerificarBBDD();
+                LoadForm();
+                LogInForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.Close();
+            }
         }
 
         private void LoadForm()
@@ -44,6 +55,12 @@ namespace Rehue
             cmbIdioma.DataSource = null;
             cmbIdioma.DataSource = idioma;
         }
+
+        private void VerificarBBDD()
+        {
+            _backupBLL.VerificarRegistroYConexion();
+        }
+
         private void LogInForm()
         {
             LogInForm form = new LogInForm()
@@ -216,15 +233,14 @@ namespace Rehue
         {
             try
             {
-                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogOutExito());
-                ILogSignOutExito evento = (ILogSignOutExito)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario);
-                BitacoraBLL.Instancia.RegistrarEventoLogOut(evento);
+                BitacoraOperador<IUsuario>.Instancia.EstablecerBitacora(new BitacoraLogIn());
+                ILogSignOut evento = (ILogSignOut)BitacoraOperador<IUsuario>.Instancia.ObtenerEvento(Session.Instancia.Usuario, $"El usuario {Session.Instancia.Usuario.ObtenerNombre()} se deslogeo correctamente.");
+                _bitacoraBLL.RegistrarEventoLogOut(evento);
 
                 Session.Instancia.LogOut();
             }
             catch (Exception)
             {
-
                 throw;
             }
 

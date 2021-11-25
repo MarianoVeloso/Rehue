@@ -66,6 +66,10 @@ namespace Rehue.CitaForms
             {
                 MessageBox.Show(ex.Message);
             }
+            catch (DigitoException)
+            {
+                throw new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["DigitoException"].Texto);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -86,7 +90,7 @@ namespace Rehue.CitaForms
         {
             _mesas = _mesaBLL.ObtenerPorIdEmpresa(((IEmpresa)lstEmpresas.SelectedItem).Id).Where(x => x.Reservada == false).ToList();
             dtMesas.DataSource = null;
-            GrillaHelper.CrearColumnasGridCita(columns,
+            GrillaHelper.CrearGrilla(columns,
                 new List<string> {"Id", "Descripcion", "CantidadComensales" }, _mesas, dtMesas );
         }
 

@@ -44,14 +44,11 @@
     <Compile Include="Administrador.cs" />
     <Compile Include="Backup.cs" />
     <Compile Include="Bitacora\Bitacora.cs" />
-    <Compile Include="Bitacora\BitacoraLogInError.cs" />
-    <Compile Include="Bitacora\BitacoraLogInExito.cs" />
-    <Compile Include="Bitacora\BitacoraLogOutExito.cs" />
+    <Compile Include="Bitacora\BitacoraLogIn.cs" />
+    <Compile Include="ConexionDB}.cs" />
     <Compile Include="EventoEnum.cs" />
-    <Compile Include="Log\Log.cs" />
-    <Compile Include="Log\LogSignInError.cs" />
-    <Compile Include="Log\LogSignInExito.cs" />
-    <Compile Include="Log\LogSignOutExito.cs" />
+    <Compile Include="Logs\Log.cs" />
+    <Compile Include="Logs\LogSignIn.cs" />
     <Compile Include="NonVerificableAttribute.cs" />
     <Compile Include="Calificacion.cs" />
     <Compile Include="Cita.cs" />
@@ -77,6 +74,7 @@
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="BE.cd" />
   </ItemGroup>
   <ItemGroup>

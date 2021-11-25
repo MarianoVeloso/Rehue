@@ -145,7 +145,7 @@ namespace Rehue.DAL
                 CantidadComensales = int.Parse(row["cantidadComensales"].ToString()),
                 Descripcion = row["descripcion"].ToString(),
                 Reservada = bool.Parse(row["reservada"].ToString()),
-                Empresa = EmpresaDAL.Instancia.ObtenerPorId(int.Parse(row["id"].ToString()))
+                Empresa = EmpresaDAL.Instancia.ObtenerPorId(int.Parse(row["IdEmpresa"].ToString()))
             };
         }
     }

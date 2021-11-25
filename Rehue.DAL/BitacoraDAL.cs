@@ -1,4 +1,4 @@
-﻿using Rehue.BE.Log;
+﻿using Rehue.Interfaces;
 using Rehue.Interfaces.Eventos;
 using Rehue.Servicios.Helpers;
 using System;
@@ -26,7 +26,7 @@ namespace Rehue.DAL
             }
         }
 
-        public void RegistrarEventoLogIn(ILogSignInExito evento)
+        public void RegistrarEventoLogIn(ILogSignIn evento)
         {
             try
             {
@@ -46,20 +46,7 @@ namespace Rehue.DAL
             }
         }
 
-        public void RegistrarEventoLogIn(ILogSignInError evento)
-        {
-            RegistrarLog(evento);
-
-            List<SqlParameter> parametros = new List<SqlParameter>()
-                {
-                    _servicio.CrearParametro("@idUsuario", evento.IdUsuario),
-                    _servicio.CrearParametro("@eventoId", evento.Id)
-                };
-
-            _servicio.RealizarOperacion("registrar_log_detalle", parametros);
-        }
-
-        public void RegistrarEventoLogOut(ILogSignOutExito evento)
+        public void RegistrarEventoLogOut(ILogSignOut evento)
         {
             try
             {
@@ -79,7 +66,7 @@ namespace Rehue.DAL
             }
         }
 
-        private void RegistrarLog(ILog evento)
+        private void RegistrarLog<T>(ILog<T> evento)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
