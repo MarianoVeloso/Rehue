@@ -46,7 +46,8 @@
     <Compile Include="Bitacora\Bitacora.cs" />
     <Compile Include="Bitacora\BitacoraSignIn.cs" />
     <Compile Include="Bitacora\BitacoraSignOut.cs" />
-    <Compile Include="ConexionDB}.cs" />
+    <Compile Include="CentroAyuda.cs" />
+    <Compile Include="ConexionDB.cs" />
     <Compile Include="EventoEnum.cs" />
     <Compile Include="Logs\Log.cs" />
     <Compile Include="Logs\LogSignIn.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Sancion.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeccionDescripcion.cs" />
     <Compile Include="Subscripcion.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Traduccion.cs" />

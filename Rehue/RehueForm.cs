@@ -21,6 +21,8 @@ using Rehue.Servicios.Bitacora;
 using Rehue.BackupForms;
 using Rehue.SubscripcionForms;
 using Rehue.Logs;
+using Rehue.Servicios.Helpers;
+using System.Diagnostics;
 
 namespace Rehue
 {
@@ -41,6 +43,23 @@ namespace Rehue
                 VerificarBBDD();
                 LoadForm();
                 LogInForm();
+            }
+            catch (InstaladorException ex)
+            {
+                DialogResult result = MessageBox.Show(ex.Message, "Configuracion", MessageBoxButtons.OK);
+                if (result == DialogResult.OK)
+                {
+                    Process.Start(@"C:\Rehue\Config\SQLServer.exe");
+                    this.Close();
+                }
+            }
+            catch (ConexionDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+                BackupForm form = new BackupForm(true);
+                form.ShowDialog();
+                RehueForm_Load(sender, e);
+
             }
             catch (Exception ex)
             {
@@ -116,6 +135,7 @@ namespace Rehue
             crearToolStripMenuItem2.Visible = false;
             comprarToolStripMenuItem.Visible = false;
             leerLogsToolStripMenuItem.Visible = false;
+            menuToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -134,6 +154,16 @@ namespace Rehue
             comprarToolStripMenuItem.Visible = true;
             crearToolStripMenuItem2.Visible = false;
             leerLogsToolStripMenuItem.Visible = false;
+            menuToolStripMenuItem.Visible = false;
+
+            if (((IEmpresa)Session.Instancia.Usuario).ObtenerSubscripcion() != null)
+            {
+                menuToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                menuToolStripMenuItem.Visible = false;
+            }
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -152,6 +182,7 @@ namespace Rehue
             crearToolStripMenuItem2.Visible = false;
             comprarToolStripMenuItem.Visible = false;
             leerLogsToolStripMenuItem.Visible = false;
+            menuToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -171,6 +202,7 @@ namespace Rehue
             crearToolStripMenuItem2.Visible = true;
             leerLogsToolStripMenuItem.Visible = true;
             comprarToolStripMenuItem.Visible = false;
+            menuToolStripMenuItem.Visible = false;
             cmbIdioma.Text = Session.Instancia.Usuario.Idioma.Nombre;
             MostrarDatosUsuario();
         }
@@ -328,11 +360,10 @@ namespace Rehue
 
         private void comprarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ComprarSubscripcionForm form = new ComprarSubscripcionForm()
-            {
-                MdiParent = this
-            };
-            form.Show();
+            ComprarSubscripcionForm form = new ComprarSubscripcionForm();
+
+            form.ShowDialog();
+            MostrarEmpresa();
         }
 
 

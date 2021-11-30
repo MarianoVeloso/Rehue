@@ -84,7 +84,7 @@ namespace Rehue.DAL
             };
             try
             {
-                var resultado = _servicio.Leer("obtener_subscripcione_por_id", parametros);
+                var resultado = _servicio.Leer("obtener_subscripcion_por_id", parametros);
 
                 ISubscripcion subscripcion = new Subscripcion();
 

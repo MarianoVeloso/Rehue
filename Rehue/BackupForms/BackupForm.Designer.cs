@@ -44,6 +44,7 @@ namespace Rehue.BackupForms
             this.btnConfirmarRestore = new System.Windows.Forms.Button();
             this.lblUbicacionRestoreValue = new System.Windows.Forms.Label();
             this.lblUbicacionRestore = new System.Windows.Forms.Label();
+            this.btnSeleccionarRestore = new System.Windows.Forms.Button();
             this.grpCrear.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtBackups)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -143,6 +144,7 @@ namespace Rehue.BackupForms
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSeleccionarRestore);
             this.groupBox1.Controls.Add(this.lblNombreRestoreValue);
             this.groupBox1.Controls.Add(this.lblNombreRestore);
             this.groupBox1.Controls.Add(this.btnConfirmarRestore);
@@ -158,7 +160,7 @@ namespace Rehue.BackupForms
             // lblNombreRestoreValue
             // 
             this.lblNombreRestoreValue.AutoSize = true;
-            this.lblNombreRestoreValue.Location = new System.Drawing.Point(15, 71);
+            this.lblNombreRestoreValue.Location = new System.Drawing.Point(6, 34);
             this.lblNombreRestoreValue.Name = "lblNombreRestoreValue";
             this.lblNombreRestoreValue.Size = new System.Drawing.Size(59, 16);
             this.lblNombreRestoreValue.TabIndex = 6;
@@ -167,7 +169,7 @@ namespace Rehue.BackupForms
             // lblNombreRestore
             // 
             this.lblNombreRestore.AutoSize = true;
-            this.lblNombreRestore.Location = new System.Drawing.Point(12, 55);
+            this.lblNombreRestore.Location = new System.Drawing.Point(3, 18);
             this.lblNombreRestore.Name = "lblNombreRestore";
             this.lblNombreRestore.Size = new System.Drawing.Size(59, 16);
             this.lblNombreRestore.TabIndex = 5;
@@ -187,7 +189,7 @@ namespace Rehue.BackupForms
             // lblUbicacionRestoreValue
             // 
             this.lblUbicacionRestoreValue.AutoSize = true;
-            this.lblUbicacionRestoreValue.Location = new System.Drawing.Point(15, 34);
+            this.lblUbicacionRestoreValue.Location = new System.Drawing.Point(6, 71);
             this.lblUbicacionRestoreValue.Name = "lblUbicacionRestoreValue";
             this.lblUbicacionRestoreValue.Size = new System.Drawing.Size(68, 16);
             this.lblUbicacionRestoreValue.TabIndex = 2;
@@ -196,11 +198,22 @@ namespace Rehue.BackupForms
             // lblUbicacionRestore
             // 
             this.lblUbicacionRestore.AutoSize = true;
-            this.lblUbicacionRestore.Location = new System.Drawing.Point(12, 16);
+            this.lblUbicacionRestore.Location = new System.Drawing.Point(3, 53);
             this.lblUbicacionRestore.Name = "lblUbicacionRestore";
             this.lblUbicacionRestore.Size = new System.Drawing.Size(71, 16);
             this.lblUbicacionRestore.TabIndex = 1;
             this.lblUbicacionRestore.Text = "Ubicacion:";
+            // 
+            // btnSeleccionarRestore
+            // 
+            this.btnSeleccionarRestore.Location = new System.Drawing.Point(170, 93);
+            this.btnSeleccionarRestore.Name = "btnSeleccionarRestore";
+            this.btnSeleccionarRestore.Size = new System.Drawing.Size(118, 23);
+            this.btnSeleccionarRestore.TabIndex = 6;
+            this.btnSeleccionarRestore.Text = "Seleccionar carpeta";
+            this.btnSeleccionarRestore.UseVisualStyleBackColor = true;
+            this.btnSeleccionarRestore.Visible = false;
+            this.btnSeleccionarRestore.Click += new System.EventHandler(this.btnSeleccionarRestore_Click);
             // 
             // BackupForm
             // 
@@ -237,5 +250,6 @@ namespace Rehue.BackupForms
         private System.Windows.Forms.Label lblUbicacionRestoreValue;
         private System.Windows.Forms.Label lblUbicacionRestore;
         private System.Windows.Forms.Label lblNombreRestoreValue;
+        private System.Windows.Forms.Button btnSeleccionarRestore;
     }
 }

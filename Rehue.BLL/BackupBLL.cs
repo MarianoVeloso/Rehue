@@ -4,6 +4,7 @@ using Rehue.Interfaces;
 using Rehue.Servicios.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,19 +39,23 @@ namespace Rehue.BLL
         {
             try
             {
-                RegistryKey RK = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\MICROSOFT\Microsoft SQL Server");
-                if (RK == null)
+                RegistryKey rk = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\MICROSOFT\Microsoft SQL Server");
+                if (rk == null)
                 {
-                    throw new Exception("No se encontró el SQL Instalado en la máquina, por favor procure instalarlo antes de continuar.");
+                    throw new InstaladorException("No se encontró el SQL Server Instalado en la máquina. Cerraremos el programa y ejecutaremos el instalador. Finalice la ínstalación e intente nuevamente.");
                 }
 
                 if (!_servicio.VerificarConexion())
                 {
                     throw new ConexionDBException("Base de datos no encontrada, restaure un backup para poder proseguir.");
                 }
-
             }
             catch (ConexionDBException ex)
+            {
+                XMLWriterException.Escribir(ex);
+                throw;
+            }
+            catch (InstaladorException ex)
             {
                 XMLWriterException.Escribir(ex);
                 throw;

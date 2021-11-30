@@ -84,7 +84,13 @@ namespace Rehue.BLL
 
         public void ObtenerCitasDeUsuarioLogeado()
         {
-            Session.Instancia.Usuario.Citas = _servicio.ObtenerCitasPorUsuario(Session.Instancia.Usuario.Id, Session.Instancia.Usuario.IsInRol("Empresa"));
+            List<ICita> citas = _servicio.ObtenerCitasPorUsuario(Session.Instancia.Usuario.Id, Session.Instancia.Usuario.IsInRol("Empresa"));
+
+            foreach (ICita cita in citas)
+            {
+                VerificarDigitos(cita);
+            }
+            Session.Instancia.Usuario.Citas = citas;
         }
 
         public List<ICita> ObtenerCitasConDenunciaSinGestion()
@@ -109,7 +115,7 @@ namespace Rehue.BLL
                 string hashH = ObtenerHashH(cita);
 
                 if (_gestorDAL.VerificarDigitoH(cita.Id, hashH, "validarDVH_cita") == 0)
-                    throw new DigitoException(string.Empty);
+                    throw new DigitoException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["DigitoException"].Texto);
             }
 
             string hashV = ObtenerHashV(cita);
@@ -120,7 +126,7 @@ namespace Rehue.BLL
             else
             {
                 if (_gestorDAL.VerificarDigitoV(hashV, "Cita", "validarDVV_cita") == 0)
-                    throw new DigitoException(string.Empty);
+                    throw new DigitoException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["DigitoException"].Texto);
             }
         }
 

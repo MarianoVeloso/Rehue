@@ -226,6 +226,7 @@ namespace Rehue.CitaForms
                     cita = _citaBLL.ObtenerCitaPorId(_idCitaPendienteConfirmacion);
 
                     _pdfBLL.CrearPDFCita(cita);
+                    MessageBox.Show("PDF exportado!");
                 }
             }
             catch (OperacionDBException ex)
@@ -248,6 +249,7 @@ namespace Rehue.CitaForms
                     cita = _citaBLL.ObtenerCitaPorId(_idCitaADenunciar);
 
                     _pdfBLL.CrearPDFCita(cita);
+                    MessageBox.Show("PDF exportado!");
                 }
             }
             catch (OperacionDBException ex)
@@ -270,6 +272,7 @@ namespace Rehue.CitaForms
                     ICita cita = null;
                     cita = _citaBLL.ObtenerCitaPorId(_idCitaCancelada);
                     _pdfBLL.CrearPDFCita(cita);
+                    MessageBox.Show("PDF exportado!");
                 }
             }
             catch (OperacionDBException ex)
@@ -292,6 +295,7 @@ namespace Rehue.CitaForms
                     ICita cita = null;
                     cita = _citaBLL.ObtenerCitaPorId(_idPendienteResolución);
                     _pdfBLL.CrearPDFCita(cita);
+                    MessageBox.Show("PDF exportado!");
                 }
             }
             catch (OperacionDBException ex)
@@ -306,8 +310,7 @@ namespace Rehue.CitaForms
 
         private void dtGridCanceladas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dtGridCanceladas.Rows.Count > 0 &&
-                !string.IsNullOrEmpty(dtGridCanceladas.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            if (dtGridCanceladas.Rows.Count > 0 && dtGridCanceladas.Rows[e.RowIndex].Cells[0].Value != null)
             {
                 _idCitaPendienteConfirmacion = int.Parse(dtGridCanceladas.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
@@ -315,16 +318,14 @@ namespace Rehue.CitaForms
 
         private void dtGridCitasConfirmadas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > 0 && dtGridCitasConfirmadas.Rows.Count > 0 &&
-                !string.IsNullOrEmpty(dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            if (dtGridCitasConfirmadas.Rows.Count > 0 && dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value != null)
             {
                 _idCitaADenunciar = int.Parse(dtGridCitasConfirmadas.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
         }
         private void dtGridPendienteConfirmacion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dtGridPendienteConfirmacion.Rows.Count > 0 &&
-                !string.IsNullOrEmpty(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            if (dtGridPendienteConfirmacion.Rows.Count > 0 && dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value != null)
             {
                 _idCitaPendienteConfirmacion = int.Parse(dtGridPendienteConfirmacion.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
@@ -332,8 +333,7 @@ namespace Rehue.CitaForms
 
         private void dtGridViewCitasPendienteResolucion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dtGridViewCitasPendienteResolucion.Rows.Count > 0 &&
-                !string.IsNullOrEmpty(dtGridViewCitasPendienteResolucion.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            if (dtGridViewCitasPendienteResolucion.Rows.Count > 0 && dtGridViewCitasPendienteResolucion.Rows[e.RowIndex].Cells[0].Value != null)
             {
                 _idPendienteResolución = int.Parse(dtGridViewCitasPendienteResolucion.Rows[e.RowIndex].Cells[0].Value.ToString());
             }

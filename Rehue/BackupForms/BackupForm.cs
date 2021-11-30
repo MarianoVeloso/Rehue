@@ -17,10 +17,13 @@ namespace Rehue.BackupForms
     public partial class BackupForm : Form, IIdiomaObserver
     {
         private readonly BackupBLL _servicio = new BackupBLL();
+        private bool _modoRestaurar { get; set; }
 
         private string _ruta = string.Empty;
-        public BackupForm()
+        public BackupForm(bool modoRestaurar = false)
         {
+            _modoRestaurar = modoRestaurar;
+
             InitializeComponent();
             LoadForm();
         }
@@ -35,19 +38,29 @@ namespace Rehue.BackupForms
 
         private void LoadForm()
         {
-            Dictionary<string, Type> columns = new Dictionary<string, Type> {
-                { "NumeroCN", typeof(int) },
-                { "NombreCN", typeof(string) },
-                { "UbicacionCN", typeof(string) },
-                { "FechaCreacionCN", typeof(DateTime) },
-                { "TamañoCN", typeof(decimal) }
-            };
+            if (!_modoRestaurar)
+            {
+                Dictionary<string, Type> columns = new Dictionary<string, Type> {
+                    { "NumeroCN", typeof(int) },
+                    { "NombreCN", typeof(string) },
+                    { "UbicacionCN", typeof(string) },
+                    { "FechaCreacionCN", typeof(DateTime) },
+                    { "TamañoCN", typeof(decimal) }
+                };
 
-            GrillaHelper.CrearGrilla(columns,
-                new List<string> { "Id", "Nombre", "Ubicacion", "FechaCreacion", "Tamaño" }, _servicio.ObtenerTodos(), dtBackups);
-            lblRuta.Text = string.Empty;
-            lblNombreRestoreValue.Text = string.Empty;
-            lblUbicacionRestoreValue.Text = string.Empty;
+                GrillaHelper.CrearGrilla(columns,
+                    new List<string> { "Id", "Nombre", "Ubicacion", "FechaCreacion", "Tamaño" }, _servicio.ObtenerTodos(), dtBackups);
+                lblRuta.Text = string.Empty;
+                lblNombreRestoreValue.Text = string.Empty;
+                lblUbicacionRestoreValue.Text = string.Empty;
+            }
+            else
+            {
+                grpCrear.Enabled = false;
+                dtBackups.Enabled = false;
+                btnConfirmarRestore.Enabled = true;
+                btnSeleccionarRestore.Visible = true;
+            }
         }
 
         private void btnSeleccionarCarpeta_Click(object sender, EventArgs e)
@@ -117,7 +130,7 @@ namespace Rehue.BackupForms
             try
             {
                 _servicio.RestaturarBackup(lblUbicacionRestoreValue.Text);
-                LoadForm();
+                this.Close();
             }
             catch (OperacionDBException ex)
             {
@@ -126,6 +139,22 @@ namespace Rehue.BackupForms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnSeleccionarRestore_Click(object sender, EventArgs e)
+        {
+            using (var archivo = new OpenFileDialog())
+            {
+                archivo.Filter = "All Files|*.bak";
+
+                DialogResult result = archivo.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(archivo.FileName))
+                {
+                    lblUbicacionRestoreValue.Text = archivo.FileName;
+                    lblNombreRestoreValue.Text = archivo.SafeFileName;
+                }
             }
         }
     }

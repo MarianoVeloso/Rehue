@@ -8,13 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Rehue.BackupForms
+namespace Rehue.AyudaForm
 {
-    public partial class RestaurarForm : Form
+    public partial class SeccionDescripcionUC : UserControl
     {
-        public RestaurarForm()
+        public SeccionDescripcionUC(string seccion, string textoInformativo)
         {
             InitializeComponent();
+            lblSeccion.Text = seccion;
+            txtTextoInformativo.Text = textoInformativo;
+
         }
     }
 }

@@ -40,16 +40,18 @@
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.denunciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.subscripcionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.comprarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.leerLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbIdioma = new System.Windows.Forms.ComboBox();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblUsuarioDato = new System.Windows.Forms.Label();
-            this.leerLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administrarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,8 +63,9 @@
             this.idiomaToolStripMenuItem,
             this.rolToolStripMenuItem,
             this.citaToolStripMenuItem,
-            this.backupToolStripMenuItem,
             this.subscripcionToolStripMenuItem,
+            this.backupToolStripMenuItem,
+            this.menuToolStripMenuItem,
             this.cerrarSesionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -155,6 +158,29 @@
             this.denunciasToolStripMenuItem.Text = "Denuncias";
             this.denunciasToolStripMenuItem.Click += new System.EventHandler(this.denunciasToolStripMenuItem_Click);
             // 
+            // subscripcionToolStripMenuItem
+            // 
+            this.subscripcionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem2,
+            this.comprarToolStripMenuItem});
+            this.subscripcionToolStripMenuItem.Name = "subscripcionToolStripMenuItem";
+            this.subscripcionToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
+            this.subscripcionToolStripMenuItem.Text = "Subscripcion";
+            // 
+            // crearToolStripMenuItem2
+            // 
+            this.crearToolStripMenuItem2.Name = "crearToolStripMenuItem2";
+            this.crearToolStripMenuItem2.Size = new System.Drawing.Size(150, 26);
+            this.crearToolStripMenuItem2.Text = "Crear";
+            this.crearToolStripMenuItem2.Click += new System.EventHandler(this.administrarToolStripMenuItem2_Click);
+            // 
+            // comprarToolStripMenuItem
+            // 
+            this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
+            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.comprarToolStripMenuItem.Text = "Comprar";
+            this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
+            // 
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -171,28 +197,12 @@
             this.crearToolStripMenuItem1.Text = "Administrar backups";
             this.crearToolStripMenuItem1.Click += new System.EventHandler(this.crearToolStripMenuItem1_Click);
             // 
-            // subscripcionToolStripMenuItem
+            // leerLogsToolStripMenuItem
             // 
-            this.subscripcionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crearToolStripMenuItem2,
-            this.comprarToolStripMenuItem});
-            this.subscripcionToolStripMenuItem.Name = "subscripcionToolStripMenuItem";
-            this.subscripcionToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
-            this.subscripcionToolStripMenuItem.Text = "Subscripcion";
-            // 
-            // crearToolStripMenuItem2
-            // 
-            this.crearToolStripMenuItem2.Name = "crearToolStripMenuItem2";
-            this.crearToolStripMenuItem2.Size = new System.Drawing.Size(224, 26);
-            this.crearToolStripMenuItem2.Text = "Crear";
-            this.crearToolStripMenuItem2.Click += new System.EventHandler(this.administrarToolStripMenuItem2_Click);
-            // 
-            // comprarToolStripMenuItem
-            // 
-            this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
-            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.comprarToolStripMenuItem.Text = "Comprar";
-            this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
+            this.leerLogsToolStripMenuItem.Name = "leerLogsToolStripMenuItem";
+            this.leerLogsToolStripMenuItem.Size = new System.Drawing.Size(227, 26);
+            this.leerLogsToolStripMenuItem.Text = "Leer Logs";
+            this.leerLogsToolStripMenuItem.Click += new System.EventHandler(this.leerLogsToolStripMenuItem_Click);
             // 
             // cerrarSesionToolStripMenuItem
             // 
@@ -234,12 +244,19 @@
             this.lblUsuarioDato.TabIndex = 6;
             this.lblUsuarioDato.Text = "label1";
             // 
-            // leerLogsToolStripMenuItem
+            // menuToolStripMenuItem
             // 
-            this.leerLogsToolStripMenuItem.Name = "leerLogsToolStripMenuItem";
-            this.leerLogsToolStripMenuItem.Size = new System.Drawing.Size(227, 26);
-            this.leerLogsToolStripMenuItem.Text = "Leer Logs";
-            this.leerLogsToolStripMenuItem.Click += new System.EventHandler(this.leerLogsToolStripMenuItem_Click);
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.administrarToolStripMenuItem2});
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
+            this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // administrarToolStripMenuItem2
+            // 
+            this.administrarToolStripMenuItem2.Name = "administrarToolStripMenuItem2";
+            this.administrarToolStripMenuItem2.Size = new System.Drawing.Size(224, 26);
+            this.administrarToolStripMenuItem2.Text = "Administrar";
             // 
             // RehueForm
             // 
@@ -288,5 +305,7 @@
         private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem comprarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem leerLogsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administrarToolStripMenuItem2;
     }
 }

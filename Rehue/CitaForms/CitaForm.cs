@@ -1,4 +1,5 @@
-﻿using Rehue.BE;
+﻿using Rehue.AyudaForm;
+using Rehue.BE;
 using Rehue.BLL;
 using Rehue.Interfaces;
 using Rehue.Servicios;
@@ -91,7 +92,7 @@ namespace Rehue.CitaForms
             _mesas = _mesaBLL.ObtenerPorIdEmpresa(((IEmpresa)lstEmpresas.SelectedItem).Id).Where(x => x.Reservada == false).ToList();
             dtMesas.DataSource = null;
             GrillaHelper.CrearGrilla(columns,
-                new List<string> {"Id", "Descripcion", "CantidadComensales" }, _mesas, dtMesas );
+                new List<string> { "Id", "Descripcion", "CantidadComensales" }, _mesas, dtMesas);
         }
 
         private void ValidarCita(ICita cita)
@@ -123,6 +124,18 @@ namespace Rehue.CitaForms
             {
                 _mesaSeleccionada = int.Parse(dtMesas.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F1)
+            {
+                CentroAyudaForm form = new CentroAyudaForm();
+                form.ShowDialog();
+                return true;    // indicate that you handled this keystroke
+            }
+
+            // Call the base class
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

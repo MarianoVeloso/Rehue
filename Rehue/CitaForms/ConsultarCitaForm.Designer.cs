@@ -44,10 +44,12 @@ namespace Rehue.CitaForms
             this.btnExportarConfirmada = new System.Windows.Forms.Button();
             this.btnExportarPendienteResolucion = new System.Windows.Forms.Button();
             this.btnExportarCanceladas = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridPendienteConfirmacion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCanceladas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridViewCitasPendienteResolucion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCitasConfirmadas)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblCitasPendientes
@@ -64,7 +66,8 @@ namespace Rehue.CitaForms
             // 
             // dtGridPendienteConfirmacion
             // 
-            this.dtGridPendienteConfirmacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.dtGridPendienteConfirmacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtGridPendienteConfirmacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtGridPendienteConfirmacion.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -76,14 +79,15 @@ namespace Rehue.CitaForms
             this.dtGridPendienteConfirmacion.ReadOnly = true;
             this.dtGridPendienteConfirmacion.RowHeadersWidth = 51;
             this.dtGridPendienteConfirmacion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtGridPendienteConfirmacion.Size = new System.Drawing.Size(1035, 215);
+            this.dtGridPendienteConfirmacion.Size = new System.Drawing.Size(1107, 215);
             this.dtGridPendienteConfirmacion.TabIndex = 1;
             this.dtGridPendienteConfirmacion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridPendienteConfirmacion_CellClick);
             this.dtGridPendienteConfirmacion.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dtGridPendienteConfirmacion_DataBindingComplete);
             // 
             // dtGridCanceladas
             // 
-            this.dtGridCanceladas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.dtGridCanceladas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtGridCanceladas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtGridCanceladas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -94,7 +98,7 @@ namespace Rehue.CitaForms
             this.dtGridCanceladas.Name = "dtGridCanceladas";
             this.dtGridCanceladas.RowHeadersWidth = 51;
             this.dtGridCanceladas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtGridCanceladas.Size = new System.Drawing.Size(1035, 144);
+            this.dtGridCanceladas.Size = new System.Drawing.Size(1108, 144);
             this.dtGridCanceladas.TabIndex = 3;
             this.dtGridCanceladas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCanceladas_CellClick);
             // 
@@ -113,7 +117,7 @@ namespace Rehue.CitaForms
             // btnConfirmar
             // 
             this.btnConfirmar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirmar.Location = new System.Drawing.Point(847, 257);
+            this.btnConfirmar.Location = new System.Drawing.Point(916, 253);
             this.btnConfirmar.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(100, 28);
@@ -125,7 +129,7 @@ namespace Rehue.CitaForms
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar.Location = new System.Drawing.Point(955, 257);
+            this.btnCancelar.Location = new System.Drawing.Point(1024, 253);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 28);
@@ -137,7 +141,7 @@ namespace Rehue.CitaForms
             // btnDenunciar
             // 
             this.btnDenunciar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDenunciar.Location = new System.Drawing.Point(955, 516);
+            this.btnDenunciar.Location = new System.Drawing.Point(1024, 512);
             this.btnDenunciar.Margin = new System.Windows.Forms.Padding(4);
             this.btnDenunciar.Name = "btnDenunciar";
             this.btnDenunciar.Size = new System.Drawing.Size(100, 28);
@@ -148,7 +152,8 @@ namespace Rehue.CitaForms
             // 
             // dtGridViewCitasPendienteResolucion
             // 
-            this.dtGridViewCitasPendienteResolucion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.dtGridViewCitasPendienteResolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtGridViewCitasPendienteResolucion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtGridViewCitasPendienteResolucion.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -159,7 +164,7 @@ namespace Rehue.CitaForms
             this.dtGridViewCitasPendienteResolucion.Name = "dtGridViewCitasPendienteResolucion";
             this.dtGridViewCitasPendienteResolucion.RowHeadersWidth = 51;
             this.dtGridViewCitasPendienteResolucion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtGridViewCitasPendienteResolucion.Size = new System.Drawing.Size(1035, 144);
+            this.dtGridViewCitasPendienteResolucion.Size = new System.Drawing.Size(1108, 144);
             this.dtGridViewCitasPendienteResolucion.TabIndex = 7;
             this.dtGridViewCitasPendienteResolucion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridViewCitasPendienteResolucion_CellClick);
             // 
@@ -177,7 +182,8 @@ namespace Rehue.CitaForms
             // 
             // dtGridCitasConfirmadas
             // 
-            this.dtGridCitasConfirmadas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.dtGridCitasConfirmadas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtGridCitasConfirmadas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtGridCitasConfirmadas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -189,7 +195,7 @@ namespace Rehue.CitaForms
             this.dtGridCitasConfirmadas.ReadOnly = true;
             this.dtGridCitasConfirmadas.RowHeadersWidth = 51;
             this.dtGridCitasConfirmadas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtGridCitasConfirmadas.Size = new System.Drawing.Size(1035, 215);
+            this.dtGridCitasConfirmadas.Size = new System.Drawing.Size(1107, 215);
             this.dtGridCitasConfirmadas.TabIndex = 10;
             this.dtGridCitasConfirmadas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridCitasConfirmadas_CellClick);
             this.dtGridCitasConfirmadas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dtGridCitasConfirmadas_DataBindingComplete);
@@ -208,9 +214,12 @@ namespace Rehue.CitaForms
             // 
             // btnExportarPDFPendienteConfirmacion
             // 
-            this.btnExportarPDFPendienteConfirmacion.Location = new System.Drawing.Point(714, 257);
+            this.btnExportarPDFPendienteConfirmacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportarPDFPendienteConfirmacion.Location = new System.Drawing.Point(687, 254);
             this.btnExportarPDFPendienteConfirmacion.Name = "btnExportarPDFPendienteConfirmacion";
-            this.btnExportarPDFPendienteConfirmacion.Size = new System.Drawing.Size(126, 28);
+            this.btnExportarPDFPendienteConfirmacion.Size = new System.Drawing.Size(222, 28);
             this.btnExportarPDFPendienteConfirmacion.TabIndex = 11;
             this.btnExportarPDFPendienteConfirmacion.Text = "Exportar PDF";
             this.btnExportarPDFPendienteConfirmacion.UseVisualStyleBackColor = true;
@@ -218,9 +227,12 @@ namespace Rehue.CitaForms
             // 
             // btnExportarConfirmada
             // 
-            this.btnExportarConfirmada.Location = new System.Drawing.Point(822, 516);
+            this.btnExportarConfirmada.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportarConfirmada.Location = new System.Drawing.Point(795, 512);
             this.btnExportarConfirmada.Name = "btnExportarConfirmada";
-            this.btnExportarConfirmada.Size = new System.Drawing.Size(126, 28);
+            this.btnExportarConfirmada.Size = new System.Drawing.Size(222, 28);
             this.btnExportarConfirmada.TabIndex = 12;
             this.btnExportarConfirmada.Text = "Exportar PDF";
             this.btnExportarConfirmada.UseVisualStyleBackColor = true;
@@ -228,9 +240,12 @@ namespace Rehue.CitaForms
             // 
             // btnExportarPendienteResolucion
             // 
-            this.btnExportarPendienteResolucion.Location = new System.Drawing.Point(928, 911);
+            this.btnExportarPendienteResolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportarPendienteResolucion.Location = new System.Drawing.Point(902, 907);
             this.btnExportarPendienteResolucion.Name = "btnExportarPendienteResolucion";
-            this.btnExportarPendienteResolucion.Size = new System.Drawing.Size(126, 28);
+            this.btnExportarPendienteResolucion.Size = new System.Drawing.Size(222, 28);
             this.btnExportarPendienteResolucion.TabIndex = 13;
             this.btnExportarPendienteResolucion.Text = "Exportar PDF";
             this.btnExportarPendienteResolucion.UseVisualStyleBackColor = true;
@@ -238,34 +253,46 @@ namespace Rehue.CitaForms
             // 
             // btnExportarCanceladas
             // 
-            this.btnExportarCanceladas.Location = new System.Drawing.Point(928, 720);
+            this.btnExportarCanceladas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportarCanceladas.Location = new System.Drawing.Point(902, 716);
             this.btnExportarCanceladas.Name = "btnExportarCanceladas";
-            this.btnExportarCanceladas.Size = new System.Drawing.Size(126, 28);
+            this.btnExportarCanceladas.Size = new System.Drawing.Size(222, 28);
             this.btnExportarCanceladas.TabIndex = 14;
             this.btnExportarCanceladas.Text = "Exportar PDF";
             this.btnExportarCanceladas.UseVisualStyleBackColor = true;
             this.btnExportarCanceladas.Click += new System.EventHandler(this.btnExportarCanceladas_Click);
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.btnExportarPendienteResolucion);
+            this.panel1.Controls.Add(this.btnExportarCanceladas);
+            this.panel1.Controls.Add(this.btnExportarPDFPendienteConfirmacion);
+            this.panel1.Controls.Add(this.btnExportarConfirmada);
+            this.panel1.Controls.Add(this.btnDenunciar);
+            this.panel1.Controls.Add(this.btnConfirmar);
+            this.panel1.Controls.Add(this.btnCancelar);
+            this.panel1.Location = new System.Drawing.Point(3, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1158, 935);
+            this.panel1.TabIndex = 15;
+            // 
             // ConsultarCitaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 946);
-            this.Controls.Add(this.btnExportarCanceladas);
-            this.Controls.Add(this.btnExportarPendienteResolucion);
-            this.Controls.Add(this.btnExportarConfirmada);
-            this.Controls.Add(this.btnExportarPDFPendienteConfirmacion);
+            this.ClientSize = new System.Drawing.Size(1163, 946);
             this.Controls.Add(this.dtGridCitasConfirmadas);
             this.Controls.Add(this.lblCitasConfirmadas);
             this.Controls.Add(this.lblCitasPendientesDeResolucion);
             this.Controls.Add(this.dtGridViewCitasPendienteResolucion);
-            this.Controls.Add(this.btnDenunciar);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.dtGridCanceladas);
             this.Controls.Add(this.lblCitasCanceladas);
             this.Controls.Add(this.dtGridPendienteConfirmacion);
             this.Controls.Add(this.lblCitasPendientes);
+            this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ConsultarCitaForm";
             this.Text = "ConsultarCitaForm";
@@ -275,6 +302,7 @@ namespace Rehue.CitaForms
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCanceladas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridViewCitasPendienteResolucion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridCitasConfirmadas)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,5 +325,6 @@ namespace Rehue.CitaForms
         private System.Windows.Forms.Button btnExportarConfirmada;
         private System.Windows.Forms.Button btnExportarPendienteResolucion;
         private System.Windows.Forms.Button btnExportarCanceladas;
+        private System.Windows.Forms.Panel panel1;
     }
 }

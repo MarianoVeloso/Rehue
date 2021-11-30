@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBackup.cs" />
+    <Compile Include="ICentroAyuda.cs" />
+    <Compile Include="ISeccionDescripcion.cs" />
     <Compile Include="ISubscripcion.cs" />
     <Compile Include="Logs\ILog.cs" />
     <Compile Include="Logs\ILogSignIn.cs" />

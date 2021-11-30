@@ -237,6 +237,7 @@
     <Compile Include="Helpers\DigitoException.cs" />
     <Compile Include="Helpers\ErrorInputException.cs" />
     <Compile Include="Helpers\ErrorLogInException.cs" />
+    <Compile Include="Helpers\InstaladorException.cs" />
     <Compile Include="Helpers\OperacionDBException.cs" />
     <Compile Include="Helpers\XmlError.cs" />
     <Compile Include="SqlInstaller.cs">

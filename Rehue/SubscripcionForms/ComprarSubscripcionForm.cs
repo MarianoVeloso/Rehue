@@ -40,6 +40,7 @@ namespace Rehue.SubscripcionForms
 
             try
             {
+                ValidarSubscripcion();
                 _servicio.PagarSubscripcion(Session.Instancia.Usuario.Id, subscripcion.Id);
                 MessageBox.Show("Subscripcion creada con éxito!");
                 this.Close();
@@ -53,6 +54,13 @@ namespace Rehue.SubscripcionForms
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void ValidarSubscripcion()
+        {
+            if(((IEmpresa)Session.Instancia.Usuario).ObtenerSubscripcion () != null){
+                throw new Exception("Usted ya posee una subscripción activa.");
+            }
         }
     }
 }

@@ -35,9 +35,12 @@
             // 
             // dtListadoErrores
             // 
+            this.dtListadoErrores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dtListadoErrores.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtListadoErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtListadoErrores.Location = new System.Drawing.Point(13, 50);
             this.dtListadoErrores.Name = "dtListadoErrores";
+            this.dtListadoErrores.ReadOnly = true;
             this.dtListadoErrores.RowHeadersWidth = 51;
             this.dtListadoErrores.RowTemplate.Height = 24;
             this.dtListadoErrores.Size = new System.Drawing.Size(775, 388);
