@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces
 {
-    public interface IMenuComponent
+    public interface IMenuComponent : IEntity
     {
-        IEmpresa Empresa { get; set; }
-        DateTime FechaCreacion { get; set; }
+        string Nombre { get; set; }
     }
 }

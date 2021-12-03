@@ -34,7 +34,7 @@ namespace Rehue.DAL
             };
             try
             {
-                _servicio.RealizarOperacion("registrar_backup", parametros);
+                _servicio.RealizarOperacionSinTransaccion("registrar_backup", parametros);
             }
             catch (OperacionDBException ex)
             {

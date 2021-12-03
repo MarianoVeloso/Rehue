@@ -131,7 +131,7 @@ namespace Rehue.CitaForms
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.lblCantidadComensales);
             this.Name = "RegistrarMesa";
-            this.Text = "RegistrarMesa";
+            this.Text = "Registrar Mesa";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RegistrarMesa_FormClosed);
             this.Load += new System.EventHandler(this.RegistrarMesa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numComensales)).EndInit();

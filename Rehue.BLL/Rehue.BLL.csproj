@@ -54,6 +54,7 @@
     <Compile Include="DenunciaBLL.cs" />
     <Compile Include="EmpresaBLL.cs" />
     <Compile Include="IdiomaBLL.cs" />
+    <Compile Include="MenuComponentBLL.cs" />
     <Compile Include="MesaBLL.cs" />
     <Compile Include="PdfWriterBLL.cs" />
     <Compile Include="RolComponentBLL.cs" />

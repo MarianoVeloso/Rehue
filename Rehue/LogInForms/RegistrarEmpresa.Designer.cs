@@ -116,7 +116,7 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.grpOtrosDatos);
             this.Name = "RegistrarEmpresa";
-            this.Text = "RegistrarEmpresa";
+            this.Text = "Registrar Empresa";
             this.Load += new System.EventHandler(this.RegistrarEmpresa_Load);
             this.Controls.SetChildIndex(this.grpOtrosDatos, 0);
             this.Controls.SetChildIndex(this.btnCancelar, 0);
@@ -128,7 +128,6 @@
             this.grpOtrosDatos.ResumeLayout(false);
             this.grpOtrosDatos.PerformLayout();
             this.ResumeLayout(false);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 

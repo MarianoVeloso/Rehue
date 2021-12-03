@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rehue.Interfaces
+﻿namespace Rehue.Interfaces
 {
-    public interface IItem
+    public interface IItem : IMenuComponent
     {
-
+        int IdPadre { get; set; }
+        decimal Costo { get; set; }
+        string Descripcion { get; set; }
     }
 }

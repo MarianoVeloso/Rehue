@@ -31,6 +31,7 @@ namespace Rehue.CitaForms
         {
             this.lstEmpresas = new System.Windows.Forms.ListBox();
             this.grpCrearCita = new System.Windows.Forms.GroupBox();
+            this.btnVerMenu = new System.Windows.Forms.Button();
             this.lblMesaDisponible = new System.Windows.Forms.Label();
             this.lblEmpresa = new System.Windows.Forms.Label();
             this.dtMesas = new System.Windows.Forms.DataGridView();
@@ -47,11 +48,9 @@ namespace Rehue.CitaForms
             // lstEmpresas
             // 
             this.lstEmpresas.FormattingEnabled = true;
-            this.lstEmpresas.ItemHeight = 16;
-            this.lstEmpresas.Location = new System.Drawing.Point(0, 39);
-            this.lstEmpresas.Margin = new System.Windows.Forms.Padding(4);
+            this.lstEmpresas.Location = new System.Drawing.Point(0, 32);
             this.lstEmpresas.Name = "lstEmpresas";
-            this.lstEmpresas.Size = new System.Drawing.Size(949, 180);
+            this.lstEmpresas.Size = new System.Drawing.Size(713, 147);
             this.lstEmpresas.TabIndex = 1;
             this.lstEmpresas.SelectedIndexChanged += new System.EventHandler(this.lstEmpresas_SelectedIndexChanged);
             // 
@@ -60,6 +59,7 @@ namespace Rehue.CitaForms
             this.grpCrearCita.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpCrearCita.Controls.Add(this.btnVerMenu);
             this.grpCrearCita.Controls.Add(this.lblMesaDisponible);
             this.grpCrearCita.Controls.Add(this.lblEmpresa);
             this.grpCrearCita.Controls.Add(this.dtMesas);
@@ -69,32 +69,38 @@ namespace Rehue.CitaForms
             this.grpCrearCita.Controls.Add(this.dtPckrFecha);
             this.grpCrearCita.Controls.Add(this.lblFecha);
             this.grpCrearCita.Controls.Add(this.lstEmpresas);
-            this.grpCrearCita.Location = new System.Drawing.Point(16, 15);
-            this.grpCrearCita.Margin = new System.Windows.Forms.Padding(4);
+            this.grpCrearCita.Location = new System.Drawing.Point(12, 12);
             this.grpCrearCita.Name = "grpCrearCita";
-            this.grpCrearCita.Padding = new System.Windows.Forms.Padding(4);
-            this.grpCrearCita.Size = new System.Drawing.Size(959, 626);
+            this.grpCrearCita.Size = new System.Drawing.Size(719, 509);
             this.grpCrearCita.TabIndex = 2;
             this.grpCrearCita.TabStop = false;
             this.grpCrearCita.Text = "Crear Cita";
             // 
+            // btnVerMenu
+            // 
+            this.btnVerMenu.Location = new System.Drawing.Point(638, 185);
+            this.btnVerMenu.Name = "btnVerMenu";
+            this.btnVerMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnVerMenu.TabIndex = 9;
+            this.btnVerMenu.Text = "Ver menu";
+            this.btnVerMenu.UseVisualStyleBackColor = true;
+            this.btnVerMenu.Click += new System.EventHandler(this.btnVerMenu_Click);
+            // 
             // lblMesaDisponible
             // 
             this.lblMesaDisponible.AutoSize = true;
-            this.lblMesaDisponible.Location = new System.Drawing.Point(3, 238);
-            this.lblMesaDisponible.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMesaDisponible.Location = new System.Drawing.Point(2, 234);
             this.lblMesaDisponible.Name = "lblMesaDisponible";
-            this.lblMesaDisponible.Size = new System.Drawing.Size(121, 16);
+            this.lblMesaDisponible.Size = new System.Drawing.Size(93, 13);
             this.lblMesaDisponible.TabIndex = 8;
             this.lblMesaDisponible.Text = "Mesas disponibles";
             // 
             // lblEmpresa
             // 
             this.lblEmpresa.AutoSize = true;
-            this.lblEmpresa.Location = new System.Drawing.Point(3, 20);
-            this.lblEmpresa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresa.Location = new System.Drawing.Point(2, 16);
             this.lblEmpresa.Name = "lblEmpresa";
-            this.lblEmpresa.Size = new System.Drawing.Size(69, 16);
+            this.lblEmpresa.Size = new System.Drawing.Size(53, 13);
             this.lblEmpresa.TabIndex = 7;
             this.lblEmpresa.Text = "Empresas";
             // 
@@ -102,21 +108,19 @@ namespace Rehue.CitaForms
             // 
             this.dtMesas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtMesas.ColumnHeadersHeight = 29;
-            this.dtMesas.Location = new System.Drawing.Point(0, 257);
-            this.dtMesas.Margin = new System.Windows.Forms.Padding(4);
+            this.dtMesas.Location = new System.Drawing.Point(0, 250);
             this.dtMesas.Name = "dtMesas";
             this.dtMesas.RowHeadersWidth = 51;
             this.dtMesas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtMesas.Size = new System.Drawing.Size(951, 217);
+            this.dtMesas.Size = new System.Drawing.Size(713, 135);
             this.dtMesas.TabIndex = 0;
             this.dtMesas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtMesas_CellClick);
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(851, 591);
-            this.btnCrear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCrear.Location = new System.Drawing.Point(638, 480);
             this.btnCrear.Name = "btnCrear";
-            this.btnCrear.Size = new System.Drawing.Size(100, 28);
+            this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.TabIndex = 6;
             this.btnCrear.Text = "Crear";
             this.btnCrear.UseVisualStyleBackColor = true;
@@ -124,50 +128,45 @@ namespace Rehue.CitaForms
             // 
             // numComensales
             // 
-            this.numComensales.Location = new System.Drawing.Point(113, 527);
-            this.numComensales.Margin = new System.Windows.Forms.Padding(4);
+            this.numComensales.Location = new System.Drawing.Point(85, 428);
             this.numComensales.Name = "numComensales";
-            this.numComensales.Size = new System.Drawing.Size(267, 22);
+            this.numComensales.Size = new System.Drawing.Size(200, 20);
             this.numComensales.TabIndex = 5;
             // 
             // lblComensales
             // 
             this.lblComensales.AutoSize = true;
-            this.lblComensales.Location = new System.Drawing.Point(0, 529);
-            this.lblComensales.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblComensales.Location = new System.Drawing.Point(0, 430);
             this.lblComensales.Name = "lblComensales";
-            this.lblComensales.Size = new System.Drawing.Size(83, 16);
+            this.lblComensales.Size = new System.Drawing.Size(64, 13);
             this.lblComensales.TabIndex = 4;
             this.lblComensales.Text = "Comensales";
             // 
             // dtPckrFecha
             // 
-            this.dtPckrFecha.Location = new System.Drawing.Point(115, 489);
-            this.dtPckrFecha.Margin = new System.Windows.Forms.Padding(4);
+            this.dtPckrFecha.Location = new System.Drawing.Point(86, 397);
             this.dtPckrFecha.Name = "dtPckrFecha";
-            this.dtPckrFecha.Size = new System.Drawing.Size(265, 22);
+            this.dtPckrFecha.Size = new System.Drawing.Size(200, 20);
             this.dtPckrFecha.TabIndex = 3;
             // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(0, 489);
-            this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFecha.Location = new System.Drawing.Point(0, 397);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(107, 16);
+            this.lblFecha.Size = new System.Drawing.Size(88, 13);
             this.lblFecha.TabIndex = 2;
             this.lblFecha.Text = "Fecha encuentro";
             // 
             // CitaForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 645);
+            this.ClientSize = new System.Drawing.Size(743, 524);
             this.Controls.Add(this.grpCrearCita);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CitaForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CitaForm";
+            this.Text = "Crear Cita";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CitaForm_FormClosed);
             this.Load += new System.EventHandler(this.CitaForm_Load);
             this.grpCrearCita.ResumeLayout(false);
@@ -189,5 +188,6 @@ namespace Rehue.CitaForms
         private System.Windows.Forms.DataGridView dtMesas;
         private System.Windows.Forms.Label lblMesaDisponible;
         private System.Windows.Forms.Label lblEmpresa;
+        private System.Windows.Forms.Button btnVerMenu;
     }
 }

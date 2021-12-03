@@ -53,6 +53,7 @@
     <Compile Include="EmpresaDAL.cs" />
     <Compile Include="GestorDigitoVHDAL.cs" />
     <Compile Include="IdiomaDAL.cs" />
+    <Compile Include="MenuComponentDAL.cs" />
     <Compile Include="MesaDAL.cs" />
     <Compile Include="Registro\RegistroCitaDAL.cs" />
     <Compile Include="RehueDAL.cs" />

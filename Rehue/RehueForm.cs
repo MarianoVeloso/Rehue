@@ -23,6 +23,7 @@ using Rehue.SubscripcionForms;
 using Rehue.Logs;
 using Rehue.Servicios.Helpers;
 using System.Diagnostics;
+using Rehue.MenuForms;
 
 namespace Rehue
 {
@@ -370,6 +371,15 @@ namespace Rehue
         private void leerLogsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LeerLogsForm form = new LeerLogsForm()
+            {
+                MdiParent = this
+            };
+            form.Show();
+        }
+
+        private void administrarToolStripMenuItem2_Click_1(object sender, EventArgs e)
+        {
+            AdministrarMenu form = new AdministrarMenu
             {
                 MdiParent = this
             };

@@ -12,20 +12,21 @@ using System.Threading.Tasks;
 
 namespace Rehue.DAL
 {
-    public class RolComponentDAL : ICrud<IRol>
+    public class MenuComponentDAL
     {
-        private readonly Servicio _servicio = new Servicio();
-        private static RolComponentDAL _instancia;
-        public static RolComponentDAL Instancia
+        private readonly Servicio _servicio = Servicio.Instancia;
+
+        private static MenuComponentDAL _instancia;
+        public static MenuComponentDAL Instancia
         {
             get
             {
                 if (_instancia == null)
-                    _instancia = new RolComponentDAL();
+                    _instancia = new MenuComponentDAL();
                 return _instancia;
             }
         }
-        public IRol ObtenerPorId(int id)
+        public IMenu ObtenerPorId(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
@@ -34,13 +35,13 @@ namespace Rehue.DAL
 
             try
             {
-                var resultado = _servicio.Leer("obtener_rol_por_id", parametros);
+                var resultado = _servicio.Leer("obtener_menu_por_id", parametros);
 
-                IRol permiso = new Rol();
+                IMenu permiso = new Menu();
 
                 foreach (DataRow item in resultado.Rows)
                 {
-                    permiso = MapearRol(item);
+                    permiso = MapearMenu(item);
                 }
 
                 return permiso;
@@ -50,58 +51,58 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        public IList<IRol> ObtenerTodos()
+
+        public IList<IMenu> ObtenerTodos(int idEmpresa)
         {
             try
             {
-                var resultado = _servicio.Leer("obtener_permisos");
+                var resultado = _servicio.Leer("obtener_menues");
 
-                return MapearRoles(resultado.Rows);
+                return MapearMenues(resultado.Rows, idEmpresa);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        public void Guardar(IRol entity)
+        public void Guardar(IMenu entity)
         {
-            int id = 0;
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@nombre", entity.Nombre),
-                _servicio.CrearParametro("@id", id, ParameterDirection.Output)
+                _servicio.CrearParametro("@Nombre", entity.Nombre),
 
             };
 
             try
             {
-                _servicio.RealizarOperacion("registrar_rol", parametros);
-
-                entity.Id = int.Parse(parametros[1].Value.ToString());
+                _servicio.RealizarOperacion("registrar_menu", parametros);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        public void GuardarPermiso(IPermiso entity)
+        public void GuardarItem(IItem entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
                 _servicio.CrearParametro("@idPadre", entity.IdPadre),
-                _servicio.CrearParametro("@idHijo", entity.Id)
+                _servicio.CrearParametro("@idHijo", entity.Id),
+                _servicio.CrearParametro("@costo", entity.Costo)
+
             };
 
             try
             {
-                _servicio.RealizarOperacion("registrar_permiso_padreHijo", parametros);
+                _servicio.RealizarOperacion("registrar_menu_padre_hijo", parametros);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        public void Eliminar(IRol entity)
+
+        public void Eliminar(IMenu entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
@@ -110,14 +111,14 @@ namespace Rehue.DAL
 
             try
             {
-                _servicio.RealizarOperacion("permiso_eliminar", parametros);
+                _servicio.RealizarOperacion("menu_eliminar", parametros);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        public void EliminarHijo(IPermiso entity)
+        public void EliminarHijo(IItem entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
@@ -127,51 +128,58 @@ namespace Rehue.DAL
 
             try
             {
-                _servicio.RealizarOperacion("eliminar_rol_padre_hijo", parametros);
+                _servicio.RealizarOperacion("eliminar_item_padre_hijo", parametros);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        public void AgregarHijo(IPermiso entity)
+
+        public void AgregarHijo(IItem entity)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@idHijo", entity.Id),
-                _servicio.CrearParametro("@idPadre", entity.IdPadre)
+                _servicio.CrearParametro("@idPadre", entity.IdPadre),
+                _servicio.CrearParametro("@idEmpresa", Session.Instancia.Usuario.Id),
+                _servicio.CrearParametro("@Descripcion", entity.Descripcion),
+                _servicio.CrearParametro("@Costo", entity.Costo),
+                _servicio.CrearParametro("@idReferencia", entity.Id)
             };
 
             try
             {
-                _servicio.RealizarOperacion("agregar_rol_padre_hijo", parametros);
+                _servicio.RealizarOperacion("registrar_item_padre_hijo", parametros);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        public IList<IRol> ObtenerRolesYPermisosPorUsuario(int idUsuario)
+
+
+        public IList<IMenu> ObtenerMenuesPorUsuario(int idUsuario, int idEmpresa)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
                 _servicio.CrearParametro("@id", idUsuario)
             };
 
-            var resultado = _servicio.Leer("Obtener_rol_por_usuario", parametros);
+            var resultado = _servicio.Leer("Obtener_menues_por_usuario", parametros);
 
-            return MapearRoles(resultado.Rows);
+            return MapearMenues(resultado.Rows, idEmpresa);
         }
-        public void AsignarRolAUsuario(int idUsuario, int idRol)
+
+        public void AsignarMenuAUsuario(int idUsuario, int idMenu)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
                 _servicio.CrearParametro("@idUsuario", idUsuario),
-                _servicio.CrearParametro("@idRol", idRol)
+                _servicio.CrearParametro("@idMenu", idMenu)
             };
             try
             {
-                _servicio.RealizarOperacion("registrar_rol_usuario", parametros);
+                _servicio.RealizarOperacion("registrar_menu_usuario", parametros);
 
             }
             catch (OperacionDBException ex)
@@ -179,82 +187,90 @@ namespace Rehue.DAL
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        public void EliminarRolAUsuario(int idUsuario, int idRol)
+
+        public void EliminarMenuAUsuario(int idUsuario, int idMenu)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
                 _servicio.CrearParametro("@idUsuario", idUsuario),
-                _servicio.CrearParametro("@idRol", idRol)
+                _servicio.CrearParametro("@idMenu", idMenu)
             };
             try
             {
-                _servicio.RealizarOperacion("eliminar_rol_usuario", parametros);
+                _servicio.RealizarOperacion("eliminar_menu_usuario", parametros);
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        private IList<IPermiso> ObtenerPermisosPorIdPadre(int idPadre)
+
+        private IList<IItem> ObtenerItemsPorIdPadre(int idPadre, int idEmpresa)
         {
             List<SqlParameter> parametros = new List<SqlParameter>()
             {
-                _servicio.CrearParametro("@idPadre", idPadre)
+                _servicio.CrearParametro("@idPadre", idPadre),
+                _servicio.CrearParametro("@idEmpresa", idEmpresa)
             };
 
             try
             {
-                var resultado = _servicio.Leer("obtener_permisos_por_idPadre", parametros);
+                var resultado = _servicio.Leer("obtener_items_por_idPadre", parametros);
 
-                List<IPermiso> permisos = new List<IPermiso>();
+                List<IItem> items = new List<IItem>();
 
                 foreach (DataRow item in resultado.Rows)
                 {
-                    permisos.Add(MapearPermiso(item));
+                    items.Add(MapearItem(item));
                 }
 
-                return permisos;
+                return items;
             }
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
             }
         }
-        private IRol MapearRol(DataRow row)
+
+        private IMenu MapearMenu(DataRow row)
         {
-            return new Rol()
+            return new Menu()
             {
                 Id = int.Parse(row["id"].ToString()),
-                Nombre = row["nombre"].ToString()
+                Nombre = row["Nombre"].ToString()
             };
         }
-        private IPermiso MapearPermiso(DataRow row)
+
+        private IItem MapearItem(DataRow row)
         {
-            return new Permiso()
+            return new Item()
             {
                 Id = int.Parse(row["id"].ToString()),
-                Nombre = row["nombre"].ToString(),
-                IdPadre = int.Parse(row["idPadre"].ToString())
+                IdPadre = int.Parse(row["idPadre"].ToString()),
+                Nombre = row["Nombre"].ToString(),
+                Costo = decimal.Parse(row["costo"].ToString()),
+                Descripcion = row["descripcion"].ToString()
             };
         }
-        private List<IRol> MapearRoles(DataRowCollection rows)
+
+        private List<IMenu> MapearMenues(DataRowCollection rows, int idEmpresa)
         {
-            List<IRol> roles = new List<IRol>();
+            List<IMenu> menues = new List<IMenu>();
 
-            foreach (DataRow item in rows)
+            foreach (DataRow itemData in rows)
             {
-                var rol = MapearRol(item);
+                var menu = MapearMenu(itemData);
 
-                var permisos = ObtenerPermisosPorIdPadre(rol.ObtenerId());
+                var items = ObtenerItemsPorIdPadre(menu.ObtenerId(), idEmpresa);
 
-                foreach (IPermiso permiso in permisos)
+                foreach (IItem item in items)
                 {
-                    rol.AgregarPermiso(permiso);
+                    menu.AgregarItem(item);
                 }
-                roles.Add(rol);
+                menues.Add(menu);
             }
 
-            return roles;
+            return menues;
         }
     }
 }

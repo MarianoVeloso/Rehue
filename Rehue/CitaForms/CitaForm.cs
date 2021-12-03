@@ -2,6 +2,7 @@
 using Rehue.BE;
 using Rehue.BLL;
 using Rehue.Interfaces;
+using Rehue.MenuForms;
 using Rehue.Servicios;
 using Rehue.Servicios.Helpers;
 using System;
@@ -131,11 +132,39 @@ namespace Rehue.CitaForms
             {
                 CentroAyudaForm form = new CentroAyudaForm();
                 form.ShowDialog();
-                return true;    // indicate that you handled this keystroke
+                return true;
             }
 
-            // Call the base class
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void btnVerMenu_Click(object sender, EventArgs e)
+        {
+            IEmpresa empresa = (IEmpresa)lstEmpresas.SelectedItem;
+
+            if (empresa != null)
+            {
+                try
+                {
+                    MenuDetalle form = new MenuDetalle()
+                    {
+                        Menu = _empresaBLL.ObtenerMenu(empresa)
+                    };
+                    form.ShowDialog();
+                }
+                catch (OperacionDBException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (DigitoException)
+                {
+                    MessageBox.Show(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)["DigitoException"].Texto);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

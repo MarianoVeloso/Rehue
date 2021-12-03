@@ -126,13 +126,13 @@ namespace Rehue.IdiomaForms
             this.Controls.Add(this.grpTraducciones);
             this.Controls.Add(this.lstIdiomas);
             this.Name = "IdiomaAltaForm";
-            this.Text = "IdiomaAlta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Crear Idioma";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IdiomaAltaForm_FormClosed);
             this.Load += new System.EventHandler(this.IdiomaAlta_Load);
             this.grpTraducciones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 

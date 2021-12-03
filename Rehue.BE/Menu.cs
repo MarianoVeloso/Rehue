@@ -8,24 +8,35 @@ namespace Rehue.BE
 {
     public class Menu : MenuComponent, IMenu
     {
-        private List<IMenuComponent> _items;
+        private List<IItem> _items;
         public Menu()
         {
-            _items = new List<IMenuComponent>();
+            _items = new List<IItem>();
+        }
+
+        public int ObtenerId()
+        {
+            return Id;
         }
 
         public void QuitarItems()
         {
             _items.Clear();
         }
-        public void AgregarItem(IMenuComponent c)
+
+        public void AgregarItem(IItem c)
         {
             _items.Add(c);
         }
 
-        public IList<IMenuComponent> ObtenerItems()
+        public IList<IItem> ObtenerItems()
         {
             return _items;
+        }
+
+        public override string ToString()
+        {
+            return Nombre;
         }
     }
 }

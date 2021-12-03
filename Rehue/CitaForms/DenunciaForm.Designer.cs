@@ -170,12 +170,12 @@ namespace Rehue.CitaForms
             this.Controls.Add(this.txtBoxMotivoTexto);
             this.Controls.Add(this.lblMotivo);
             this.Name = "DenunciaForm";
-            this.Text = "DenunciaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Generar Denuncia";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DenunciaForm_FormClosed);
             this.Load += new System.EventHandler(this.DenunciaForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 

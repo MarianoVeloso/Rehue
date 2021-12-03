@@ -37,27 +37,27 @@
             // lstPromociones
             // 
             this.lstPromociones.FormattingEnabled = true;
-            this.lstPromociones.ItemHeight = 16;
-            this.lstPromociones.Location = new System.Drawing.Point(16, 29);
+            this.lstPromociones.Location = new System.Drawing.Point(12, 24);
+            this.lstPromociones.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lstPromociones.Name = "lstPromociones";
-            this.lstPromociones.Size = new System.Drawing.Size(357, 356);
+            this.lstPromociones.Size = new System.Drawing.Size(269, 290);
             this.lstPromociones.TabIndex = 0;
             // 
             // lblPromociones
             // 
             this.lblPromociones.AutoSize = true;
-            this.lblPromociones.Location = new System.Drawing.Point(13, 10);
+            this.lblPromociones.Location = new System.Drawing.Point(10, 8);
+            this.lblPromociones.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPromociones.Name = "lblPromociones";
-            this.lblPromociones.Size = new System.Drawing.Size(160, 16);
+            this.lblPromociones.Size = new System.Drawing.Size(123, 13);
             this.lblPromociones.TabIndex = 1;
             this.lblPromociones.Text = "Promociones disponibles";
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(273, 392);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelar.Location = new System.Drawing.Point(205, 318);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 11;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -65,10 +65,9 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(165, 392);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGuardar.Location = new System.Drawing.Point(124, 318);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(100, 28);
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -76,15 +75,16 @@
             // 
             // ComprarSubscripcionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 438);
+            this.ClientSize = new System.Drawing.Size(298, 356);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.lblPromociones);
             this.Controls.Add(this.lstPromociones);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ComprarSubscripcionForm";
-            this.Text = "ComprarSubscripcionForm";
+            this.Text = "Comprar subscripcion";
             this.ResumeLayout(false);
             this.PerformLayout();
 

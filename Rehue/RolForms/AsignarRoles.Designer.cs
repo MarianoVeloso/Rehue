@@ -125,12 +125,12 @@ namespace Rehue.RolForm
             this.Controls.Add(this.lblUsuarios);
             this.Controls.Add(this.lstUsuarios);
             this.Name = "AsignarRoles";
-            this.Text = "AsignarRoles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Asignar Roles";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AsignarRoles_FormClosed);
             this.Load += new System.EventHandler(this.AsignarRoles_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
         }
 

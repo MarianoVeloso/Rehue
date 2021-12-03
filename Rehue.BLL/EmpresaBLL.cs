@@ -16,6 +16,7 @@ namespace Rehue.BLL
     public class EmpresaBLL : ICrud<IEmpresa>
     {
         private readonly EmpresaDAL _servicio = new EmpresaDAL();
+        private readonly MenuComponentDAL _menuServicio = new MenuComponentDAL();
 
         public IEmpresa ObtenerPorId(int id)
         {
@@ -48,6 +49,18 @@ namespace Rehue.BLL
             catch (OperacionDBException ex)
             {
                 throw new ErrorLogInException(ex.Message);
+            }
+        }
+
+        public IList<IMenu> ObtenerMenu(IEmpresa empresa)
+        {
+            if (empresa.ObtenerSubscripcion() != null)
+            {
+                return _menuServicio.ObtenerTodos(empresa.Id);
+            }
+            else
+            {
+                throw new Exception("La empresa no posee un menú disponible.");
             }
         }
     }

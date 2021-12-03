@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Rehue.BLL
 {
-    public class RolComponentBLL : ICrud<IRol>
+    public class MenuComponentBLL
     {
-        private readonly RolComponentDAL _servicio = new RolComponentDAL();
+        private readonly MenuComponentDAL _servicio = new MenuComponentDAL();
 
-        public IRol ObtenerPorId(int id)
+        public IMenu ObtenerPorId(int id)
         {
             try
             {
@@ -25,18 +25,18 @@ namespace Rehue.BLL
                 throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
-        public IList<IRol> ObtenerTodos()
+        public IList<IMenu> ObtenerTodos()
         {
             try
             {
-                return _servicio.ObtenerTodos();
+                return _servicio.ObtenerTodos(Session.Instancia.Usuario.Id);
             }
             catch (OperacionDBException ex)
             {
                 throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
-        public void Guardar(IRol entity)
+        public void Guardar(IMenu entity)
         {
             try
             {
@@ -51,11 +51,22 @@ namespace Rehue.BLL
                 throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
-        public void GuardarPermiso(IPermiso permiso)
+        public void GuardarItem(IItem permiso)
         {
-            _servicio.GuardarPermiso(permiso);
+            try
+            {
+                _servicio.GuardarItem(permiso);
+            }
+            catch (OperacionDBException ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
+            catch (Exception ex)
+            {
+                throw RiseException(ex, "ErrorBaseDeDatos");
+            }
         }
-        public void Eliminar(IRol entity)
+        public void Eliminar(IMenu entity)
         {
             try
             {
@@ -70,7 +81,7 @@ namespace Rehue.BLL
                 throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
-        public void EliminarHijo(IPermiso entity)
+        public void EliminarHijo(IItem entity)
         {
             try
             {
@@ -86,7 +97,7 @@ namespace Rehue.BLL
             }
         }
 
-        public void AgregarHijo(IPermiso entity)
+        public void AgregarHijo(IItem entity)
         {
             try
             {
@@ -102,16 +113,16 @@ namespace Rehue.BLL
             }
         }
 
-        public IList<IRol> ObtenerPorUsuario(int idUsuario)
+        public IList<IMenu> ObtenerPorUsuario(int idUsuario)
         {
-            return _servicio.ObtenerRolesYPermisosPorUsuario(idUsuario);
+            return _servicio.ObtenerMenuesPorUsuario(idUsuario, Session.Instancia.Usuario.Id);
         }
 
-        public void AsignarRolAUsuario(IUsuario usuario, IRol rol)
+        public void AsignarRolAUsuario(IUsuario usuario, IMenu rol)
         {
             try
             {
-                _servicio.AsignarRolAUsuario(usuario.Id, rol.Id);
+                _servicio.AsignarMenuAUsuario(usuario.Id, rol.Id);
             }
             catch (OperacionDBException ex)
             {
@@ -122,11 +133,11 @@ namespace Rehue.BLL
                 throw RiseException(ex, "ErrorBaseDeDatos");
             }
         }
-        public void EliminarRolAUsuario(IUsuario usuario, IRol rol)
+        public void EliminarRolAUsuario(IUsuario usuario, IMenu rol)
         {
             try
             {
-                _servicio.EliminarRolAUsuario(usuario.Id, rol.Id);
+                _servicio.EliminarMenuAUsuario(usuario.Id, rol.Id);
             }
             catch (OperacionDBException ex)
             {
@@ -142,7 +153,7 @@ namespace Rehue.BLL
             }
             else
             {
-                return new Exception(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)[message].Texto);
+                return new OperacionDBException(TraductorBLL.ObtenerTraducciones(Session.Instancia.Usuario.Idioma)[message].Texto);
             }
         }
     }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Rehue.Interfaces
 {
-    public interface IMenu
+    public interface IMenu : IMenuComponent
     {
-        DateTime FechaCreacion { get; set; }
-        IList<IMenuComponent> ObtenerItems();
-        void AgregarItem(IMenuComponent c);
+        int ObtenerId();
+        IList<IItem> ObtenerItems();
+        void AgregarItem(IItem c);
         void QuitarItems();
     }
 }

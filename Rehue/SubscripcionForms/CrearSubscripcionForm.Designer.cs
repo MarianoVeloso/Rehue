@@ -40,51 +40,55 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(10, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 16);
+            this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Costo";
             // 
             // txtCosto
             // 
-            this.txtCosto.Location = new System.Drawing.Point(16, 33);
+            this.txtCosto.Location = new System.Drawing.Point(12, 27);
+            this.txtCosto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCosto.Name = "txtCosto";
-            this.txtCosto.Size = new System.Drawing.Size(100, 22);
+            this.txtCosto.Size = new System.Drawing.Size(76, 20);
             this.txtCosto.TabIndex = 1;
             // 
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(13, 62);
+            this.lblDescripcion.Location = new System.Drawing.Point(10, 50);
+            this.lblDescripcion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(79, 16);
+            this.lblDescripcion.Size = new System.Drawing.Size(63, 13);
             this.lblDescripcion.TabIndex = 4;
             this.lblDescripcion.Text = "Descripcion";
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(16, 82);
+            this.txtDescripcion.Location = new System.Drawing.Point(12, 67);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(290, 22);
+            this.txtDescripcion.Size = new System.Drawing.Size(218, 20);
             this.txtDescripcion.TabIndex = 5;
             // 
             // chbxPuedeCrearMenu
             // 
             this.chbxPuedeCrearMenu.AutoSize = true;
-            this.chbxPuedeCrearMenu.Location = new System.Drawing.Point(16, 121);
+            this.chbxPuedeCrearMenu.Location = new System.Drawing.Point(12, 98);
+            this.chbxPuedeCrearMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chbxPuedeCrearMenu.Name = "chbxPuedeCrearMenu";
-            this.chbxPuedeCrearMenu.Size = new System.Drawing.Size(139, 20);
+            this.chbxPuedeCrearMenu.Size = new System.Drawing.Size(113, 17);
             this.chbxPuedeCrearMenu.TabIndex = 7;
             this.chbxPuedeCrearMenu.Text = "Puede crear menú";
             this.chbxPuedeCrearMenu.UseVisualStyleBackColor = true;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(205, 157);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelar.Location = new System.Drawing.Point(154, 128);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 9;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -92,20 +96,19 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(97, 157);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGuardar.Location = new System.Drawing.Point(73, 128);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(100, 28);
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 8;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // CrearSubscripcion
+            // CrearSubscripcionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 198);
+            this.ClientSize = new System.Drawing.Size(238, 161);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.chbxPuedeCrearMenu);
@@ -113,8 +116,9 @@
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.txtCosto);
             this.Controls.Add(this.label1);
-            this.Name = "CrearSubscripcion";
-            this.Text = "CrearSubscripcion";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "CrearSubscripcionForm";
+            this.Text = "Crear Subscripcion";
             this.ResumeLayout(false);
             this.PerformLayout();
 
